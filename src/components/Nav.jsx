@@ -4,13 +4,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Training Programs", href: "#", current: false },
-  { name: "Training Centres", href: "#", current: false },
-  { name: "Events", href: "#", current: false },
-  { name: "Gallery", href: "#", current: false },
-  { name: "About Us", href: "#", current: false },
-  { name: "Contact Us", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Training Programs", href: "/courses-we-offer", current: false },
+  { name: "Training Centeres", href: "/our-training-centers", current: false },
+  { name: "Events", href: "/", current: false }, 
+  { name: "Gallery", href: "/", current: false },
+  { name: "About Us", href: "/", current: false },
+  { name: "Contact Us", href: "/", current: false },
 
 ];
 
@@ -20,7 +20,7 @@ function classNames(...classes) {
 
 export default function Nav() {
   return (
-    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#f6f6f6]">
+    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#f6f6f6] shadow-sm shadow-[#f6f6f6]">
       {({ open }) => (
         <>
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">

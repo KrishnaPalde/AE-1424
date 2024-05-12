@@ -10,5 +10,5 @@ export default {
     //   '3xl': {'min' : '2560px'},
     // },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'),], 
 }
