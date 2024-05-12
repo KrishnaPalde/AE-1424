@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Training Programs", href: "/courses-we-offer", current: false },
   { name: "Training Centeres", href: "/our-training-centers", current: false },
   { name: "Events", href: "#", current: false }, 
@@ -18,6 +19,11 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
   return (
     <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#ffffff] shadow-sm shadow-[#f6f6f6]">
       {({ open }) => (
@@ -67,23 +73,22 @@ export default function Nav() {
               
             </div>
           </div>
-
+          
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 ">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href} 
                   className={classNames(
-                    item.current
-                    ? " text-[#95360A] bg-[#f6f6f6]"
-                    : "text-[#95260A] ",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                    item.current ? "text-[#95360A] bg-[#f6f6f6]" : "text-[#95260A]",
+                    "block rounded-md px-3 py-2 text-base font-medium hover:bg-[#f6f6f6]"
                   )}
                   aria-current={item.current ? "page" : undefined}
+                  onClick={closeMenu}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>
