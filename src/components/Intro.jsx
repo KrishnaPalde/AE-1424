@@ -4,7 +4,7 @@ import React from 'react'
 export default function Intro() {
   return (
     <>
-     {/* Intro starts */}
+     
      <div className="container bg-[#DF6327] max-w-full">
         <div className="flex flex-col p-8 text-justify lg:space-x-4 sm:p-16 lg:flex-row ">
           <div className="lg:w-3/5">
@@ -32,7 +32,7 @@ export default function Intro() {
           </div>
         </div>
       </div>
-      {/* Intro ends */}
+      
     </>
   )
 }

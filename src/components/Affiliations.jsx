@@ -11,9 +11,9 @@ export default function Affiliations() {
   return (
     <>
     <div className="container h-auto max-w-full mt-10">
-        <div className="flex flex-col items-center justify-center ">
-          <div>
-            <h1 className="text-xl font-semibold capitalize text-[#bf4408] md:font-bold">
+        <div className="flex flex-col items-center justify-center">
+          <div className='px-10 text-center'>
+            <h1 className="text-xl font-semibold capitalize text-[#bf4408] md:font-bold lg:text-2xl">
               our affiliations with government
             </h1>
           </div>

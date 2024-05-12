@@ -5,7 +5,7 @@ export default function CoursesWeOffer() {
     <>
         <div className='flex flex-col items-center justify-center p-4 space-y-4'>
             <div>
-                <h1 className='text-2xl text-[#ff5e15] font-bold'>Courses We Offer</h1>
+                <h1 className='text-2xl text-[#ff5e15] font-bold lg:text-3xl'>Courses We Offer</h1>
             </div>
             <div>
                 <p className='px-6 text-justify'>

@@ -1,16 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Training Programs", href: "/courses-we-offer", current: false },
   { name: "Training Centeres", href: "/our-training-centers", current: false },
-  { name: "Events", href: "/", current: false }, 
-  { name: "Gallery", href: "/", current: false },
-  { name: "About Us", href: "/", current: false },
-  { name: "Contact Us", href: "/", current: false },
+  { name: "Events", href: "#", current: false }, 
+  { name: "Gallery", href: "#", current: false },
+  { name: "About Us", href: "#", current: false },
+  { name: "Contact Us", href: "#", current: false },
 
 ];
 
@@ -20,13 +19,13 @@ function classNames(...classes) {
 
 export default function Nav() {
   return (
-    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#f6f6f6] shadow-sm shadow-[#f6f6f6]">
+    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#ffffff] shadow-sm shadow-[#f6f6f6]">
       {({ open }) => (
         <>
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-end h-16">
+            <div className="relative flex items-center justify-center h-16 md:grow">
               <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
+                {/* Mobile*/}
                 <Disclosure.Button className="relative inline-flex items-center justify-center p-2 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
@@ -46,21 +45,21 @@ export default function Nav() {
                   />
                 </div> */}
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-2">
+                  <div className="flex items-center justify-center space-x-2">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? " text-[#95360A]"
-                            : "text-[#95260A]  ",
-                          "rounded-md px-3 py-2 font-sm ll:text-md 3xl:text-xl md:text-sm lg:text-lg hover:text-[#95260A]"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
+                       <a
+                       key={item.name}
+                       href={item.href}
+                       className={classNames(
+                         item.current ? "text-[#95360A] " : "text-[#95260A]",
+                         "rounded-md px-2 py-2 font-sm ll:text-md 3xl:text-xl md:text-sm lg:text-lg  lg:px-3 hover:bg-[#f6f6f6]",
+                       )}
+                       aria-current={item.current ? "page" : undefined}
+                     >
+                       {item.name}
+                     </a>
+                    
+                        
                     ))}
                   </div>
                 </div>
@@ -74,12 +73,11 @@ export default function Nav() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? " text-gray-800"
-                      : "text-gray-800 ",
+                    ? " text-[#95360A] bg-[#f6f6f6]"
+                    : "text-[#95260A] ",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
@@ -94,3 +92,4 @@ export default function Nav() {
     </Disclosure>
   );
 }
+
