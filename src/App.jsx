@@ -9,6 +9,7 @@ import Intro from "./components/Intro";
 import Records from "./components/Records";
 import Carousel from "./components/Carousel";
 import TrainingPrograms from "./components/TrainingPrograms";
+import Nav from "./components/Nav";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           element={
             <>
             <Header/>
+            <Nav/>
             <CoursesWeOffer/>
             <CoursesCard/>
             <Affiliations/>
