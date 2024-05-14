@@ -56,7 +56,7 @@ export default function Carousel(props) {
   return (
     <div className="max-w-full h-[600px] w-full m-auto py-8 px-4 relative group">
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+        style={{ backgroundImage: `url(${slides[currentIndex].url})`, loading:"lazy" }}
         className="w-full h-full duration-500 bg-center bg-cover rounded-2xl"
       ></div>
       

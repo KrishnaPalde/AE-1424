@@ -16,6 +16,7 @@ export default function TrainingPrograms() {
               src={map}
               alt="map"
               className="md:h-[25rem] lg:h-[32rem] object-cover "
+              loading="lazy"
               />
             
           </div>
