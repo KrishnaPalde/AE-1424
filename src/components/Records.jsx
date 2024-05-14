@@ -1,6 +1,13 @@
-import React from 'react'
+import { UsersIcon } from '@heroicons/react/24/outline'
+import React, {useState} from 'react'
+import CountUp from 'react-countup'
+import ScrollTrigger from 'react-scroll-trigger';
 
 export default function Records() {
+
+    const [CounterOn, setCounterOn] = useState(false);
+
+
   return (
     <>
     <div className="bg-[#f9f9f9] ">
@@ -24,19 +31,21 @@ export default function Records() {
                 Sparking & injecting the Entrepreneurship Skills.
               </p>
             </div>
+            
+            
             <div className="w-full lg:flex lg:flex-row lg:w-2/4">
               <div className="grid grid-cols-2 ">
                 <div className="border border-[#ff4a06] flex flex-col items-center justify-center p-8 md:p-0">
                   <h1 className="text-3xl text-[#ff4a06] font-bold lg:text-4xl ">
-                    60+
+                    <CountUp start={0} end={60} duration={2} delay={0}/>+
                   </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#ff4a06]">
+                  <h2 className="text-xl font-medium capitalize text-[#ff4a06] lg:pl-6">
                     training centres
                   </h2>
                 </div>
                 <div className="flex flex-col items-center justify-center p-8">
-                  <h1 className="text-3xl text-[#ff4a06] font-bold lg:text-4xl">
-                    3400+
+                  <h1 className="text-3xl text-[#ff4a06] font-bold lg:text-4xl flex flex-wrap">
+                  <CountUp start={0} end={3400} duration={4} delay={0}/>+
                   </h1>
                   <h2 className="text-xl font-medium capitalize text-[#ff4a06] pl-2">
                     placements done
@@ -44,22 +53,25 @@ export default function Records() {
                 </div>
                 <div className="border-l border-b border-[#ff4a06] flex flex-col items-center justify-center p-8">
                   <h1 className="text-3xl text-[#ff4a06] font-bold lg:text-4xl">
-                    60+
+                  <CountUp start={0} end={60} duration={4} delay={0}/>+
                   </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#ff4a06]">
+                  <h2 className="text-xl font-medium capitalize text-[#ff4a06] ">
                     training centres
                   </h2>
                 </div>
                 <div className="border border-[#ff4a06] flex flex-col items-center justify-center p-8">
                   <h1 className="text-3xl text-[#ff4a06] font-bold lg:text-4xl">
-                    5000+
+                  <CountUp start={0} end={5000} duration={4} delay={0}/>+
                   </h1>
                   <h2 className="text-xl font-medium capitalize text-[#ff4a06]">
                     trained students
                   </h2>
                 </div>
+            
               </div>
             </div>
+
+            
           </div>
         </div>
       </div>

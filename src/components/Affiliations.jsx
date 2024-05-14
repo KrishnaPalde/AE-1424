@@ -10,7 +10,7 @@ import affiliation5 from "../assets/affiliation5.png";
 export default function Affiliations() {
   return (
     <>
-    <div className="container h-auto max-w-full mt-10">
+    <div className="container h-auto max-w-full mt-10 scroll-smooth">
         <div className="flex flex-col items-center justify-center">
           <div className='px-10 text-center'>
             <h1 className="text-xl font-semibold capitalize text-[#bf4408] md:font-bold lg:text-2xl">

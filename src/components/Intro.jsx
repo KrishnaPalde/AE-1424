@@ -6,8 +6,8 @@ export default function Intro() {
     <>
      
      <div className="container bg-[#DF6327] max-w-full">
-        <div className="flex flex-col p-8 text-justify lg:space-x-4 sm:p-16 lg:flex-row ">
-          <div className="lg:w-3/5">
+        <div className="flex flex-col-reverse p-8 text-justify lg:space-x-4 sm:p-16 lg:flex-row">
+          <div className="mt-6 lg:w-3/5">
             <p className="text-[#f9f9f9]">
               At Aarti EduCare Pvt Ltd, we're more than just a company we're a
               family of passionate, dedicated, and innovative individuals. Our
@@ -20,7 +20,7 @@ export default function Intro() {
               youth efficiently and effectively.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center mt-10 lg:mt-0 lg:w-2/5">
+          <div className="flex flex-col items-center justify-center sm:mt-10 lg:mt-0 lg:w-2/5">
             <button className="text-[#ac2900] px-8 w-64 h-fit py-2 bg-[#f9f9f9] hover:bg-[#df4327] hover:text-[#f9f9f9] flex justify-around ">
               Enroll Now
               <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#f6f6f6]" />

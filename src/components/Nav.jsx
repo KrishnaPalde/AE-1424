@@ -25,20 +25,20 @@ export default function Nav() {
     setIsOpen(false);
   };
   return (
-    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full bg-[#ffffff] shadow-sm shadow-[#f6f6f6]">
+    <Disclosure as="nav" className="sticky top-0 z-50 max-w-full sm:bg-[#ffffff] shadow-sm bg-transparent">
       {({ open }) => (
         <>
-          <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-center h-16 md:grow">
+          <div className="max-w-full px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-end h-14 md:grow">
               <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
                 {/* Mobile*/}
                 <Disclosure.Button className="relative inline-flex items-center justify-center p-2 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
+                    <XMarkIcon className="block w-6 h-6 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
                   ) : (
-                    <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
+                    <Bars3Icon className="block w-6 h-6 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -75,14 +75,14 @@ export default function Nav() {
           </div>
           
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 ">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-[#f6f6f6] ">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href} 
                   className={classNames(
                     item.current ? "text-[#95360A] bg-[#f6f6f6]" : "text-[#95260A]",
-                    "block rounded-md px-3 py-2 text-base font-medium hover:bg-[#f6f6f6]"
+                    "block rounded-md px-3 py-2 text-base font-medium hover:bg-[#f1f1f1]"
                   )}
                   aria-current={item.current ? "page" : undefined}
                   onClick={closeMenu}

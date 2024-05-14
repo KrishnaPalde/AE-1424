@@ -3,18 +3,21 @@ import SearchButton from "./SearchButton";
 import Card from "./TrainingCard";
 import map from "../assets/map.png";
 import Header from "./Header";
+import Nav from "./Nav";
 
 export default function TrainingPrograms() {
   return (
     <>
+    <Nav/>
       <div className="container max-w-full">
-        <div className="flex flex-col p-6 text-justify md:flex-row ">
+        <div className="flex flex-col p-6 text-justify md:flex-row">
           <div className="flex items-center justify-center md:w-4/6">
             <img
               src={map}
               alt="map"
-              className="md:h-[25rem] lg:h-[32rem] object-cover"
-            />
+              className="md:h-[25rem] lg:h-[32rem] object-cover "
+              />
+            
           </div>
           <div className="space-y-3 md:w-3/6 md:space-y-16 md:px-1">
             <div className="text-3xl capitalize  text-[#ff5e15] font-bold lg:text-6xl">
