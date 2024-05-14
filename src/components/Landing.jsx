@@ -59,7 +59,7 @@ export default function Landing() {
           <div className="flex flex-col items-center justify-center mt-10 lg:mt-0 lg:w-2/5">
             <button className="text-[#ac2900] px-8 w-64 h-fit py-2 bg-[#f9f9f9] hover:bg-[#df4327] hover:text-[#f9f9f9] flex justify-around ">
               Enroll Now
-              <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#f6f6f6]" />
+              <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#ac2900] hover:text-[#f9f9f9]" />
             </button>
             <button className="text-[#f9f9f9] px-8 w-64 h-fit py-2 bg-[#df6327] hover:bg-[#FF643E] flex justify-around mt-5 border border-[#f9f9f9]">
               Upcoming Events

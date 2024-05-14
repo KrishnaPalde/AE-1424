@@ -36,9 +36,9 @@ export default function Nav() {
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XMarkIcon className="block w-6 h-6 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
+                    <XMarkIcon className="block w-7 h-7 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
                   ) : (
-                    <Bars3Icon className="block w-6 h-6 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
+                    <Bars3Icon className="block w-7 h-7 text-[#f6f6f6] bg-[#DF6327]" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -75,7 +75,7 @@ export default function Nav() {
           </div>
           
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-[#f6f6f6] ">
+            <div className="sticky px-2 pt-2 pb-3 space-y-1 bg-[#f6f6f6] " >
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -83,7 +83,11 @@ export default function Nav() {
                   className={classNames(
                     item.current ? "text-[#95360A] bg-[#f6f6f6]" : "text-[#95260A]",
                     "block rounded-md px-3 py-2 text-base font-medium hover:bg-[#f1f1f1]"
-                  )}
+                  )
+                }
+                  data-aos="fade-right"
+     data-aos-offset="150"
+     data-aos-easing="ease-in-sine"
                   aria-current={item.current ? "page" : undefined}
                   onClick={closeMenu}
                 >

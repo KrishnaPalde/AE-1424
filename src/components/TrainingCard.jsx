@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import tc1 from "../assets/tc1.png";
 import tc2 from "../assets/tc2.png";
 import tc3 from "../assets/tc3.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 import { FaBookBookmark, FaLocationArrow, FaLocationDot, FaUserGraduate } from "react-icons/fa6";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -58,6 +61,9 @@ const cards = [
 ]
 
 export default function TrainingCard() {
+  useEffect(() => {
+    AOS.init({ duration: 600 });
+  }, []);
   return (
     <>
       <div className="container flex flex-wrap justify-center max-w-full min-h-screen xl:px-28">
@@ -69,6 +75,7 @@ export default function TrainingCard() {
                   src={tc.image}
                   alt={tc.title}
                   className="absolute object-cover w-full h-full"
+                  data-aos="zoom-in"
                 />
                 <div className="bg-[#ff5e15] absolute px-2 py-1 bottom-[-14px] left-0 p-1 ml-4 flex text-white text-xl font-semibold">
                   {tc.title}
@@ -100,11 +107,11 @@ export default function TrainingCard() {
           ))}
         {/* </div> */}
       </div>
-      <div className="relative flex items-center justify-center my-3 h-36">
+      <div className="relative flex items-center justify-center my-3 h-36 ">
           <img src={tc1} alt="success background" className="absolute object-cover w-full h-full opacity-[.20] mix-blend-overlay"/>
-          <button className="text-[#953601] w-auto h-fit px-3 py-2 rounded bg-[#Fdfdfd] hover:bg-[#FF643E] absolute flex justify-around">
+          <button className="text-[#953601] w-auto h-fit px-3 py-2 rounded bg-[#Fdfdfd] hover:bg-[#FF643E] absolute flex justify-around hover:text-[#f6f6f6]">
             Register Now
-            <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#953601]" />
+            <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#953601] hover:text-[#f6f6f6]" />
           </button>
         </div>
     </>

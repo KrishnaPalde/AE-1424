@@ -45,7 +45,7 @@ export default function CoursesCard() {
       <div className="container flex flex-wrap justify-center max-w-full min-h-screen xl:px-28">
         {cards.map((tc, index) => (
           // <div className="p-4 ">
-          <div className="grid grid-cols-1 p-4 md:w-1/2 lg:w-3/3 xl:w-6/6 ">
+          <div className="grid grid-cols-1 p-4 md:w-1/2 lg:w-3/3 xl:w-6/6 "  data-aos="zoom-in">
             <div className="relative w-full h-56" key={tc.title}>
               <img
                 src={tc.image}
