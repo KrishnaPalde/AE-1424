@@ -27,13 +27,13 @@ export default function Legacy() {
             <div className="h-48 bg-[#f6f6f6] mt-16"></div>
           </div>
         </div>
-        <div className="relative flex items-center justify-center my-3 h-36">
+        {/* <div className="relative flex items-center justify-center my-3 h-36">
           <img src={ss1} alt="success background" className="absolute object-cover w-full h-full opacity-[.20] mix-blend-overlay"/>
           <button className="text-[#ffffff] w-auto h-fit px-3 py-2 rounded bg-[#FF743E] hover:bg-[#FF643E] absolute flex justify-around">
             Register As Student
             <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#f6f6f6]" />
           </button>
-        </div>
+        </div> */}
       </div>
       
     </>

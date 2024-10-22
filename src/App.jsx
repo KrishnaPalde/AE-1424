@@ -10,6 +10,10 @@ import Records from "./components/Records";
 import Carousel from "./components/Carousel";
 import TrainingPrograms from "./components/TrainingPrograms";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
+import Gallery from "./components/Gallery";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
@@ -27,6 +31,7 @@ function App() {
                 <Carousel />
                 <Affiliations />
                 <Legacy />
+                <Footer />
               </>
             }
           />
@@ -36,6 +41,7 @@ function App() {
             <>
             <Header/>
             <TrainingPrograms/>
+            <Footer />
             </>
           }
           />
@@ -49,6 +55,40 @@ function App() {
             <CoursesCard/>
             <Affiliations/>
             <Legacy/>
+            <Footer />
+            </>
+          }
+          />
+          <Route
+          path="/aboutus"
+          element={
+            <>
+            <Header/>
+            <Nav/>
+            <AboutUs />
+            <Footer />
+            </>
+          }
+          />
+          <Route
+          path="/gallery"
+          element={
+            <>
+            <Header/>
+            <Nav/>
+            <Gallery />
+            <Footer />
+            </>
+          }
+          />
+          <Route
+          path="/contactus"
+          element={
+            <>
+            <Header/>
+            <Nav/>
+            <ContactUs/>
+            <Footer />
             </>
           }
           />

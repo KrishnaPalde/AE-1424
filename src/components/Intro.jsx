@@ -5,7 +5,7 @@ export default function Intro() {
   return (
     <>
      
-     <div className="container bg-[#DF6327] max-w-full">
+     <div className="container bg-[#e87c24] max-w-full">
         <div className="flex flex-col-reverse p-8 text-justify lg:space-x-4 sm:p-16 lg:flex-row">
           <div className="mt-6 lg:w-3/5">
             <p className="text-[#f9f9f9]">
@@ -20,10 +20,10 @@ export default function Intro() {
               youth efficiently and effectively.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center sm:mt-10 lg:mt-0 lg:w-2/5">
-            <button className="text-[#ac2900] px-8 w-64 h-fit py-2 bg-[#f9f9f9] hover:bg-[#df4327] hover:text-[#f9f9f9] flex justify-around ">
+          <div className="flex flex-col items-center justify-center sm:mt-10 lg:mt-0 lg:w-2/5 hover:text-[#f9f9f9]">
+            <button className="text-[#ac2900] px-8 w-64 h-fit py-2 bg-[#f9f9f9] hover:bg-[#df4327]  flex justify-around ">
               Enroll Now
-              <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 hover:text-[#f6f6f6] text-[#ac2900]" />
+              <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8  text-[#ac2900]" />
             </button>
             <button className="text-[#f9f9f9] px-8 w-64 h-fit py-2 bg-[#df6327] hover:bg-[#FF643E] flex justify-around mt-5 border border-[#f9f9f9]">
               Upcoming Events

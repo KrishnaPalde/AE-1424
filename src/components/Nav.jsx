@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
-  { name: "Training Programs", href: "/courses-we-offer", current: false },
-  { name: "Training Centeres", href: "/our-training-centers", current: false },
-  { name: "Events", href: "#", current: false }, 
-  { name: "Gallery", href: "#", current: false },
-  { name: "About Us", href: "#", current: false },
-  { name: "Contact Us", href: "#", current: false },
+  { name: "Courses", href: "/courses-we-offer", current: false },
+  { name: "Training Centre", href: "/our-training-centers", current: false },
+  { name: "Services", href: "#", current: false }, 
+  { name: "Gallery", href: "/gallery", current: false },
+  { name: "About Us", href: "/aboutus", current: false },
+  { name: "Contact Us", href: "/contactus", current: false },
 
 ];
 

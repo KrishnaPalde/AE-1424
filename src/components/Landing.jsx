@@ -41,10 +41,10 @@ export default function Landing() {
       {/* Image ends */}
 
       {/* Intro starts */}
-      <div className="container bg-[#DF6327] max-w-full">
+      <div className="container bg-[#df6e27] max-w-full">
         <div className="flex flex-col p-8 text-justify lg:space-x-4 sm:p-16 lg:flex-row ">
           <div className="lg:w-3/5">
-            <p className="text-[#f9f9f9]">
+            <p className="text-[#f9f9f9] ">
               At Aarti EduCare Pvt Ltd, we're more than just a company – we're a
               family of passionate, dedicated, and innovative individuals. Our
               mission is simple: to realize India's potential as a global
