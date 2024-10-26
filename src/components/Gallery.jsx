@@ -66,9 +66,9 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-gray-50">
      
-      <div className="relative py-20 overflow-hidden text-white bg-blue-600">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-90"></div>
+     <div className="relative py-20 overflow-hidden text-white bg-violet-700">
+    <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-violet-900 opacity-90"></div>
          
           <div
             className="absolute inset-0"
