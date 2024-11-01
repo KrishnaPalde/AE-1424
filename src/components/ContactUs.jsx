@@ -79,24 +79,24 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
-      <div className="bg-orange-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+      
+      <div className="py-20 text-white bg-orange-600">
+        <div className="px-4 mx-auto text-center max-w-7xl">
+          <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
+          <p className="max-w-3xl mx-auto text-xl">
             Get in touch with us for any queries about our training programs and services.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Information Section */}
-          <div className="lg:col-span-1 space-y-8">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Information</h2>
+      <div className="px-4 py-16 mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-3">
+          
+          <div className="space-y-8 lg:col-span-1">
+            <div className="p-8 bg-white shadow-lg rounded-xl">
+              <h2 className="mb-6 text-2xl font-bold text-gray-800">Contact Information</h2>
               <GoogleMapWidget />
-              <div className="space-y-6 mt-6">
+              <div className="mt-6 space-y-6">
                 <div className="flex items-center space-x-4">
                   <MapPin className="text-orange-600" />
                   <p className="text-gray-700">123 Training Hub, Education Street, Mumbai, Maharashtra 400001</p>
@@ -117,14 +117,14 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* Form Section */}
-          <div className="lg:col-span-2 bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+          
+          <div className="p-8 bg-white shadow-lg lg:col-span-2 rounded-xl">
+            <h2 className="mb-6 text-2xl font-bold text-gray-800">Send us a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Full Name *</label>
                   <input
                     type="text"
                     name="name"
@@ -132,11 +132,11 @@ const ContactUs = () => {
                     onChange={handleChange}
                     className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.name ? "border-red-500" : "border-gray-300"}`}
                   />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                  {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -144,11 +144,11 @@ const ContactUs = () => {
                     onChange={handleChange}
                     className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
                   />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                  {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -156,16 +156,16 @@ const ContactUs = () => {
                     onChange={handleChange}
                     className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.phone ? "border-red-500" : "border-gray-300"}`}
                   />
-                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                  {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Enquiry Type</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Enquiry Type</label>
                   <select
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors border-gray-300"
+                    className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2"
                   >
                     <option value="Student">Student</option>
                     <option value="training_center">Traning Center</option>
@@ -175,7 +175,7 @@ const ContactUs = () => {
 
                 {formData.type === "student" && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-700">Age</label>
                     <input
                       type="number"
                       name="age"
@@ -183,12 +183,12 @@ const ContactUs = () => {
                       onChange={handleChange}
                       className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.age ? "border-red-500" : "border-gray-300"}`}
                     />
-                    {errors.age && <p className="text-red-500 text-sm mt-1">{errors.age}</p>}
+                    {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
                   </div>
                 )}
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">State *</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">State *</label>
                   <select
                     name="state"
                     value={formData.state}
@@ -200,11 +200,11 @@ const ContactUs = () => {
                       <option key={state} value={state}>{state}</option>
                     ))}
                   </select>
-                  {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
+                  {errors.state && <p className="mt-1 text-sm text-red-500">{errors.state}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">City *</label>
                   <select
                     name="city"
                     value={formData.city}
@@ -216,12 +216,12 @@ const ContactUs = () => {
                       <option key={city} value={city}>{city}</option>
                     ))}
                   </select>
-                  {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
+                  {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Message *</label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -229,10 +229,10 @@ const ContactUs = () => {
                   rows="4"
                   className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.message ? "border-red-500" : "border-gray-300"}`}
                 />
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
 
-              <button type="submit" className="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition-colors duration-300">
+              <button type="submit" className="w-full py-3 text-white transition-colors duration-300 bg-orange-600 rounded-lg hover:bg-orange-700">
                 Send Message
               </button>
             </form>

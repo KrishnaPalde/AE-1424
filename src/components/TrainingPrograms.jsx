@@ -1,6 +1,6 @@
 import React from "react";
 import SearchButton from "./SearchButton";
-import Card from "./TrainingCard";
+import TrainingCard from "./TrainingCard";
 import map from "../assets/map.png";
 import Header from "./Header";
 import Nav from "./Nav";
@@ -49,7 +49,7 @@ export default function TrainingPrograms() {
 
       <div>
         <SearchButton />
-        <Card />
+        <TrainingCard />
       </div>
     </>
   );

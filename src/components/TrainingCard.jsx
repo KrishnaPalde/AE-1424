@@ -4,8 +4,6 @@ import tc2 from "../assets/tc2.png";
 import tc3 from "../assets/tc3.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-
 import { FaBookBookmark, FaLocationArrow, FaLocationDot, FaUserGraduate } from "react-icons/fa6";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
@@ -68,7 +66,7 @@ export default function TrainingCard() {
     <>
       <div className="container flex flex-wrap justify-center max-w-full min-h-screen xl:px-28">
           {cards.map((tc, index) => (
-        // <div className="p-4 ">
+        
             <div className="grid grid-cols-1 p-4 md:w-1/2 lg:w-1/3 xl:w-2/6 md:pb-10">
               <div className="relative w-full h-56" key={tc.title}>
                 <img
@@ -105,15 +103,8 @@ export default function TrainingCard() {
               </div>
             </div>
           ))}
-        {/* </div> */}
+        
       </div>
-      {/* <div className="relative flex items-center justify-center my-3 h-36 ">
-          <img src={tc1} alt="success background" className="absolute object-cover w-full h-full opacity-[.20] mix-blend-overlay"/>
-          <button className="text-[#953601] w-auto h-fit px-3 py-2 rounded bg-[#Fdfdfd] hover:bg-[#FF643E] absolute flex justify-around hover:text-[#f6f6f6]">
-            Register Now
-            <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#953601] hover:text-[#f6f6f6]" />
-          </button>
-        </div> */}
     </>
   );
 }

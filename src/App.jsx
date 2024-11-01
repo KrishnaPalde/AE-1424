@@ -14,6 +14,13 @@ import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
 import Gallery from "./components/Gallery";
 import ContactUs from "./components/ContactUs";
+import AdminLogin from "./components/Admin/AdminLogin";
+import  Sidebar  from "./components/Admin/Sidebar";
+import GalleryAdmin from "./components/Admin/GalleryAdmin";
+import AdminContact from "./components/Admin/AdminContact";
+import CoursesAdmin from "./components/Admin/CoursesAdmin";
+import AdminTrainingCentre from "./components/Admin/AdminTrainingCentre";
+import NewsBanner from "./components/NewsBanner";
 
 function App() {
   return (
@@ -89,6 +96,54 @@ function App() {
             <Nav/>
             <ContactUs/>
             <Footer />
+            </>
+          }
+          />
+          <Route
+          path="/login"
+          element={
+            <>
+            <AdminLogin/>
+            </>
+          }
+          />
+          <Route
+          path="/admin-gallery"
+          element={
+            <>
+            <GalleryAdmin/>
+            </>
+          }
+          />
+          <Route
+          path={"/admin-contact-settings"}
+          element={
+            <>
+            <AdminContact/>
+            </>
+          }
+          />
+          <Route
+          path="/admin-courses"
+          element={
+            <>
+            <CoursesAdmin/>
+            </>
+          }
+          />
+          <Route
+          path="/admin-training-centres"
+          element={
+            <>
+            <AdminTrainingCentre/>
+            </>
+          }
+          />
+          <Route
+          path="/admin-banners"
+          element={
+            <>
+            <NewsBanner isAdmin={true}/>
             </>
           }
           />

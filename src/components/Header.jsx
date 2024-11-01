@@ -58,11 +58,11 @@ export default function Header() {
               admin@aartieducare.com
             </span>
           </div>
-          <div className="items-center justify-center hidden sm:flex ">
+          <Link to={'/login'} className="items-center justify-center hidden sm:flex ">
             <button className="text-[#ffffff] w-auto h-fit px-3 py-2  bg-[#FF743E] hover:bg-[#FF643E] lg:text-lg">
-              Register As Student
+              Login
             </button>
-          </div>
+          </Link>
         </div>
       </div>
           <div>

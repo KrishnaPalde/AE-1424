@@ -44,7 +44,6 @@ export default function CoursesCard() {
     <>
       <div className="container flex flex-wrap justify-center max-w-full min-h-screen xl:px-28">
         {cards.map((tc, index) => (
-          // <div className="p-4 ">
           <div className="grid grid-cols-1 p-4 md:w-1/2 lg:w-3/3 xl:w-6/6 "  data-aos="zoom-in">
             <div className="relative w-full h-56" key={tc.title}>
               <img
@@ -74,19 +73,7 @@ export default function CoursesCard() {
             </div>
           </div>
         ))}
-        {/* </div> */}
       </div>
-      {/* <div className="relative flex items-center justify-center my-3 h-36">
-        <img
-          src={tc1}
-          alt="success background"
-          className="absolute object-cover w-full h-full opacity-[.20] mix-blend-overlay"
-        />
-        <button className="text-[#953601] w-auto h-fit px-3 py-2 rounded bg-[#Fdfdfd] hover:bg-[#FF643E] absolute flex justify-around">
-          Register Now
-          <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#953601]" />
-        </button>
-      </div> */}
     </>
   );
 }
