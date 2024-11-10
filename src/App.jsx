@@ -37,7 +37,7 @@ function App() {
                 <Records />
                 <Carousel />
                 <Affiliations />
-                <Legacy />
+                {/* <Legacy /> */}
                 <Footer />
               </>
             }
@@ -61,7 +61,7 @@ function App() {
             <CoursesWeOffer/>
             <CoursesCard/>
             <Affiliations/>
-            <Legacy/>
+            {/* <Legacy/> */}
             <Footer />
             </>
           }

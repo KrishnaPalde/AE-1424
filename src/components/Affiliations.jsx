@@ -13,7 +13,7 @@ export default function Affiliations() {
     <div className="container h-auto max-w-full mt-10 scroll-smooth">
         <div className="flex flex-col items-center justify-center">
           <div className='px-10 text-center'>
-            <h1 className="text-xl font-semibold capitalize text-[#bf4408] md:font-bold lg:text-2xl">
+            <h1 className="text-xl font-semibold capitalize text-[#e67e23] md:font-bold lg:text-2xl">
               our affiliations with government
             </h1>
           </div>

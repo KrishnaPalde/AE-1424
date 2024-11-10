@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-
+import indianStates from "./indianState";
 
 // Google Map Component
 const GoogleMapWidget = () => (
@@ -29,22 +29,24 @@ const ContactUs = () => {
 
   const [errors, setErrors] = useState({});
 
-  const indianStates = {
-    Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
-    Delhi: ["New Delhi", "North Delhi", "South Delhi", "East Delhi", "West Delhi"],
-    Karnataka: ["Bangalore", "Mysore", "Hubli", "Mangalore", "Belgaum"],
-    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Trichy"],
-    Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"],
-  };
-
+  
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //     ...(name === "state" && { city: "" }),
+  //   }));
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-      ...(name === "state" && { city: "" }),
+      ...(name === "type" && value === "student" ? { age: "" } : {}),
     }));
   };
+  
 
   const validateForm = () => {
     const newErrors = {};
@@ -80,7 +82,7 @@ const ContactUs = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       
-      <div className="py-20 text-white bg-orange-600">
+      <div className="py-20 text-white bg-[#e67e23]">
         <div className="px-4 mx-auto text-center max-w-7xl">
           <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
           <p className="max-w-3xl mx-auto text-xl">
@@ -98,27 +100,27 @@ const ContactUs = () => {
               <GoogleMapWidget />
               <div className="mt-6 space-y-6">
                 <div className="flex items-center space-x-4">
-                  <MapPin className="text-orange-600" />
-                  <p className="text-gray-700">123 Training Hub, Education Street, Mumbai, Maharashtra 400001</p>
+                  <MapPin className="text-[#e67e23]" size={100} />
+                  <p className="text-gray-700">Utkarsha Training Centre, Plot No. 58, Ambad - Uttam Nagar Rd, behind Shivanjali Petrol Pump, DGP Nagar 2, Murari Nagar, Nashik, Maharashtra 422010</p>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <Phone className="text-orange-600" />
-                  <p className="text-gray-700">+91-1234567890</p>
+                  <Phone className="text-[#e67e23]" />
+                  <p className="text-gray-700">+91 82377 76233</p>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <Mail className="text-orange-600" />
-                  <p className="text-gray-700">contact@traininghub.com</p>
+                  <Mail className="text-[#e67e23]" />
+                  <p className="text-gray-700">contact@aartieducare.com</p>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <Clock className="text-orange-600" />
-                  <p className="text-gray-700">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                  <Clock className="text-[#e67e23]" />
+                  <p className="text-gray-700">Mon - Sat: 9:00 AM - 6:00 PM</p>
                 </div>
               </div>
             </div>
           </div>
 
           
-          <div className="p-8 bg-white shadow-lg lg:col-span-2 rounded-xl">
+          <div key={formData.type} className="p-8 bg-white shadow-lg lg:col-span-2 rounded-xl">
             <h2 className="mb-6 text-2xl font-bold text-gray-800">Send us a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -160,32 +162,33 @@ const ContactUs = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-700">Enquiry Type</label>
-                  <select
-                    name="type"
-                    value={formData.type}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2"
-                  >
-                    <option value="Student">Student</option>
-                    <option value="training_center">Traning Center</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Enquiry Type</label>
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-lg outline-none focus:ring-2"
+                >
+                  <option value="student">Student</option>
+                  <option value="training_center">Training Center</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
 
                 {formData.type === "student" && (
-                  <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">Age</label>
-                    <input
-                      type="number"
-                      name="age"
-                      value={formData.age}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.age ? "border-red-500" : "border-gray-300"}`}
-                    />
-                    {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
-                  </div>
-                )}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Age</label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 outline-none transition-colors ${errors.age ? "border-red-500" : "border-gray-300"}`}
+                  />
+                  {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
+                </div>
+              )}
+
 
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-700">State *</label>
@@ -232,7 +235,7 @@ const ContactUs = () => {
                 {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
 
-              <button type="submit" className="w-full py-3 text-white transition-colors duration-300 bg-orange-600 rounded-lg hover:bg-orange-700">
+              <button type="submit" className="w-full py-3 text-white transition-colors duration-300 bg-[#e67e23] rounded-lg hover:bg-orange-700">
                 Send Message
               </button>
             </form>

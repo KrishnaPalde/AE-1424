@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React, {useEffect} from "react";
 import tc1 from "../assets/tc1.png";
 import tc2 from "../assets/tc2.png";
@@ -75,7 +76,7 @@ export default function TrainingCard() {
                   className="absolute object-cover w-full h-full"
                   data-aos="zoom-in"
                 />
-                <div className="bg-[#ff5e15] absolute px-2 py-1 bottom-[-14px] left-0 p-1 ml-4 flex text-white text-xl font-semibold">
+                <div className="bg-[#e67e23] absolute px-2 py-1 bottom-[-14px] left-0 p-1 ml-4 flex text-white text-xl font-semibold">
                   {tc.title}
                 </div>
               </div>
@@ -95,7 +96,7 @@ export default function TrainingCard() {
                     <span className="ml-2">{tc.address}</span>
                   </div>
                   <div>
-                    <button className="text-[#df6327] px-2 py-1 w-full border border-[#df6327] hover:bg-[#df5221] hover:text-[#f6f6f6]">
+                    <button className="text-[#e67e23] px-2 py-1 w-full border border-[#e67e23] hover:bg-[#df5221] hover:text-[#f6f6f6]">
                       Register Now
                     </button>
                   </div>

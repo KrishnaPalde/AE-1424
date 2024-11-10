@@ -21,7 +21,7 @@ export default function TrainingPrograms() {
             
           </div>
           <div className="space-y-3 md:w-3/6 md:space-y-16 md:px-1">
-            <div className="text-3xl capitalize  text-[#ff5e15] font-bold lg:text-6xl">
+            <div className="text-3xl capitalize  text-[#e67e23] font-bold lg:text-6xl">
               <h1>our</h1>
               <h1>training</h1>
               <h1>center</h1>

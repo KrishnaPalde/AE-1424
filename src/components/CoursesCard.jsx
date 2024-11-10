@@ -59,7 +59,7 @@ export default function CoursesCard() {
               />
               </div>
             </div>
-            <div className="container bg-[#f66015] space-y-2 px-4 ">
+            <div className="container bg-[#e67e23] space-y-2 px-4 ">
               <div className="grid grid-cols-2 pb-3 space-y-14">
                 <div className="pt-14">
                   <h1 className="text-xl font-semibold text-[#f6f6f6]">{tc.title}</h1>

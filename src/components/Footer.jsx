@@ -125,12 +125,12 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="flex-shrink-0 w-5 h-5 mt-1" />
                 <p className="text-sm">
-                  123 Education Hub, Training Center Road, Your City - 400001
+                Utkarsha Training Centre, Plot No. 58, Ambad - Uttam Nagar Rd, behind Shivanjali Petrol Pump, DGP Nagar 2, Murari Nagar, Nashik, Maharashtra 422010
                 </p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="flex-shrink-0 w-5 h-5" />
-                <p className="text-sm">+91 98765 43210</p>
+                <p className="text-sm">+91 82377 76233</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="flex-shrink-0 w-5 h-5" />

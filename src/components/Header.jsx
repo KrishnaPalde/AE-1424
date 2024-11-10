@@ -53,13 +53,13 @@ export default function Header() {
             </span>
           </div>
           <div className="flex items-center justify-around px-3">
-            <EnvelopeIcon className="w-4 h-4 text-gray-500" />
+            <EnvelopeIcon className="w-4 h-4 text-gray-500 mr-2" />
             <span className="text-xs sm:mr-6 lg:text-lg">
               admin@aartieducare.com
             </span>
           </div>
           <Link to={'/login'} className="items-center justify-center hidden sm:flex ">
-            <button className="text-[#ffffff] w-auto h-fit px-3 py-2  bg-[#FF743E] hover:bg-[#FF643E] lg:text-lg">
+            <button className="text-[#ffffff] w-auto h-fit px-3 py-2  bg-[#e67e23] hover:bg-[#e67e23] lg:text-lg">
               Login
             </button>
           </Link>
