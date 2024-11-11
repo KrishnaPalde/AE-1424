@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Intro() {
   return (
@@ -21,11 +22,15 @@ export default function Intro() {
             </p>
           </div>
           <div className="flex flex-col items-center justify-center sm:mt-10 lg:mt-0 lg:w-2/5 hover:text-[#f9f9f9]">
-            <button className="text-[#ac2900] px-8 w-64 h-fit py-2 bg-[#f9f9f9] hover:bg-[#df4327]  flex justify-around ">
+              <Link
+                to="contact-us/"
+              >
+            <button className="text-[#e67e23] px-8 w-64 h-fit py-2 bg-[#f9f9f9] flex justify-around ">
               Enquire Now
               <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8  text-[#ac2900]" />
             </button>
-            <button className="text-[#f9f9f9] px-8 w-64 h-fit py-2 bg-[#df6327] hover:bg-[#FF643E] flex justify-around mt-5 border border-[#f9f9f9]">
+              </Link>
+            <button className="text-[#f9f9f9] px-8 w-64 h-fit py-2 bg-[#e67e23] flex justify-around mt-5 border border-[#f9f9f9]">
               Upcoming Events
               <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#f6f6f6]" />
             </button>

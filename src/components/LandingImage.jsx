@@ -14,7 +14,6 @@ export default function LandingImage() {
             className="absolute object-cover w-full h-full mix-blend-overlay"
             loading="lazy"
           />
-          <Nav />
           <div className="absolute inset-0 flex items-end justify-start p-5 sm:p-10 sm:items-center">
             <div
               className=""

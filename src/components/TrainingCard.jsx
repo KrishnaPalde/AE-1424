@@ -11,23 +11,15 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 const cards = [
   {
     image: tc1,
-    title: "Innovation Lab",
+    title: "Test Center - 1",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur rem repudiandae magni nulla. Illo, praesentium consequuntur?",
     courses: "XXX Courses",
     students: "XXX+ Students",
     address: "City, State",
   },
   {
-    image: tc2,
-    title: "Aashadeep Classes",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugit quia natus veritatis tempora repellendus? Dicta!",
-    courses: "XXX Courses",
-    students: "XXX+ Students",
-    address: "City, State",
-  },
-  {
-    image: tc3,
-    title: "Phoenix Computers",
+    image: tc1,
+    title: "Test Center - 2",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugit quia natus veritatis tempora repellendus? Dicta!",
     courses: "XXX Courses",
     students: "XXX+ Students",
@@ -35,7 +27,15 @@ const cards = [
   },
   {
     image: tc1,
-    title: "Innovation Labs",
+    title: "Test Center - 3",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugit quia natus veritatis tempora repellendus? Dicta!",
+    courses: "XXX Courses",
+    students: "XXX+ Students",
+    address: "City, State",
+  },
+  {
+    image: tc1,
+    title: "Test Center - 4",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur rem repudiandae magni nulla. Illo, praesentium consequuntur?",
     courses: "XXX Courses",
     students: "XXX+ Students",
@@ -43,7 +43,7 @@ const cards = [
   },
   {
     image: tc2,
-    title: "Akashadeep Classes",
+    title: "Test Center - 5",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugit quia natus veritatis tempora repellendus? Dicta!",
     courses: "XXX Courses",
     students: "XXX+ Students",
@@ -51,7 +51,7 @@ const cards = [
   },
   {
     image: tc3,
-    title: "Phoenixx Computers",
+    title: "Test Center - 6",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugit quia natus veritatis tempora repellendus? Dicta!",
     courses: "XXX Courses",
     students: "XXX+ Students",
@@ -68,7 +68,8 @@ export default function TrainingCard() {
       <div className="container flex flex-wrap justify-center max-w-full min-h-screen xl:px-28">
           {cards.map((tc, index) => (
         
-            <div className="grid grid-cols-1 p-4 md:w-1/2 lg:w-1/3 xl:w-2/6 md:pb-10">
+            <div className="grid grid-cols-1 p-4 md:w-1/4 lg:w-1/4 xl:w-1/4 md:pb-2">
+              <div>
               <div className="relative w-full h-56" key={tc.title}>
                 <img
                   src={tc.image}
@@ -80,9 +81,9 @@ export default function TrainingCard() {
                   {tc.title}
                 </div>
               </div>
-              <div className="container bg-[#f6f6f6] space-y-8 px-4 ">
-                <p className="pt-5 text-sm text-justify">{tc.description}</p>
-                <div className="grid grid-cols-2 pb-3 space-y-1">
+              <div className="container bg-[#f6f6f6] space-y-8 px-4">
+                <p className="pt-5 text-sm text-justify h-32">{tc.description}</p>
+                <div className="grid grid-cols-2 pb-3 space-y-2">
                   <div className="flex flex-row items-center">
                     <FaBookBookmark />
                     <span className="ml-2">{tc.courses}</span>
@@ -101,6 +102,7 @@ export default function TrainingCard() {
                     </button>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           ))}

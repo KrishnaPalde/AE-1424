@@ -193,10 +193,31 @@
 // export default AboutUs;
 
 
-import React from "react";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Award, Target, Users, CheckCircle } from "lucide-react";
 
+import aboutUsImage from "../assets/tc3.png"
+
 const AboutUs = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname)
+    if(location.pathname === "/who-we-are/about-us/vision-mission"){
+      window.scrollTo({
+        top: 400,
+        behavior: "smooth",
+      });
+    } else if( location.pathname === "/who-we-are/about-us/board-directors"){
+      window.scrollTo({
+        top: 900,
+        behavior: "smooth",
+      });
+    }
+  })
+  
+
   const team = [
     {
       name: "Rajesh Kumar",
@@ -250,7 +271,7 @@ const AboutUs = () => {
             </div>
             <div className="relative">
               <img
-                src="/api/placeholder/600/400"
+                src={aboutUsImage}
                 alt="Training Session"
                 className="rounded-lg shadow-xl"
               />
@@ -324,7 +345,7 @@ const AboutUs = () => {
         <div className="px-4 mx-auto max-w-7xl">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-[#e67e23]">
-              Our Leadership Team
+              Our Board of Directors
             </h2>
             <p className="max-w-2xl mx-auto text-[#333333]">
               Meet the dedicated professionals who drive our mission forward and

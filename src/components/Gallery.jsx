@@ -12,7 +12,7 @@
   //     category: "workshops",
   //     title: "Web Development Workshop",
   //     date: "March 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Students learning advanced web technologies",
   //   },
   //   {
@@ -20,7 +20,7 @@
   //     category: "events",
   //     title: "Annual Tech Summit",
   //     date: "February 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Industry experts sharing insights",
   //   },
   //   {
@@ -28,7 +28,7 @@
   //     category: "students",
   //     title: "Graduation Ceremony",
   //     date: "January 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Successful completion of advanced courses",
   //   },
   //   {
@@ -36,7 +36,7 @@
   //     category: "workshops",
   //     title: "Digital Marketing Workshop",
   //     date: "March 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Practical session on social media marketing",
   //   },
   //   {
@@ -44,7 +44,7 @@
   //     category: "events",
   //     title: "Industry Visit",
   //     date: "February 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Students visiting tech park",
   //   },
   //   {
@@ -52,7 +52,7 @@
   //     category: "students",
   //     title: "Project Presentation",
   //     date: "January 2024",
-  //     image: "/api/placeholder/600/400",
+  //     image: "https://picsum.photos/200/300",
   //     description: "Students showcasing their final projects",
   //   },
     
@@ -191,7 +191,7 @@ const Gallery = () => {
       category: "workshops",
       title: "Web Development Workshop",
       date: "March 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Students learning advanced web technologies",
     },
     {
@@ -199,7 +199,7 @@ const Gallery = () => {
       category: "events",
       title: "Annual Tech Summit",
       date: "February 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Industry experts sharing insights",
     },
     {
@@ -207,7 +207,7 @@ const Gallery = () => {
       category: "students",
       title: "Graduation Ceremony",
       date: "January 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Successful completion of advanced courses",
     },
     {
@@ -215,7 +215,7 @@ const Gallery = () => {
       category: "workshops",
       title: "Digital Marketing Workshop",
       date: "March 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Practical session on social media marketing",
     },
     {
@@ -223,7 +223,7 @@ const Gallery = () => {
       category: "events",
       title: "Industry Visit",
       date: "February 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Students visiting tech park",
     },
     {
@@ -231,7 +231,7 @@ const Gallery = () => {
       category: "students",
       title: "Project Presentation",
       date: "January 2024",
-      image: "/api/placeholder/600/400",
+      image: "https://picsum.photos/200/300",
       description: "Students showcasing their final projects",
     },
     

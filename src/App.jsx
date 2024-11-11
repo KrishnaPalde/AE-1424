@@ -21,38 +21,19 @@ import AdminContact from "./components/Admin/AdminContact";
 import CoursesAdmin from "./components/Admin/CoursesAdmin";
 import AdminTrainingCentre from "./components/Admin/AdminTrainingCentre";
 import NewsBanner from "./components/NewsBanner";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Header />
-                <LandingImage />
-                <Intro />
-                <Records />
-                <Carousel />
-                <Affiliations />
-                {/* <Legacy /> */}
-                <Footer />
-              </>
-            }
-          />
-          <Route
-          path="/our-training-centers"
-          element={
-            <>
-            <Header/>
-            <TrainingPrograms/>
-            <Footer />
-            </>
-          }
-          />
-          <Route
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/training-centers"element={<><Header/><TrainingPrograms/><Footer /></>}/>
+          <Route path="training-centers/courses-offered" element={<><Header/><Nav/><CoursesWeOffer/><CoursesCard/><Affiliations/><Footer /></>}/>
+          <Route path="training-centers/find-a-center"element={<><Header/><TrainingPrograms/><Footer /></>}/>
+          
+          {/* <Route
           path="/courses-we-offer"
           element={
             <>
@@ -61,13 +42,35 @@ function App() {
             <CoursesWeOffer/>
             <CoursesCard/>
             <Affiliations/>
-            {/* <Legacy/> */}
+            <Footer />
+            </>
+          }
+          /> */}
+
+          <Route
+          path="who-we-are/about-us"
+          element={
+            <>
+            <Header/>
+            <Nav/>
+            <AboutUs />
             <Footer />
             </>
           }
           />
           <Route
-          path="/aboutus"
+          path="who-we-are/about-us/vision-mission"
+          element={
+            <>
+            <Header/>
+            <Nav/>
+            <AboutUs />
+            <Footer />
+            </>
+          }
+          />
+          <Route
+          path="who-we-are/about-us/board-directors"
           element={
             <>
             <Header/>
@@ -89,7 +92,7 @@ function App() {
           }
           />
           <Route
-          path="/contactus"
+          path="/contact-us"
           element={
             <>
             <Header/>
