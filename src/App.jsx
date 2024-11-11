@@ -22,6 +22,8 @@ import CoursesAdmin from "./components/Admin/CoursesAdmin";
 import AdminTrainingCentre from "./components/Admin/AdminTrainingCentre";
 import NewsBanner from "./components/NewsBanner";
 import LandingPage from "./components/LandingPage";
+import Courses from "./components/Courses";
+import TrainingCenters from "./components/TrainingCenters";
 
 function App() {
   return (
@@ -29,9 +31,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
-          <Route path="/training-centers"element={<><Header/><TrainingPrograms/><Footer /></>}/>
-          <Route path="training-centers/courses-offered" element={<><Header/><Nav/><CoursesWeOffer/><CoursesCard/><Affiliations/><Footer /></>}/>
-          <Route path="training-centers/find-a-center"element={<><Header/><TrainingPrograms/><Footer /></>}/>
+          <Route path="/training-centers"element={<TrainingCenters/>}/>
+          <Route path="training-centers/courses-offered" element={<Courses/>}/>
+          <Route path="training-centers/find-a-center"element={<TrainingCenters/>}/>
           
           {/* <Route
           path="/courses-we-offer"

@@ -8,7 +8,6 @@ import Nav from "./Nav";
 export default function TrainingPrograms() {
   return (
     <>
-    <Nav/>
       <div className="container max-w-full">
         <div className="flex flex-col p-6 text-justify md:flex-row">
           <div className="flex items-center justify-center md:w-4/6">
