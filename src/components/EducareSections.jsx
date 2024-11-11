@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Users, Award, Building2, ChevronRight, Calendar } from 'lucide-react';
+import React from 'react';
+import { BookOpen, Users, Award, Building2, Calendar } from 'lucide-react';
 
 const EducareSections = () => {
-  const [activeNewsIndex, setActiveNewsIndex] = useState(0);
-
   const services = [
     {
-      icon: <BookOpen className="w-6 h-6" />,
-      title: "Curriculum Development",
-      description: "Expert guidance in aligning educational programs with government standards",
-      gradient: "from-blue-500 to-cyan-400"
+      icon: <BookOpen className="w-8 h-8 text-[#e67e23]" />,
+      title: "Skill Development Training Programs",
+      description: "Tailored programs that enhance practical skills, improve employability, and align with national educational standards.",
     },
     {
-      icon: <Users className="w-6 h-6" />,
-      title: "Teacher Training",
-      description: "Professional development programs for educators",
-      gradient: "from-purple-500 to-pink-400"
+      icon: <Users className="w-8 h-8 text-[#e67e23]" />,
+      title: "Training Center Partnerships",
+      description: "Collaborations to support training centers with resources, training, and operational guidance for improved educational delivery.",
     },
     {
-      icon: <Award className="w-6 h-6" />,
-      title: "Quality Assurance",
-      description: "Comprehensive assessment and improvement strategies",
-      gradient: "from-green-500 to-emerald-400"
+      icon: <Award className="w-8 h-8 text-[#e67e23]" />,
+      title: "Placement Assistance",
+      description: "Helping trained students secure employment by connecting them with employers and providing job placement support.",
     },
     {
-      icon: <Building2 className="w-6 h-6" />,
-      title: "Institution Support",
-      description: "Administrative and operational guidance for schools",
-      gradient: "from-orange-500 to-yellow-400"
-    }
+      icon: <Building2 className="w-8 h-8 text-[#e67e23]" />,
+      title: "Tenders and Work Orders",
+      description: "Expert assistance in managing tenders and work orders, ensuring competitive bids and successful project execution.",
+    },
+    {
+      icon: <BookOpen className="w-8 h-8 text-[#e67e23]" />,
+      title: "Skill Development Training Programs",
+      description: "Programs focused on equipping individuals with the necessary skills for success in various industries.",
+    },
+    {
+      icon: <Users className="w-8 h-8 text-[#e67e23]" />,
+      title: "Training Center Partnerships",
+      description: "Strategic partnerships that provide training centers with guidance and resources to enhance their training programs.",
+    },
   ];
 
   const news = [
@@ -65,114 +68,54 @@ const EducareSections = () => {
     }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveNewsIndex((current) => (current + 1) % news.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="w-full p-6 my-16">
+      <div className="mx-16 px-16 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* What We Do Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="backdrop-blur-lg bg-white/90 rounded-2xl shadow-xl p-8 h-full border border-gray-200"
-        >
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 relative">
-            What We Do
-            <div className="h-1 w-20 bg-blue-500 mt-2 rounded-full"></div>
-          </h2>
-          <div className="grid gap-6">
+        <div className="space-y-8 mr-32">
+          <h2 className="text-3xl font-bold text-[#e67e23]">What We Do</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative overflow-hidden"
+                className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`} />
-                <div className="relative flex items-start space-x-4 p-6 rounded-xl border border-gray-200 hover:border-transparent hover:shadow-lg transition-all duration-300">
-                  <div className={`flex-shrink-0 p-3 rounded-lg bg-gradient-to-r ${service.gradient} text-white`}>
-                    {service.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mt-2 group-hover:text-gray-700 transition-colors">
-                      {service.description}
-                    </p>
-                  </div>
+                <div className="flex items-center space-x-4">
+                  {service.icon}
+                  <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
                 </div>
-              </motion.div>
+                <p className="mt-2 text-gray-600">{service.description}</p>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* News and Updates Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="backdrop-blur-lg bg-white/90 rounded-2xl shadow-xl p-8 h-full border border-gray-200"
-        >
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 relative">
-            News & Updates
-            <div className="h-1 w-20 bg-blue-500 mt-2 rounded-full"></div>
-          </h2>
-          <div className="relative h-[400px] overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeNewsIndex}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0"
-              >
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-gray-200 h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {news[activeNewsIndex].date}
-                    </div>
-                    <span className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full">
-                      {news[activeNewsIndex].tag}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                    {news[activeNewsIndex].title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    {news[activeNewsIndex].description}
-                  </p>
-                  <button className="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
-                    <span className="text-sm font-medium">Read full article</span>
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </button>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {news.map((_, index) => (
-                <button
+        {/* News & Updates Section */}
+        <div className="space-y-8">
+          <h2 className="text-3xl font-bold text-[#e67e23]">News & Updates</h2>
+          <div
+            className="relative bg-white rounded-lg shadow-md overflow-y-auto"
+            style={{ maxHeight: '500px' }}
+          >
+            <div>
+              {news.map((item, index) => (
+                <div
                   key={index}
-                  onClick={() => setActiveNewsIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === activeNewsIndex 
-                      ? 'bg-blue-600 w-4' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
+                  className="p-6 border-b border-gray-200"
+                  style={{ height: "auto" }} // This will auto adjust based on content
+                >
+                  <div className="flex items-center space-x-2 text-gray-500 text-sm mb-1">
+                    <Calendar className="w-4 h-4" />
+                    <span>{item.date}</span>
+                    <span className="bg-[#e67e23] text-white text-xs px-2 py-1 rounded-full">{item.tag}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

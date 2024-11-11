@@ -10,7 +10,7 @@ export default function Records() {
 
   return (
     <>
-    <div className="bg-[#f9f9f9] ">
+    <div className="bg-white ">
         <div className="container h-auto max-w-full">
           <div className="flex flex-col items-center justify-center p-10 px-12 space-y-7 lg:flex-row lg:px-44 lg:space-x-40">
             <div className="w-full lg:w-2/4">
