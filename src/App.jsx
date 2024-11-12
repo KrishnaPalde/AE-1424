@@ -24,6 +24,11 @@ import NewsBanner from "./components/NewsBanner";
 import LandingPage from "./components/LandingPage";
 import Courses from "./components/Courses";
 import TrainingCenters from "./components/TrainingCenters";
+import OverviewSection from "./components/OverviewSection";
+import SkillDevelopment from "./components/SkillDevelopment";
+import TrainingCenterPartnerships from "./components/TCPartnerships";
+import PlacementAssistance from "./components/PlacementAssistance";
+import WorkOrders from "./components/WorkOrder";
 
 function App() {
   return (
@@ -33,7 +38,14 @@ function App() {
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/training-centers"element={<TrainingCenters/>}/>
           <Route path="training-centers/courses-offered" element={<Courses/>}/>
-          <Route path="training-centers/find-a-center"element={<TrainingCenters/>}/>
+          <Route path="training-centers/find-a-center" element={<TrainingCenters/>}/>
+
+
+          <Route path="what-we-do/services-overview" element={<><Header/><Nav/><OverviewSection/><Footer/></>}/>
+          <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
+          <Route path="what-we-do/tc-partnerships" element={<><Header/><Nav/><TrainingCenterPartnerships/><Footer/></>}/>
+          <Route path="what-we-do/placement" element={<><Header/><Nav/><PlacementAssistance/><Footer/></>}/>
+          <Route path="what-we-do/work-orders" element={<><Header/><Nav/><WorkOrders/><Footer/></>}/>
           
           {/* <Route
           path="/courses-we-offer"

@@ -203,7 +203,10 @@ const AboutUs = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     if(location.pathname === "/who-we-are/about-us/vision-mission"){
       window.scrollTo({
         top: 400,

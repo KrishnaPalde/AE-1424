@@ -126,7 +126,7 @@ const navigation = [
     current: false,
     sublinks: [
       { name: "Overview", href: "/what-we-do/services-overview" },
-      { name: "Skill Development Training Programs", href: "/what-we-do/team" },
+      { name: "Skill Development Training Programs", href: "/what-we-do/skill-development" },
       { name: "Training Center Partnerships", href: "/what-we-do/tc-partnerships" },
       { name: "Placement Assistance", href: "/what-we-do/placement" },
       { name: "Tenders and Work Orders", href: "/what-we-do/work-orders" },
