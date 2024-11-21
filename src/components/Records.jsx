@@ -1,80 +1,71 @@
-import { UsersIcon } from '@heroicons/react/24/outline'
-import React, {useState} from 'react'
-import CountUp from 'react-countup'
-import ScrollTrigger from 'react-scroll-trigger';
+import React, { useState } from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 export default function Records() {
+  const metrics = [
+    { title: "Training Centres", count: 60 },
+    { title: "Trainers", count: 150 },
+    { title: "Master Trainers", count: 40 },
+    { title: "Trained Candidates", count: 15000 },
+    { title: "Placed Candidates", count: 9000 },
+    { title: "Projects Completed", count: 45 },
+    { title: "Government Collaborations", count: 20 },
+    { title: "Industry Partners", count: 180 },
+  ];
 
-    const [CounterOn, setCounterOn] = useState(false);
-
+  const [ref, inView] = useInView({
+    triggerOnce: false, // Continuously monitor visibility
+    threshold: 0.5, // Trigger when 50% of the section is visible
+  });
 
   return (
-    <>
-    <div className="bg-white ">
-        <div className="container h-auto max-w-full">
-          <div className="flex flex-col items-center justify-center p-10 px-12 space-y-7 lg:flex-row lg:px-44 lg:space-x-40">
-            <div className="w-full lg:w-2/4">
-              <h1 className="capitalize text-[#e67e23] text-3xl font-bold">
-                our mission
-              </h1>
-              <p className="text-[#e67e23]">
-                We promise to deliver state of the art training to each needy &
-                deserving youth of our Nation to reduce the unemployment ratio.
-              </p>
+    <div className="bg-white py-16">
+      <div className="container mx-auto px-6 lg:px-12">
+        {/* Mission and Vision Section */}
+        <div className="flex flex-col items-center justify-between lg:flex-row lg:space-x-20">
+          <div className="lg:w-1/2">
+            <h1 className="text-3xl font-bold text-[#e67e23] capitalize mb-4">Our Mission</h1>
+            <p className="text-lg text-gray-700 mb-8">
+              To empower the nation by unlocking the potential of youth and women through transformative education, skill development, 
+              and comprehensive consultancy services. We are dedicated to fostering self-reliance, reducing unemployment, and 
+              building a future-ready workforce that drives innovation, strengthens communities, and contributes to India's 
+              sustainable growth and prosperity.
+            </p>
 
-              <h1 className="capitalize text-[#e67e23] text-3xl mt-7 font-bold">
-                our vision
-              </h1>
-              <p className="text-[#e67e23]">
-                Make India a Nation of Super Skilled Power Source for the World.
-                For this we're not only focussing employability skills but also
-                Sparking & injecting the Entrepreneurship Skills.
-              </p>
-            </div>
-            
-            
-            <div className="w-full lg:flex lg:flex-row lg:w-2/4">
-              <div className="grid grid-cols-2 ">
-                <div className="border border-[#e67e23] flex flex-col items-center justify-center p-8 md:p-0">
-                  <h1 className="text-3xl text-[#e67e23] font-bold lg:text-4xl ">
-                    <CountUp start={0} end={60} duration={2} delay={0}/>+
-                  </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#e67e23] lg:pl-6">
-                    training centres
-                  </h2>
-                </div>
-                <div className="flex flex-col items-center justify-center p-8">
-                  <h1 className="text-3xl text-[#e67e23] font-bold lg:text-4xl flex flex-wrap">
-                  <CountUp start={0} end={3400} duration={4} delay={0}/>+
-                  </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#e67e23] pl-2">
-                    placements done
-                  </h2>
-                </div>
-                <div className="border-l border-b border-[#e67e23] flex flex-col items-center justify-center p-8">
-                  <h1 className="text-3xl text-[#e67e23] font-bold lg:text-4xl">
-                  <CountUp start={0} end={60} duration={4} delay={0}/>+
-                  </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#e67e23] ">
-                    training centres
-                  </h2>
-                </div>
-                <div className="border border-[#e67e23] flex flex-col items-center justify-center p-8">
-                  <h1 className="text-3xl text-[#e67e23] font-bold lg:text-4xl">
-                  <CountUp start={0} end={5000} duration={4} delay={0}/>+
-                  </h1>
-                  <h2 className="text-xl font-medium capitalize text-[#e67e23]">
-                    trained students
-                  </h2>
-                </div>
-            
-              </div>
-            </div>
+            <h1 className="text-3xl font-bold text-[#e67e23] capitalize mb-4">Our Vision</h1>
+            <p className="text-lg text-gray-700">
+              To be a cornerstone in the empowerment of India by enabling youth and women to lead transformative change.
+               We envision a nation where every individual has the opportunity to thrive, contributing to a skilled, inclusive,
+                and self-reliant society that propels India to global leadership.
+            </p>
+          </div>
 
-            
+          {/* Metrics Section */}
+          <div className="lg:w-1/2 mt-12 lg:mt-0">
+            <div ref={ref} className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-2">
+              {metrics.map((metric, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center border border-[#e67e23] rounded-lg p-6 text-center transition-transform transform hover:scale-105 shadow-md"
+                >
+                  <h1 className="text-4xl lg:text-5xl font-bold text-[#e67e23]">
+                    {inView ? (
+                      <CountUp start={0} end={metric.count} duration={3} />
+                    ) : (
+                      "0"
+                    )}
+                    <span className="text-2xl">+</span>
+                  </h1>
+                  <p className="mt-2 text-lg font-medium text-gray-700 capitalize">
+                    {metric.title}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }

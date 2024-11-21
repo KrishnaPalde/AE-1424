@@ -27,19 +27,11 @@ export default function TrainingPrograms() {
             </div>
             <div className="text-[#561f06] font-medium xl:text-xl">
               <p>
-                At our training center, we're dedicated to nurturing talent,
-                fostering growth, and empowering individuals to reach their
-                fullest potential. With state-of-the-art facilities and a team
-                of experienced professionals, we provide a dynamic learning
-                environment tailored to meet the diverse needs of our students.
-                Whether you're embarking on a journey of skill development,
-                seeking to enhance your expertise, or exploring new avenues of
-                learning, our training center is your gateway to success. From
-                hands-on workshops to immersive training programs, we offer a
-                comprehensive range of courses designed to equip you with the
-                knowledge and skills needed to thrive in today's competitive
-                landscape. Join us at our training center and unlock endless
-                possibilities for personal and professional development.
+                At our training centers, we are committed to creating a transformative learning environment that empowers individuals to achieve their highest potential. With state-of-the-art infrastructure, modern equipment, and cutting-edge technology, we ensure students receive hands-on training that meets industry standards. Our spacious classrooms, advanced labs, and interactive learning setups are designed to foster creativity, collaboration, and skill enhancement. <br></br><br></br>
+Our team of highly qualified trainers brings a wealth of industry experience and expertise, blending practical knowledge with academic rigor. They not only focus on technical skills but also mentor students to develop confidence, problem-solving abilities, and a growth mindset.<br></br><br></br>
+We offer a diverse range of programs, covering traditional sectors like agriculture, craftsmanship, and retail, as well as future-ready fields such as Artificial Intelligence, Data Analytics, Cloud Computing, and Digital Marketing. With a strong emphasis on healthcare and wellness, we also provide specialized courses in geriatric care, nursing, and other health-related professions, addressing the growing demand in these critical sectors.<br></br><br></br>
+Beyond employment, we focus on entrepreneurship by equipping students with the skills and resources to start their own ventures. Through mentorship, business planning, and incubation support, we empower aspiring entrepreneurs to transform their ideas into successful businesses.<br></br><br></br>
+Our mission is not just to train individuals for jobs but to prepare them for lifelong success, whether they choose to thrive in the workforce or embark on entrepreneurial journeys. At Aarti Educare, we create opportunities, foster innovation, and shape the leaders of tomorrow.
               </p>
             </div>
           </div>
