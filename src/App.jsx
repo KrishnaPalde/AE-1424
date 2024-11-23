@@ -29,6 +29,8 @@ import SkillDevelopment from "./components/SkillDevelopment";
 import TrainingCenterPartnerships from "./components/TCPartnerships";
 import PlacementAssistance from "./components/PlacementAssistance";
 import WorkOrders from "./components/WorkOrder";
+import AffiliatedBy from "./components/AffiliatedBy";
+import GovernmentDepartments from "./components/GovernmentDepartments";
 
 function App() {
   return (
@@ -41,7 +43,7 @@ function App() {
           <Route path="training-centers/find-a-center" element={<TrainingCenters/>}/>
 
 
-          <Route path="what-we-do/services-overview" element={<><Header/><Nav/><OverviewSection/><Footer/></>}/>
+          <Route path="what-we-do/services-overview" element={<><Header/><Nav/><OverviewSection/><AffiliatedBy/><GovernmentDepartments/><Footer/></>}/>
           <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
           <Route path="what-we-do/tc-partnerships" element={<><Header/><Nav/><TrainingCenterPartnerships/><Footer/></>}/>
           <Route path="what-we-do/placement" element={<><Header/><Nav/><PlacementAssistance/><Footer/></>}/>

@@ -4,6 +4,7 @@ import  Header  from "./Header"
 import  Nav  from "./Nav"
 import  TrainingPrograms  from "./TrainingPrograms"
 import { useLocation } from "react-router-dom"
+import OurPartners from "./OurPartners"
 
 const TrainingCenters = () => {
     const location = useLocation();
@@ -18,6 +19,7 @@ const TrainingCenters = () => {
         <Header/>
         <Nav/>
         <TrainingPrograms/>
+        <OurPartners/>
         <Footer />
         </>
     )

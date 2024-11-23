@@ -10,6 +10,9 @@ import   Records  from "./Records"
 import PopupEnquiryForm from "./PopupEnquiryForm"
 import Nav from "./Nav"
 import EducareSections from "./EducareSections"
+import AffiliatedBy from "./AffiliatedBy"
+import GovernmentDepartments from "./GovernmentDepartments"
+import OurPartners from "./OurPartners"
 
 
 const LandingPage = () => {
@@ -36,9 +39,12 @@ const LandingPage = () => {
         <Nav/>
         <Carousel />
         <Intro />
+        <AffiliatedBy />
         <Records />
+        <GovernmentDepartments/>
         <EducareSections/>
-        <Affiliations />
+        {/* <Affiliations /> */}
+        <OurPartners />
         {/* <Legacy /> */}
         <Footer />
         </>

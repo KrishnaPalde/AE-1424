@@ -6,6 +6,7 @@ import aboutUsImage from "../assets/tc3.png";
 import sagar_thoke from "../assets/Sagar_Thoke.jpg";
 import sagar_ghule from "../assets/Sagar_Ghule.jpg";
 import sagar_khumbhar from "../assets/Sagar_Kumbhar.jpg";
+import GovernmentDepartments from "./GovernmentDepartments";
 
 const AboutUs = () => {
   const boardOfDirectors = [
@@ -48,12 +49,12 @@ const AboutUs = () => {
   const stats = [
     { label: "Students Trained", value: "15,000+" },
     { label: "Corporate Partners", value: "180+" },
-    { label: "Completed Projects", value: "45+" },
+    { label: "Government Collaborations", value: "20+" }
   ];
   const stats2 = [
     { label: "Students Trained", value: "15,000+" },
     { label: "Training Centres", value: "60+" },
-    { label: "Government Collaborations", value: "20+" },
+    { label: "Completed Projects", value: "45+" }
   ];
 
   const [showMore, setShowMore] = useState(false);
@@ -260,6 +261,8 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+
+      <div className="bg-white"><GovernmentDepartments/></div>
 
       {/* Impact Section */}
       <section className="py-16 bg-[#e67e23] text-white">

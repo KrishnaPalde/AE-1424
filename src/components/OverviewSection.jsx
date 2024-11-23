@@ -63,7 +63,7 @@ const OverviewSection = () => {
     activeTab === "candidates" ? candidatesServices : organizationsServices;
 
   return (
-    <div className="bg-gray-50 py-24">
+    <div className="bg-white py-24">
       <div className="container mx-auto px-6 max-w-7xl">
         <h1 className="text-5xl font-bold text-center text-gray-900 mb-8">
           Our Services Overview

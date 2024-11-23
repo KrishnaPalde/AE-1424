@@ -4,7 +4,8 @@ import  Header  from "./Header"
 import  Nav  from "./Nav"
 import CoursesWeOffer from "./CoursesWeOffer"
 import CoursesCard from "./CoursesCard"
-import Affiliations from "./Affiliations"
+
+import OurPartners from "./OurPartners"
 
 
 
@@ -19,7 +20,7 @@ const Courses = () => {
         <Nav/>
         <CoursesWeOffer/>
         <CoursesCard/>
-        <Affiliations/>
+        <OurPartners/>
         <Footer />
         </>
     )
