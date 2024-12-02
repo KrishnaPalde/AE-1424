@@ -6,6 +6,7 @@ import CoursesWeOffer from "./CoursesWeOffer"
 import CoursesCard from "./CoursesCard"
 
 import OurPartners from "./OurPartners"
+import WhatsAppButton from "./WhatsappButton"
 
 
 
@@ -21,6 +22,7 @@ const Courses = () => {
         <CoursesWeOffer/>
         <CoursesCard/>
         <OurPartners/>
+        <WhatsAppButton/>
         <Footer />
         </>
     )

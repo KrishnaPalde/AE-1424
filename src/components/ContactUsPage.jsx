@@ -3,6 +3,7 @@ import  Footer  from "./Footer"
 import  Header  from "./Header"
 import  Nav  from "./Nav"
 import ContactUs from "./ContactUs"
+import WhatsAppButton from "./WhatsappButton"
  
 const ContactUsPage = () => {
     useEffect(() => {
@@ -13,6 +14,7 @@ const ContactUsPage = () => {
             <Header/>
             <Nav/>
             <ContactUs/>
+            <WhatsAppButton/>
             <Footer />
         </>
     )

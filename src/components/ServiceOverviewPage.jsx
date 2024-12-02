@@ -5,6 +5,7 @@ import  Nav  from "./Nav"
 import AffiliatedBy from "./AffiliatedBy"
 import OverviewSection from "./OverviewSection"
 import GovernmentDepartments from "./GovernmentDepartments"
+import WhatsAppButton from "./WhatsappButton"
 
 const ServiceOverviewPage = () => {
     useEffect(() => {
@@ -17,6 +18,7 @@ const ServiceOverviewPage = () => {
         <OverviewSection/>
         <AffiliatedBy/>
         <GovernmentDepartments/>
+        <WhatsAppButton/>
         <Footer/>
         </>
     )

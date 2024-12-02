@@ -13,6 +13,7 @@ import EducareSections from "./EducareSections"
 import AffiliatedBy from "./AffiliatedBy"
 import GovernmentDepartments from "./GovernmentDepartments"
 import OurPartners from "./OurPartners"
+import WhatsAppButton from "./WhatsappButton"
 
 
 const LandingPage = () => {
@@ -46,6 +47,7 @@ const LandingPage = () => {
         {/* <Affiliations /> */}
         <OurPartners />
         {/* <Legacy /> */}
+        <WhatsAppButton/>
         <Footer />
         </>
     )

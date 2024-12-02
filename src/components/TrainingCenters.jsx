@@ -5,6 +5,7 @@ import  Nav  from "./Nav"
 import  TrainingPrograms  from "./TrainingPrograms"
 import { useLocation } from "react-router-dom"
 import OurPartners from "./OurPartners"
+import WhatsAppButton from "./WhatsappButton"
 
 const TrainingCenters = () => {
     const location = useLocation();
@@ -20,6 +21,7 @@ const TrainingCenters = () => {
         <Nav/>
         <TrainingPrograms/>
         <OurPartners/>
+        <WhatsAppButton/>
         <Footer />
         </>
     )
