@@ -17,7 +17,7 @@ import affiliated_logo11 from "../assets/affiliated_by/Home Management And Care 
 import affiliated_logo12 from "../assets/affiliated_by/IT-ITeS Sector Skills Council nasscom (SSC nasscom).png";
 import affiliated_logo13 from "../assets/affiliated_by/Management & Entrepreneurship and Professional Skills Council (MEPSC).png";
 // import affiliated_logo14 from "../assets/affiliated_by/Media & Entertainment Skills Council (MESC).png";
-import affiliated_logo14 from "../assets/affiliated_by/MESC.jpg";
+import affiliated_logo14 from "../assets/affiliated_by/MESC.jpg"; 
 import affiliated_logo15 from "../assets/affiliated_by/Power Sector Skill Council (PSSC).png";
 import affiliated_logo16 from "../assets/affiliated_by/Rubber, Chemical & Petrochemical Skill Development Council (RCPSDC).png";
 import affiliated_logo17 from "../assets/affiliated_by/Skill Council for Green Jobs (SCGJ).gif";

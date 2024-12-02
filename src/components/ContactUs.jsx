@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import indianStates from "./indianState";
 
@@ -29,6 +29,12 @@ const ContactUs = () => {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
   
   // const handleChange = (e) => {
   //   const { name, value } = e.target;

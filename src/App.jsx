@@ -1,21 +1,11 @@
-import Legacy from "./components/Legacy";
 import Header from "./components/Header";
-import CoursesWeOffer from "./components/CoursesWeOffer";
-import CoursesCard from "./components/CoursesCard";
-import Affiliations from "./components/Affiliations";
-import LandingImage from "./components/LandingImage";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Intro from "./components/Intro";
-import Records from "./components/Records";
-import Carousel from "./components/Carousel";
-import TrainingPrograms from "./components/TrainingPrograms";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
 import Gallery from "./components/Gallery";
 import ContactUs from "./components/ContactUs";
 import AdminLogin from "./components/Admin/AdminLogin";
-import  Sidebar  from "./components/Admin/Sidebar";
 import GalleryAdmin from "./components/Admin/GalleryAdmin";
 import AdminContact from "./components/Admin/AdminContact";
 import CoursesAdmin from "./components/Admin/CoursesAdmin";
@@ -24,13 +14,13 @@ import NewsBanner from "./components/NewsBanner";
 import LandingPage from "./components/LandingPage";
 import Courses from "./components/Courses";
 import TrainingCenters from "./components/TrainingCenters";
-import OverviewSection from "./components/OverviewSection";
-import SkillDevelopment from "./components/SkillDevelopment";
-import TrainingCenterPartnerships from "./components/TCPartnerships";
-import PlacementAssistance from "./components/PlacementAssistance";
-import WorkOrders from "./components/WorkOrder";
-import AffiliatedBy from "./components/AffiliatedBy";
-import GovernmentDepartments from "./components/GovernmentDepartments";
+
+import ServiceOverviewPage from "./components/ServiceOverviewPage";
+import ServiceDetailsPage from "./components/ServiceDetailsPage";
+import SchemesOverviewPage from "./components/SchemesOverviewPage";
+import SchemeDetailsPage from "./components/SchemeDetailsPage";
+import AboutUsPage from "./components/AboutUsPage";
+import ContactUsPage from "./components/ContactUsPage";
 
 function App() {
   return (
@@ -43,11 +33,17 @@ function App() {
           <Route path="training-centers/find-a-center" element={<TrainingCenters/>}/>
 
 
-          <Route path="what-we-do/services-overview" element={<><Header/><Nav/><OverviewSection/><AffiliatedBy/><GovernmentDepartments/><Footer/></>}/>
-          <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
+          <Route path="what-we-do/services-overview" element={<ServiceOverviewPage/>}/>
+          <Route path="what-we-do/:id" element={<ServiceDetailsPage/>}/>
+
+
+          <Route path="schemes" element={<SchemesOverviewPage/>}/>
+          <Route path="schemes/:id" element={<SchemeDetailsPage/>}/>
+          {/* <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
           <Route path="what-we-do/tc-partnerships" element={<><Header/><Nav/><TrainingCenterPartnerships/><Footer/></>}/>
           <Route path="what-we-do/placement" element={<><Header/><Nav/><PlacementAssistance/><Footer/></>}/>
-          <Route path="what-we-do/work-orders" element={<><Header/><Nav/><WorkOrders/><Footer/></>}/>
+          <Route path="what-we-do/work-orders" element={<><Header/><Nav/><WorkOrders/><Footer/></>}/> */}
+
           
           {/* <Route
           path="/courses-we-offer"
@@ -66,34 +62,19 @@ function App() {
           <Route
           path="who-we-are/about-us"
           element={
-            <>
-            <Header/>
-            <Nav/>
-            <AboutUs />
-            <Footer />
-            </>
+            <AboutUsPage/>
           }
           />
           <Route
           path="who-we-are/about-us/vision-mission"
           element={
-            <>
-            <Header/>
-            <Nav/>
-            <AboutUs />
-            <Footer />
-            </>
+            <AboutUsPage/>
           }
           />
           <Route
           path="who-we-are/about-us/board-directors"
           element={
-            <>
-            <Header/>
-            <Nav/>
-            <AboutUs />
-            <Footer />
-            </>
+            <AboutUsPage/>
           }
           />
           <Route
@@ -110,12 +91,7 @@ function App() {
           <Route
           path="/contact-us"
           element={
-            <>
-            <Header/>
-            <Nav/>
-            <ContactUs/>
-            <Footer />
-            </>
+            <ContactUsPage/>
           }
           />
           <Route

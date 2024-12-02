@@ -18,7 +18,7 @@ export default function Intro() {
               dedicated to empowering young people and fostering self-reliance
               through skill development. Through our various projects, we're
               committed to driving employment and entrepreneurship among the
-              youth efficiently and effectively.
+              youth efficiently and effectively. 
             </p>
           </div>
           <div className="flex flex-col items-center justify-center sm:mt-10 lg:mt-0 lg:w-2/5 hover:text-[#f9f9f9]">

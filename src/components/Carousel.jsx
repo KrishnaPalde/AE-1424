@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 // Import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-export default function Carousel() {
+export default function Carousel() { 
   const slides = [
     {
       url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner1.jpg?alt=media&token=de6a7739-a570-4fa0-bdcf-fe37ce3af6fe",
