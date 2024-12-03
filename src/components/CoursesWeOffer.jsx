@@ -1,18 +1,25 @@
-import React from 'react'
+import React from "react";
 
-export default function CoursesWeOffer() {
+export default function CoursesWeOffer({ onCTAClick }) {
   return (
-    <>
-        <div className='flex flex-col items-center justify-center p-4 space-y-4'>
-            <div>
-                <h1 className='text-2xl text-[#e67e23] font-bold lg:text-3xl'>Programs We Offer</h1>
-            </div>
-            <div>
-                <p className='px-6 text-justify'>
-                At our training centers, we offer a diverse range of programs meticulously designed to meet the demands of an ever-evolving job market. From technical skills to soft skills, our curriculum is crafted to empower individuals with the knowledge and expertise needed to succeed in their chosen field. Whether you're interested in IT certifications, professional development programs, or vocational courses, we have something for everyone. Our experienced instructors, cutting-edge resources, and hands-on learning approach ensure that you not only gain valuable insights but also develop practical skills that are immediately applicable in the workplace. Browse through our course offerings and take the first step towards unlocking your full potential.
-                </p>
-            </div>
-        </div>
-    </>
-  )
+    <div className="bg-gray-50 py-16">
+      <div className="container mx-auto px-6 max-w-5xl text-center space-y-8">
+        <h1 className="text-4xl font-extrabold text-[#e67e23] lg:text-5xl">
+          Programs We Offer
+        </h1>
+        <p className="text-lg text-gray-600">
+          Explore a range of diverse programs meticulously designed to meet the
+          demands of an ever-evolving job market. Empower yourself with
+          cutting-edge skills, practical knowledge, and insights that drive
+          success.
+        </p>
+        <button
+          onClick={onCTAClick}
+          className="bg-[#e67e23] text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-[#c75f12] transition-all duration-300 shadow-lg"
+        >
+          Get in Touch
+        </button>
+      </div>
+    </div>
+  );
 }

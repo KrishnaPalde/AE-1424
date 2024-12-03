@@ -155,6 +155,18 @@ const navigation = [
     ],
   },
   { name: "Schemes", href: "/schemes", current: false },
+  // { name: "Training Centers", href: "/training-centers", current: false },
+  // { name: "Courses & Programs", href: "/courses-program", current: false },
+  {
+    name: "Training Centers",
+    href: "/training-centers",
+    current: false,
+    sublinks: [
+      { name: "Training Centers", href: "/training-centers" },
+      { name: "Courses & Programs", href: "/training-centers/courses-offered" },
+      { name: "Find a Center", href: "/training-centers/find-a-center" },
+    ],
+  },
   // { name: "Gallery", href: "/gallery", current: false },
   { name: "Contact Us", href: "/contact-us", current: false },
 ];

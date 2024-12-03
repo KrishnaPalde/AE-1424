@@ -1,57 +1,57 @@
-import React, { useEffect, useState } from "react"
-
-import Affiliations  from "./Affiliations"
-import   Carousel  from "./Carousel"
-import   Footer  from "./Footer"
-import   Header  from "./Header"
-import   Intro  from "./Intro"
-import   LandingImage  from "./LandingImage"
-import   Records  from "./Records"
-import PopupEnquiryForm from "./PopupEnquiryForm"
-import Nav from "./Nav"
-import EducareSections from "./EducareSections"
-import AffiliatedBy from "./AffiliatedBy"
-import GovernmentDepartments from "./GovernmentDepartments"
-import OurPartners from "./OurPartners"
-import WhatsAppButton from "./WhatsappButton"
-
+import React, { useEffect, useState } from "react";
+import Affiliations from "./Affiliations";
+import Carousel from "./Carousel";
+import Footer from "./Footer";
+import Header from "./Header";
+import Intro from "./Intro";
+import Records from "./Records";
+import PopupEnquiryForm from "./PopupEnquiryForm";
+import Nav from "./Nav";
+import EducareSections from "./EducareSections";
+import AffiliatedBy from "./AffiliatedBy";
+import GovernmentDepartments from "./GovernmentDepartments";
+import OurPartners from "./OurPartners";
+import WhatsAppButton from "./WhatsappButton";
+import LoadingSpinner from "./LoadingSpinner";
 
 const LandingPage = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => setIsPopupOpen(false);
 
-    useEffect(() => {
-        window.scrollTo({
-            top:0,
-            behavior: "smooth"
-        })
-        setIsPopupOpen(true);
-    }, []);
-    
-   
+  useEffect(() => {
+    // Show popup after initial load
+    setTimeout(() => setIsPopupOpen(true), 2000);
 
-    
-    return (
-        <>
-        <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
-        <Header />
-        {/* <LandingImage /> */}
-        <Nav/>
-        <Carousel />
-        <Intro />
-        <AffiliatedBy />
-        <Records />
-        <GovernmentDepartments/>
-        <EducareSections/>
-        {/* <Affiliations /> */}
-        <OurPartners />
-        {/* <Legacy /> */}
-        <WhatsAppButton/>
-        <Footer />
-        </>
-    )
-}
+    // Simulate loading for 2.5 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
 
+    return () => clearTimeout(timer); // Cleanup timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />; // Show the spinner during the loading phase
+  }
+
+  return (
+    <>
+      <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
+      <Header />
+      <Nav />
+      <Carousel />
+      <Intro />
+      <AffiliatedBy />
+      <Records />
+      <GovernmentDepartments />
+      <EducareSections />
+      <OurPartners />
+      <WhatsAppButton />
+      <Footer />
+    </>
+  );
+};
 
 export default LandingPage;

@@ -1,95 +1,62 @@
 import React, { useEffect } from "react";
-import tc1 from "../assets/tc1.png";
-import tc2 from "../assets/tc2.png";
-import tc3 from "../assets/tc3.png";
-import courses1 from "../assets/courses1.png";
-import courses2 from "../assets/courses2.png";
-import courses3 from "../assets/courses3.png";
-import courses4 from "../assets/courses4.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import {
-  FaBookBookmark,
-  FaLocationArrow,
-  FaLocationDot,
-  FaUserGraduate,
-} from "react-icons/fa6";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-
-const cards = [
+const courses = [
   {
     title: "Apparel Made-Ups & Home Furnishing",
-    image: tc1,
-    logo: courses1,
+    description: "Build expertise in the textile and fashion industry.",
   },
   {
     title: "Beauty & Wellness Sector Skill Council",
-    image: tc2,
-    logo: courses2,
+    description: "Learn advanced beauty and wellness techniques.",
   },
   {
     title: "Capital Goods Skill Council",
-    image: tc3,
-    logo: courses3,
+    description: "Master skills in engineering and capital goods sectors.",
   },
   {
     title: "BFSI Sector Skill Council Of India",
-    image: tc1,
-    logo: courses4,
-  },
-  {
-    title: "BFSI Sector Skill Council Of India",
-    image: tc1,
-    logo: courses4,
-  },
-  {
-    title: "BFSI Sector Skill Council Of India",
-    image: tc1,
-    logo: courses4,
+    description: "Advance your career in banking and finance.",
   },
 ];
 
-export default function CoursesCard() {
+export default function CoursesCard({ onCTAClick }) {
   useEffect(() => {
     AOS.init({ duration: 600 });
   }, []);
+
   return (
-    <>
-    <div className="container grid grid-cols-4 h-auto justify-center max-w-full xl:px-28 ">
-      {cards.map((tc, index) => (
+    <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 py-16 px-6 max-w-7xl mx-auto">
+      {courses.map((course, index) => (
         <div
-          key={tc.title}  // Move key prop here
-          className="grid grid-cols-1 p-4  h-auto"
-          data-aos="zoom-in"
+          key={index}
+          className="relative bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+          data-aos="fade-up"
         >
-          <div>
-          <div className="relative w-full h-56">
-            <img
-              src={tc.image}
-              alt={tc.title}
-              className="absolute object-cover w-full h-full lg:h-full"
-            />
-            <div className="bg-[#f6f6f6] absolute px-2 py-1 bottom-[-38px] left-0 p-1 ml-4 flex text-white text-xl font-semibold rounded-full">
-              <img src={tc.logo} alt={tc.title} className="object-cover h-20" />
+          {/* Decorative Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#e67e23] via-[#f3904f] to-[#e67e23] opacity-10"></div>
+
+          {/* Card Content */}
+          <div className="relative p-6 space-y-4">
+            <h3 className="text-2xl font-bold text-gray-800">{course.title}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {course.description}
+            </p>
+            <div className="pt-4">
+              <button
+                onClick={onCTAClick}
+                className="w-full bg-[#e67e23] text-white py-3 rounded-lg font-medium hover:bg-[#c75f12] transition-all duration-300"
+              >
+                Enquire Now
+              </button>
             </div>
           </div>
-          <div className="container bg-[#e67e23] space-y-2 px-4 h-44">
-            <div className="grid grid-cols-2 pb-3 space-y-14">
-              <div className="pt-14">
-                <h1 className="text-xl font-semibold text-[#f6f6f6]">{tc.title}</h1>
-              </div>
-              <div>
-                <button className="px-2 py-1 w-full border-b text-[#f6f6f6] underline underline-offset-8">
-                  Know More
-                </button>
-              </div>
-            </div>
-          </div>
-          </div>
+
+          {/* Highlighted Border */}
+          <div className="absolute inset-0 border-4 border-transparent rounded-xl hover:border-[#e67e23] transition-all duration-300"></div>
         </div>
       ))}
     </div>
-    </>
   );
 }

@@ -1,47 +1,66 @@
 import React from "react";
-import SearchButton from "./SearchButton";
-import TrainingCard from "./TrainingCard";
-import map from "../assets/map.png";
-import Header from "./Header";
-import Nav from "./Nav";
+import { Link } from "react-router-dom";
 
 export default function TrainingPrograms() {
   return (
-    <>
-      <div className="container max-w-full">
-        <div className="flex flex-col p-6 text-justify md:flex-row">
-          <div className="flex items-center justify-center md:w-4/6">
-            <img
-              src={map}
-              alt="map"
-              className="md:h-[25rem] lg:h-[32rem] object-cover "
-              loading="lazy"
-              />
-            
+    <div className="bg-gray-50 py-16">
+      <div className="container mx-auto px-6 max-w-6xl space-y-16">
+        {/* Header Section */}
+        <div className="text-center space-y-6">
+          <h1 className="text-4xl font-bold text-[#e67e23] uppercase lg:text-6xl">
+            Our Training Center
+          </h1>
+          <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
+            At our training centers, we are committed to creating a transformative learning environment that empowers individuals to achieve their highest potential. With state-of-the-art infrastructure, modern equipment, and cutting-edge technology, we ensure students receive hands-on training that meets industry standards.
+          </p>
+        </div>
+
+        {/* Content Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Text Section */}
+          <div className="space-y-6 text-gray-700 text-justify">
+            <p className="text-lg leading-relaxed">
+              Our spacious classrooms, advanced labs, and interactive learning setups are designed to foster creativity, collaboration, and skill enhancement. Our team of highly qualified trainers brings a wealth of industry experience and expertise, blending practical knowledge with academic rigor.
+            </p>
+            <p className="text-lg leading-relaxed">
+              We offer diverse programs in traditional sectors like agriculture, craftsmanship, and retail, as well as future-ready fields such as Artificial Intelligence, Data Analytics, Cloud Computing, and Digital Marketing. With a strong emphasis on healthcare and wellness, we also provide specialized courses in geriatric care and other health-related professions.
+            </p>
           </div>
-          <div className="space-y-3 md:w-3/6 md:space-y-16 md:px-1">
-            <div className="text-3xl capitalize  text-[#e67e23] font-bold lg:text-6xl">
-              <h1>our</h1>
-              <h1>training</h1>
-              <h1>center</h1>
-            </div>
-            <div className="text-[#561f06] font-medium xl:text-xl">
-              <p>
-                At our training centers, we are committed to creating a transformative learning environment that empowers individuals to achieve their highest potential. With state-of-the-art infrastructure, modern equipment, and cutting-edge technology, we ensure students receive hands-on training that meets industry standards. Our spacious classrooms, advanced labs, and interactive learning setups are designed to foster creativity, collaboration, and skill enhancement. <br></br><br></br>
-Our team of highly qualified trainers brings a wealth of industry experience and expertise, blending practical knowledge with academic rigor. They not only focus on technical skills but also mentor students to develop confidence, problem-solving abilities, and a growth mindset.<br></br><br></br>
-We offer a diverse range of programs, covering traditional sectors like agriculture, craftsmanship, and retail, as well as future-ready fields such as Artificial Intelligence, Data Analytics, Cloud Computing, and Digital Marketing. With a strong emphasis on healthcare and wellness, we also provide specialized courses in geriatric care, nursing, and other health-related professions, addressing the growing demand in these critical sectors.<br></br><br></br>
-Beyond employment, we focus on entrepreneurship by equipping students with the skills and resources to start their own ventures. Through mentorship, business planning, and incubation support, we empower aspiring entrepreneurs to transform their ideas into successful businesses.<br></br><br></br>
-Our mission is not just to train individuals for jobs but to prepare them for lifelong success, whether they choose to thrive in the workforce or embark on entrepreneurial journeys. At Aarti Educare, we create opportunities, foster innovation, and shape the leaders of tomorrow.
-              </p>
-            </div>
+
+          {/* Highlight Section */}
+          <div className="bg-white shadow-lg rounded-2xl p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-[#e67e23]">
+              Why Choose Us?
+            </h2>
+            <ul className="list-disc list-inside space-y-4 text-gray-600">
+              <li>
+                <strong>State-of-the-Art Infrastructure:</strong> Hands-on training in industry-standard labs.
+              </li>
+              <li>
+                <strong>Expert Trainers:</strong> Industry professionals with real-world expertise.
+              </li>
+              <li>
+                <strong>Diverse Programs:</strong> Covering traditional and future-ready fields.
+              </li>
+              <li>
+                <strong>Entrepreneurship Focus:</strong> Empowering students to start their own ventures.
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div>
-        <SearchButton />
-        <TrainingCard />
+        {/* Call to Action */}
+        <div className="text-center mt-12">
+          <Link
+            to="/training-centers/courses-offered"
+          >
+            <button 
+            className="bg-[#e67e23] text-white px-8 py-3 rounded-lg shadow-lg text-lg font-medium hover:bg-[#c75f12] transition-all duration-300">
+              Explore Our Programs
+            </button>
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
