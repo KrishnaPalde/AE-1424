@@ -21,6 +21,9 @@ import SchemesOverviewPage from "./components/SchemesOverviewPage";
 import SchemeDetailsPage from "./components/SchemeDetailsPage";
 import AboutUsPage from "./components/AboutUsPage";
 import ContactUsPage from "./components/ContactUsPage";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermsOfService";
+import Sitemap from "./components/Sitemap";
 
 function App() {
   return (
@@ -39,6 +42,10 @@ function App() {
 
           <Route path="schemes" element={<SchemesOverviewPage/>}/>
           <Route path="schemes/:id" element={<SchemeDetailsPage/>}/>
+
+          <Route path="privacy-policy" element={<PrivacyPolicy/>}/>
+          <Route path="terms-of-service" element={<TermsOfService/>}/>
+          <Route path="sitemap" element={<Sitemap/>}/>
           {/* <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
           <Route path="what-we-do/tc-partnerships" element={<><Header/><Nav/><TrainingCenterPartnerships/><Footer/></>}/>
           <Route path="what-we-do/placement" element={<><Header/><Nav/><PlacementAssistance/><Footer/></>}/>

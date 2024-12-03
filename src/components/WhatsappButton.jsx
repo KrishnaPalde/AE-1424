@@ -4,7 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa'; // Import WhatsApp icon from react-
 const WhatsAppButton = () => {
 
   return (
-    <div className="fixed max-w-full bottom-4 right-4">
+    <div className="fixed max-w-full bottom-12 right-4">
       <a
         href="https://wa.me/918237776233"
         target="_blank"
