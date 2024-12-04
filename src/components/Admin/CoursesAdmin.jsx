@@ -27,6 +27,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Sidebar from "./Sidebar";
+import PageWrapper from "../PageWrapper";
 
 const CoursesAdmin = () => {
  
@@ -122,6 +123,7 @@ const CoursesAdmin = () => {
   };
 
   return (
+    <PageWrapper>
     <div className="flex min-h-screen bg-gray-100">
         <Sidebar/>
       <div className="flex-1 px-6 py-8">
@@ -405,6 +407,7 @@ const CoursesAdmin = () => {
         </Dialog>
       </div>
     </div>
+    </PageWrapper>
   );
 };
 

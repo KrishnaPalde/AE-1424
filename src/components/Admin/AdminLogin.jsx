@@ -2,6 +2,7 @@ import React from "react";
 import { Eye, EyeOff, ArrowRight, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PageWrapper from "../PageWrapper";
 
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,7 @@ const AdminLogin = () => {
   };
 
   return (
+    <PageWrapper>
     <div className="flex min-h-screen bg-gray-50">
       <div className="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
         <div className="w-full max-w-sm mx-auto lg:w-96">
@@ -160,6 +162,7 @@ const AdminLogin = () => {
         </div>
       </div>
     </div>
+    </PageWrapper>
   );
 };
 

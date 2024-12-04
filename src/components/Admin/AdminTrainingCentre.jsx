@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import Sidebar from './Sidebar';
+import PageWrapper from '../PageWrapper';
 // import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const AdminTrainingCentre = () => {
@@ -114,6 +115,7 @@ const AdminTrainingCentre = () => {
   );
 
   return (
+    <PageWrapper>
     <div className="flex h-screen bg-gray-100">
       <Sidebar/>
       <div className="flex-1 p-8 overflow-auto">
@@ -309,6 +311,7 @@ const AdminTrainingCentre = () => {
         </Tabs>
       </div>
     </div>
+    </PageWrapper>
   );
 };
 

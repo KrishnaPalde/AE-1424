@@ -4,6 +4,7 @@ import  Header  from "./Header"
 import  Nav  from "./Nav"
 import ContactUs from "./ContactUs"
 import WhatsAppButton from "./WhatsappButton"
+import PageWrapper from "./PageWrapper"
  
 const ContactUsPage = () => {
     useEffect(() => {
@@ -11,11 +12,13 @@ const ContactUsPage = () => {
     })
     return(
         <>
-            <Header/>
+            {/* <Header/> */}
             <Nav/>
+            <PageWrapper>
             <ContactUs/>
             <WhatsAppButton/>
             <Footer />
+            </PageWrapper>
         </>
     )
 }

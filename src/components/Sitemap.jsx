@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "./Layout";
 import { servicesData } from "../data/servicesData";
 import { schemesData } from "../data/schemeData"; // Import schemesData
+import PageWrapper from "./PageWrapper";
 
 const Sitemap = () => {
   const sections = [
@@ -42,6 +43,7 @@ const Sitemap = () => {
   ];
 
   return (
+    <PageWrapper>
     <Layout title="Sitemap">
       <div className="space-y-8">
         {sections.map((section, index) => (
@@ -49,7 +51,7 @@ const Sitemap = () => {
             <h2 className="text-2xl font-semibold text-[#e67e23] mb-4">
               {section.title}
             </h2>
-            <ul className="list-disc list-inside space-y-2">
+            <ul className="space-y-2 list-disc list-inside">
               {section.links.map((link, idx) => (
                 <li key={idx}>
                   <a
@@ -65,6 +67,7 @@ const Sitemap = () => {
         ))}
       </div>
     </Layout>
+    </PageWrapper>
   );
 };
 

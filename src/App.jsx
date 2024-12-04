@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
@@ -24,11 +24,14 @@ import ContactUsPage from "./components/ContactUsPage";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import Sitemap from "./components/Sitemap";
+import { AnimatePresence } from 'framer-motion';
+import PageWrapper from "./components/PageWrapper";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <AnimatePresence mode = "wait">
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/training-centers"element={<TrainingCenters/>}/>
@@ -88,10 +91,12 @@ function App() {
           path="/gallery"
           element={
             <>
-            <Header/>
+            {/* <Header/> */}
             <Nav/>
+            <PageWrapper>
             <Gallery />
             <Footer />
+            </PageWrapper>
             </>
           }
           />
@@ -150,6 +155,7 @@ function App() {
           }
           />
         </Routes>
+        </AnimatePresence>
       </BrowserRouter>
     </>
   );

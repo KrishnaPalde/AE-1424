@@ -40,7 +40,7 @@ export default function Carousel() {
         }}
         // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="w-full h-[700px] mx-4 "
+        className="max-w-full h-[700px] mx-4"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>

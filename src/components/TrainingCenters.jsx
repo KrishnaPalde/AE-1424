@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom"
 import OurPartners from "./OurPartners"
 import WhatsAppButton from "./WhatsappButton"
 import FindTrainingCenter from "./FindTrainingCenter"
+import PageWrapper from "./PageWrapper"
 
 const TrainingCenters = () => {
     const location = useLocation();
@@ -18,13 +19,15 @@ const TrainingCenters = () => {
     })
     return(
         <>
-        <Header/>
+        {/* <Header/> */}
         <Nav/>
+        <PageWrapper>
         <TrainingPrograms/>
         <FindTrainingCenter/>
         <OurPartners/>
         <WhatsAppButton/>
         <Footer />
+        </PageWrapper>
         </>
     )
 }

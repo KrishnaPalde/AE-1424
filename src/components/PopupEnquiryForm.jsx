@@ -101,10 +101,10 @@
 
 //   return (
 //     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-//       <div className="relative w-full max-w-lg p-8 mx-4 bg-white rounded-xl shadow-2xl lg:max-w-2xl">
+//       <div className="relative w-full max-w-lg p-8 mx-4 bg-white shadow-2xl rounded-xl lg:max-w-2xl">
 //         <button
 //           onClick={onClose}
-//           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
+//           className="absolute text-gray-400 transition top-4 right-4 hover:text-gray-600"
 //         >
 //           <X size={24} />
 //         </button>
@@ -178,7 +178,7 @@
 //                 name="type"
 //                 value={formData.type}
 //                 onChange={handleChange}
-//                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 transition"
+//                 className="w-full px-4 py-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
 //               >
 //                 <option value="student">Student</option>
 //                 <option value="training_center">Training Center</option>
@@ -274,12 +274,12 @@
 //           {/* Submit Button */}
 //           <button
 //             type="submit"
-//             className="w-full py-3 text-white bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg shadow-lg hover:from-orange-600 hover:to-orange-800 transition-all"
+//             className="w-full py-3 text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800"
 //           >
 //             Submit Enquiry
 //           </button>
 //           {success && (
-//             <p className="text-green-500 text-center mt-4">
+//             <p className="mt-4 text-center text-green-500">
 //               Enquiry submitted successfully!
 //             </p>
 //           )}
@@ -408,10 +408,10 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-      <div className="relative w-full max-w-lg p-8 mx-4 bg-white rounded-xl shadow-2xl lg:max-w-2xl">
+      <div className="relative w-full max-w-lg p-8 mx-4 bg-white shadow-2xl rounded-xl lg:max-w-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
+          className="absolute text-gray-400 transition top-4 right-4 hover:text-gray-600"
         >
           <X size={24} />
         </button>
@@ -487,7 +487,7 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 transition"
+                    className="w-full px-4 py-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
                   >
                     <option value="student">Student</option>
                     <option value="training_center">Training Center</option>
@@ -583,7 +583,7 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
 
               <button
                 type="submit"
-                className="w-full py-3 text-white bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg shadow-lg hover:from-orange-600 hover:to-orange-800 transition-all"
+                className="w-full py-3 text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800"
               >
                 Submit Enquiry
               </button>

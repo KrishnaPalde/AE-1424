@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <>
-      <div className="container flex flex-row justify-around max-w-full xl:justify-between ">
-        <div className="w-2/4 sm:w-1/6 pl-8">
+      <div className="container flex flex-row justify-around max-w-full xl:justify-between">
+        <div className="w-2/4 pl-8 sm:w-1/6">
           <Link to={"/"}>
             <img
               src={logo}
               alt="Aarti Educare Logo"
-              className="object-cover h-24"
+              className="object-cover h-24 "
             />
           </Link>
         </div>
@@ -27,7 +27,7 @@ export default function Header() {
           </div>
           <a href="mailto:help.tantratech@gmail.com">
             <div className="flex items-center justify-around px-3">
-              <EnvelopeIcon className="w-4 h-4 text-gray-500 mr-2" />
+              <EnvelopeIcon className="w-4 h-4 mr-2 text-gray-500" />
               <span className="text-xs sm:mr-6 lg:text-lg">
                 admin@aartieducare.com
               </span>

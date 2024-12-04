@@ -1,9 +1,11 @@
 // PrivacyPolicy.js
 import React from "react";
 import Layout from "./Layout";
+import PageWrapper from "./PageWrapper";
 
 const PrivacyPolicy = () => {
   return (
+    <PageWrapper>
     <Layout title="Privacy Policy">
       <div className="space-y-6 text-gray-800">
         <p>
@@ -12,7 +14,7 @@ const PrivacyPolicy = () => {
           safeguard your data.
         </p>
         <h2 className="text-2xl font-semibold text-[#e67e23]">Information We Collect</h2>
-        <ul className="list-disc list-inside space-y-2">
+        <ul className="space-y-2 list-disc list-inside">
           <li>Personal details like name, email, and contact information.</li>
           <li>
             Usage data such as pages visited, time spent, and interaction
@@ -35,6 +37,7 @@ const PrivacyPolicy = () => {
         </p>
       </div>
     </Layout>
+    </PageWrapper>
   );
 };
 

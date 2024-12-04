@@ -7,6 +7,7 @@ import CoursesCard from "./CoursesCard";
 import OurPartners from "./OurPartners";
 import WhatsAppButton from "./WhatsappButton";
 import CTAPopup from "./CTAPopup";
+import PageWrapper from "./PageWrapper";
 
 const Courses = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -21,14 +22,16 @@ const Courses = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Nav />
+      <PageWrapper>
       <CoursesWeOffer onCTAClick={handlePopupToggle} />
       <CoursesCard onCTAClick={handlePopupToggle} />
       <OurPartners />
       <WhatsAppButton />
       <Footer />
       <CTAPopup isOpen={isPopupOpen} onClose={handlePopupToggle} />
+      </PageWrapper>
     </>
   );
 };

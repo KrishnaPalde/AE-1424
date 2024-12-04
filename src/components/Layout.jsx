@@ -7,9 +7,9 @@ import Nav from "./Nav";
 const Layout = ({ children, title }) => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Nav />
-      <div className="container mx-auto px-6 py-12 max-w-5xl">
+      <div className="container max-w-5xl px-6 py-12 mx-auto">
         <h1 className="text-4xl font-bold text-[#e67e23] mb-6 text-center">
           {title}
         </h1>

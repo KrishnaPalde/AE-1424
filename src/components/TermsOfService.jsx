@@ -1,9 +1,11 @@
 // TermsOfService.js
 import React from "react";
 import Layout from "./Layout";
+import PageWrapper from "./PageWrapper";
 
 const TermsOfService = () => {
   return (
+    <PageWrapper>
     <Layout title="Terms of Service">
       <div className="space-y-6 text-gray-800">
         <p>
@@ -28,6 +30,7 @@ const TermsOfService = () => {
         </p>
       </div>
     </Layout>
+    </PageWrapper>
   );
 };
 

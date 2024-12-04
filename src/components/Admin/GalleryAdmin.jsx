@@ -19,9 +19,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Sidebar from "./Sidebar";
+import PageWrapper from "../PageWrapper";
 
 const GalleryAdmin = () => {
   return (
+    <PageWrapper>
     <div className="flex h-screen bg-gray-100">
       <Sidebar currentPath="/admin/gallery" />
 
@@ -151,6 +153,7 @@ const GalleryAdmin = () => {
         </div>
       </div>
     </div>
+    </PageWrapper>
   );
 };
 

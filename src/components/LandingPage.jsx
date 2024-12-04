@@ -13,6 +13,7 @@ import GovernmentDepartments from "./GovernmentDepartments";
 import OurPartners from "./OurPartners";
 import WhatsAppButton from "./WhatsappButton";
 import LoadingSpinner from "./LoadingSpinner";
+import PageWrapper from "./PageWrapper";
 
 const LandingPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,8 +40,9 @@ const LandingPage = () => {
   return (
     <>
       <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
-      <Header />
+      {/* <Header /> */}
       <Nav />
+      <PageWrapper>
       <Carousel />
       <Intro />
       <AffiliatedBy />
@@ -50,6 +52,7 @@ const LandingPage = () => {
       <OurPartners />
       <WhatsAppButton />
       <Footer />
+      </PageWrapper>
     </>
   );
 };

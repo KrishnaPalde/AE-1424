@@ -28,6 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Sidebar from "./Sidebar";
+import PageWrapper from "../PageWrapper";
 
 const AdminContact = () => {
   
@@ -91,6 +92,7 @@ const AdminContact = () => {
   };
 
   return (
+    <PageWrapper>
     <div className="flex min-h-screen bg-gray-100">
         <Sidebar/>
      
@@ -270,6 +272,7 @@ const AdminContact = () => {
         </Card>
       </div>
     </div>
+    </PageWrapper>
   );
 };
 
