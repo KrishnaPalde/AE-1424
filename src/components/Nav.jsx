@@ -408,7 +408,7 @@ export default function Nav() {
             onMouseLeave={handleMenuLeave}
           >
             {item.sublinks ? (
-              <div className="inline-flex items-center text-[#e67e23] px-3 py-2 font-medium hover:text-[#c75f12] cursor-pointer transition-colors duration-200">
+              <div className="inline-flex items-center text-[#e67e23] px-3 py-2  font-medium hover:text-[#c75f12] cursor-pointer transition-colors duration-200">
                 {item.name}
                 <ChevronDownIcon className="ml-1 h-4 w-4 text-[#e67e23] transform group-hover:rotate-180 transition-transform duration-200" />
               </div>
@@ -590,7 +590,7 @@ export default function Nav() {
       }}
     >
       <div className="container max-w-full px-4 lg:px-8">
-        <div className="grid items-center grid-cols-1 lg:grid-cols-2">
+        <div className="grid items-center grid-cols-[auto,1fr]">
          
         <div className="flex justify-center lg:justify-start">
             <Link to="/">

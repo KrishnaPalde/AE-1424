@@ -407,7 +407,7 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+    <div className="fixed inset-0 z-50 top-24 flex items-center justify-center bg-black bg-opacity-60">
       <div className="relative w-full max-w-lg p-8 mx-4 bg-white shadow-2xl rounded-xl lg:max-w-2xl">
         <button
           onClick={onClose}
