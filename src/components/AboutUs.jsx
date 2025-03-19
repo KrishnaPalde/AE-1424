@@ -264,7 +264,7 @@ const AboutUs = () => {
 
       <div className="bg-white"><GovernmentDepartments/></div>
 
-      {/* Impact Section */}
+      {/* Impact Section
       <section className="py-16 bg-[#e67e23] text-white">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-3 text-center">
@@ -276,7 +276,7 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

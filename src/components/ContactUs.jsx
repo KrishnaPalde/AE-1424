@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import indianStates from "./indianState";
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 // Google Map Component
 const GoogleMapWidget = () => (
@@ -78,9 +81,28 @@ const ContactUs = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      try {
+        const response = await fetch(API_URL + "/inquiries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...formData
+          }),
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Error Submitting Message.");
+        } else {
+          alert("Message Sent Successfully.")
+        }
+  
+      } catch (err) {
+        console.error("Error saving service:", err);
+      }
       console.log("Form submitted:", formData);
     }
   };

@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { servicesData } from "../data/servicesData"; // Import the servicesData
+// import { servicesData } from "../data/servicesData"; // Import the servicesData
+
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 const OverviewSection = () => {
   const [activeTab, setActiveTab] = useState("candidates");
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
 
   useEffect(() => {
     window.scrollTo({
@@ -11,11 +19,30 @@ const OverviewSection = () => {
     });
   }, []);
 
+  useEffect(() => {
+        const fetchServices = async () => {
+          try {
+            const response = await fetch(API_URL + "/services");
+            if (!response.ok) throw new Error("Failed to fetch services");
+    
+            const data = await response.json();
+            setServices(data);
+          } catch (err) {
+            setError("Failed to load services.");
+            console.error("Error fetching services:", err);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchServices();
+      }, []);
+
   // Filter services based on active tab
-  const candidatesServices = servicesData.filter(
+  const candidatesServices = services.filter(
     (service) => service.category === "Candidates"
   );
-  const organizationsServices = servicesData.filter(
+  const organizationsServices = services.filter(
     (service) => service.category === "Organizations"
   );
 

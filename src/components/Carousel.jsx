@@ -1,30 +1,49 @@
-import React from 'react';
-// Import Swiper React components
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-// Import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import config from '@/config';
+
+const API_URL = config.API_URL;
 
 export default function Carousel() { 
-  const slides = [
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner1.jpg?alt=media&token=de6a7739-a570-4fa0-bdcf-fe37ce3af6fe",
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner%202.jpg?alt=media&token=cafb8857-a947-4d52-b790-5b8c356f9341",
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner1.jpg?alt=media&token=de6a7739-a570-4fa0-bdcf-fe37ce3af6fe",
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/123.png?alt=media&token=9410c10f-8752-4d1b-8475-b5f8aa115f55",
-    },
-  ];
+  const [banners, setBanners] = useState([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  // const slides = [
+  //   {
+  //     url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner1.jpg?alt=media&token=de6a7739-a570-4fa0-bdcf-fe37ce3af6fe",
+  //   },
+  //   {
+  //     url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner%202.jpg?alt=media&token=cafb8857-a947-4d52-b790-5b8c356f9341",
+  //   },
+  //   {
+  //     url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/banner1.jpg?alt=media&token=de6a7739-a570-4fa0-bdcf-fe37ce3af6fe",
+  //   },
+  //   {
+  //     url: "https://firebasestorage.googleapis.com/v0/b/tranquil-trails-70973.appspot.com/o/123.png?alt=media&token=9410c10f-8752-4d1b-8475-b5f8aa115f55",
+  //   },
+  // ];
+
+  useEffect(() => {
+      const fetchBanners = async () => {
+        try {
+          const response = await fetch(API_URL + "/banners");
+          if (!response.ok) throw new Error("Failed to fetch banners");
+          const data = await response.json();
+          setBanners(data);
+        } catch (err) {
+          setError("Failed to load banners.");
+          console.error("Error fetching banners:", err);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      fetchBanners();
+    }, []);
 
   return (
     <>
@@ -42,10 +61,10 @@ export default function Carousel() {
         modules={[Autoplay, Pagination, Navigation]}
         className="max-w-full h-[700px] mx-4"
       >
-        {slides.map((slide, index) => (
+        {banners.map((banner, index) => (
           <SwiperSlide key={index}>
             <img
-              src={slide.url}
+              src={banner.imageUrl}
               alt={`Slide ${index + 1}`}
               className="w-full h-[650px] object-cover "
             />

@@ -30,10 +30,12 @@ export default function Intro() {
               <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8  text-[#ac2900]" />
             </button>
               </Link>
+            <Link
+            to="who-we-are/about-us">
             <button className="text-[#f9f9f9] px-8 w-64 h-fit py-2 bg-[#e67e23] flex justify-around mt-5 border border-[#f9f9f9]">
-              Upcoming Events
+              Who We Are
               <ArrowRightIcon className="flex items-center justify-center w-4 h-4 mt-1 ml-8 text-[#f6f6f6]" />
-            </button>
+            </button></Link>
           </div>
         </div>
       </div>

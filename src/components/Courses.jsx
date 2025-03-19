@@ -8,13 +8,38 @@ import OurPartners from "./OurPartners";
 import WhatsAppButton from "./WhatsappButton";
 import CTAPopup from "./CTAPopup";
 import PageWrapper from "./PageWrapper";
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 const Courses = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handlePopupToggle = () => {
     setIsPopupOpen(!isPopupOpen);
   };
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(API_URL + "/courses");
+        if (!response.ok) throw new Error("Failed to fetch services");
+
+        const data = await response.json();
+        setCourses(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({top:0, behavior:"smooth"})
@@ -26,7 +51,7 @@ const Courses = () => {
       <Nav />
       <PageWrapper>
       <CoursesWeOffer onCTAClick={handlePopupToggle} />
-      <CoursesCard onCTAClick={handlePopupToggle} />
+      <CoursesCard onCTAClick={handlePopupToggle} courses={courses} />
       <OurPartners />
       <WhatsAppButton />
       <Footer />

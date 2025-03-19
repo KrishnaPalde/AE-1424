@@ -7,6 +7,7 @@ import OverviewSection from "./OverviewSection"
 import GovernmentDepartments from "./GovernmentDepartments"
 import WhatsAppButton from "./WhatsappButton"
 import PageWrapper from "./PageWrapper"
+import { Helmet } from "react-helmet-async"
 
 const ServiceOverviewPage = () => {
     useEffect(() => {
@@ -14,6 +15,16 @@ const ServiceOverviewPage = () => {
     })
     return(
         <>
+        <Helmet>
+            <title>Our Services - Skill Development & Career Growth | Aarti Educare</title>
+            <meta name="description" content="Discover our skill development programs, career counseling, and professional training services designed for success." />
+            <meta name="keywords" content="career training, professional courses, skill development, job-oriented training" />
+            <meta property="og:title" content="Our Services - Skill Development & Career Growth | Aarti Educare" />
+            <meta property="og:description" content="We provide high-quality skill development and career-oriented training programs to help individuals achieve their goals." />
+            <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.png?alt=media&token=e965adc5-aca7-4b16-a5e8-6270665cfe0c" />
+            <meta property="og:url" content="https://www.aartieducare.com/what-we-do/services" />
+            <meta name="robots" content="index, follow" />
+        </Helmet>
         {/* <Header/> */}
         <Nav/>
         <PageWrapper>

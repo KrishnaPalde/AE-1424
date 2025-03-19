@@ -36,6 +36,7 @@ export default function AffiliatedBy() {
     slidesToScroll: 1,
     pauseOnHover: true,
     arrows: false,
+    rtl: true,
     responsive: [
       {
         breakpoint: 1024,

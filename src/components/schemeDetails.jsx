@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { schemesData } from "../data/schemeData";
 import CTAPopup from "./CTAPopup"; // Import the popup component
+
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 const SchemeDetails = () => {
   const { id } = useParams();
-  const scheme = schemesData.find((s) => s.id === id);
+  const [scheme, setScheme] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Popup state
 
+  useEffect(() => {
+    const fetchScheme = async () => {
+      try {
+        const response = await fetch(API_URL+"/schemes/"+id);
+        if (!response.ok) throw new Error("Failed to fetch services");
+        const data = await response.json();
+        setScheme(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchScheme();
+  }, []);
+ 
   if (!scheme) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">

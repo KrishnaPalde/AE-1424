@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { schemesData } from "../data/schemeData";
+// import { schemesData } from "../data/schemeData";
+
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 const SchemeOverview = () => {
+  const [schemes, setSchemes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(API_URL + "/schemes");
+        if (!response.ok) throw new Error("Failed to fetch services");
+
+        const data = await response.json();
+        setSchemes(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <div className="bg-gray-50 py-24">
       <div className="container mx-auto px-6 max-w-7xl space-y-16">
@@ -18,7 +45,7 @@ const SchemeOverview = () => {
 
         {/* Schemes Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {schemesData.map((scheme) => (
+          {schemes.map((scheme) => (
             <div
               key={scheme.id}
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between border-t-4 border-[#e67e23]"

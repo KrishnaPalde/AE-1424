@@ -1,414 +1,210 @@
-import React, { useState } from "react";
-import {
-  PlusCircle,
-  Edit2,
-  Trash2,
-  ImageIcon,
-  Save,
-  X,
-  FileText,
-  MoveUp,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import React, { useEffect, useState } from "react";
+import { PlusCircle, Edit2, Trash2 } from "lucide-react";
 import Sidebar from "./Sidebar";
-import PageWrapper from "../PageWrapper";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-const CoursesAdmin = () => {
- 
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      title: "Apparel Made-Ups & Home Furnishing",
-      image: "/api/placeholder/400/320",
-      logo: "/api/placeholder/100/100",
-      order: 1,
-      active: true,
-    },
-    {
-      id: 2,
-      title: "Beauty & Wellness Sector Skill Council",
-      image: "/api/placeholder/400/320",
-      logo: "/api/placeholder/100/100",
-      order: 2,
-      active: true,
-    },
-    {
-      id: 3,
-      title: "Capital Goods Skill Council",
-      image: "/api/placeholder/400/320",
-      logo: "/api/placeholder/100/100",
-      order: 3,
-      active: true,
-    },
-  ]);
+import config from "@/config";
 
-  const [courseDescription, setCourseDescription] = useState(
-    "At our training center, we offer a diverse range of courses meticulously designed to meet the demands of an ever-evolving job market. From technical skills to soft skills, our curriculum is crafted to empower individuals with the knowledge and expertise needed to succeed in their chosen field."
-  );
+const API_URL = config.API_URL;
 
-  const [editingDescription, setEditingDescription] = useState(false);
-  const [newDescription, setNewDescription] = useState(courseDescription);
-  const [showAddCourse, setShowAddCourse] = useState(false);
-  const [editingCourse, setEditingCourse] = useState(null);
+const AdminCourses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
   const [newCourse, setNewCourse] = useState({
     title: "",
-    image: "",
-    logo: "",
-    order: courses.length + 1,
-    active: true,
+    shortDescription: "",
   });
 
-  const handleSaveDescription = () => {
-    setCourseDescription(newDescription);
-    setEditingDescription(false);
+  // ✅ Fetch all courses
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(API_URL + "/courses");
+        if (!response.ok) throw new Error("Failed to fetch courses");
+
+        const data = await response.json();
+        setCourses(data);
+      } catch (err) {
+        setError("Failed to load courses.");
+        console.error("Error fetching courses:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // ✅ Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCourse((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleAddCourse = () => {
-    if (newCourse.title) {
-      setCourses((prev) => [...prev, { ...newCourse, id: Date.now() }]);
-      setNewCourse({
-        title: "",
-        image: "",
-        logo: "",
-        order: courses.length + 2,
-        active: true,
+  // ✅ Add or Edit Course
+  const handleSaveCourse = async () => {
+    if (!newCourse.title || !newCourse.shortDescription) {
+      alert("Title and Short Description are required!");
+      return;
+    }
+
+    const method = isEditing ? "PUT" : "POST";
+    const url = isEditing ? `${API_URL}/courses/${newCourse._id}` : API_URL + "/courses";
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCourse),
       });
-      setShowAddCourse(false);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error saving course.");
+      }
+
+      const data = await response.json();
+
+      if (isEditing) {
+        setCourses(courses.map((c) => (c._id === data.course._id ? data.course : c)));
+      } else {
+        setCourses([...courses, data.course]);
+      }
+
+      setShowModal(false);
+      setNewCourse({ title: "", shortDescription: "" });
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error saving course:", err);
     }
   };
 
-  const handleUpdateCourse = () => {
-    if (editingCourse) {
-      setCourses((prev) =>
-        prev.map((course) =>
-          course.id === editingCourse.id ? editingCourse : course
-        )
-      );
-      setEditingCourse(null);
-    }
+  // ✅ Open Edit Course Dialog
+  const handleEditCourse = (course) => {
+    setNewCourse(course);
+    setIsEditing(true);
+    setShowModal(true);
   };
 
-  const handleDeleteCourse = (id) => {
-    setCourses((prev) => prev.filter((course) => course.id !== id));
-  };
+  // ✅ Delete Course
+  const handleDeleteCourse = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
 
-  const moveItemUp = (index) => {
-    if (index > 0) {
-      const newCourses = [...courses];
-      [newCourses[index - 1], newCourses[index]] = [
-        newCourses[index],
-        newCourses[index - 1],
-      ];
-      newCourses.forEach((course, idx) => {
-        course.order = idx + 1;
-      });
-      setCourses(newCourses);
+    try {
+      const response = await fetch(`${API_URL}/courses/${id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error("Error deleting course.");
+
+      setCourses(courses.filter((c) => c._id !== id));
+    } catch (err) {
+      console.error("Error deleting course:", err);
     }
   };
 
   return (
-    <PageWrapper>
-    <div className="flex min-h-screen bg-gray-100">
-        <Sidebar/>
-      <div className="flex-1 px-6 py-8">
-        <h1 className="mb-8 text-3xl font-bold text-gray-800">
-          Courses Management
-        </h1>
+    <div className="flex">
+      <Sidebar />
+      <div className="ml-64 flex-1 p-6 bg-gray-100 min-h-screen overflow-auto">
+        <h1 className="mb-8 text-3xl font-bold text-gray-800">Courses Management</h1>
 
-        
-        <Card className="mb-8">
+        {/* Courses Table */}
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              <span>Course Overview Description</span>
-              {!editingDescription ? (
-                <button
-                  onClick={() => setEditingDescription(true)}
-                  className="p-2 text-gray-600 transition-colors rounded-full hover:bg-gray-100"
-                >
-                  <Edit2 size={20} />
-                </button>
-              ) : (
-                <div className="flex space-x-2">
-                  <button
-                    onClick={handleSaveDescription}
-                    className="p-2 text-green-600 transition-colors rounded-full hover:bg-green-50"
-                  >
-                    <Save size={20} />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setEditingDescription(false);
-                      setNewDescription(courseDescription);
-                    }}
-                    className="p-2 text-red-600 transition-colors rounded-full hover:bg-red-50"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
-              )}
+              <span>Courses List</span>
+              <Button
+                onClick={() => {
+                  setShowModal(true);
+                  setIsEditing(false);
+                  setNewCourse({ title: "", shortDescription: "" });
+                }}
+                className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2"
+              >
+                <PlusCircle size={20} /> <span>Add Course</span>
+              </Button>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            {editingDescription ? (
-              <textarea
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-                className="w-full h-32 p-3 border border-gray-300 rounded-md"
-              />
+          <CardContent className="overflow-auto">
+            {loading ? (
+              <p className="text-center text-gray-600">Loading courses...</p>
+            ) : error ? (
+              <p className="text-center text-red-500">{error}</p>
             ) : (
-              <p className="text-gray-700">{courseDescription}</p>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Short Description</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {courses.map((course) => (
+                    <TableRow key={course._id}>
+                      <TableCell>{course.title}</TableCell>
+                      <TableCell>{course.shortDescription}</TableCell>
+                      <TableCell className="flex space-x-2">
+                        <Button onClick={() => handleEditCourse(course)} className="p-2 text-blue-600 hover:bg-blue-50">
+                          <Edit2 size={16} />
+                        </Button>
+                        <Button onClick={() => handleDeleteCourse(course._id)} className="p-2 text-red-600 hover:bg-red-50">
+                          <Trash2 size={16} />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             )}
           </CardContent>
         </Card>
 
-       
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span>Course Cards</span>
-              <button
-                onClick={() => setShowAddCourse(true)}
-                className="flex items-center px-4 py-2 space-x-2 text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-700"
-              >
-                <PlusCircle size={20} />
-                <span>Add Course</span>
-              </button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Order</TableHead>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Images</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {courses.map((course, index) => (
-                  <TableRow key={course.id}>
-                    <TableCell>
-                      <div className="flex items-center space-x-2">
-                        <span>{course.order}</span>
-                        {index > 0 && (
-                          <button
-                            onClick={() => moveItemUp(index)}
-                            className="p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100"
-                          >
-                            <MoveUp size={16} />
-                          </button>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {course.title}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex space-x-2">
-                        <img
-                          src={course.image}
-                          alt=""
-                          className="w-10 h-10 rounded"
-                        />
-                        <img
-                          src={course.logo}
-                          alt=""
-                          className="w-10 h-10 rounded"
-                        />
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <span
-                        className={`px-3 py-1 text-sm rounded-full ${
-                          course.active
-                            ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-800"
-                        }`}
-                      >
-                        {course.active ? "Active" : "Inactive"}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => setEditingCourse(course)}
-                          className="p-2 text-blue-600 transition-colors rounded-full hover:bg-blue-50"
-                        >
-                          <Edit2 size={16} />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteCourse(course.id)}
-                          className="p-2 text-red-600 transition-colors rounded-full hover:bg-red-50"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-
-       
-        <Dialog
-          open={showAddCourse || editingCourse !== null}
-          onOpenChange={() => {
-            setShowAddCourse(false);
-            setEditingCourse(null);
-          }}
-        >
-          <DialogContent className="bg-white">
+        {/* ✅ Add/Edit Course Dialog Popup */}
+        <Dialog open={showModal} onOpenChange={setShowModal}>
+          <DialogContent className="bg-white shadow-lg rounded-lg p-6">
             <DialogHeader>
-              <DialogTitle>
-                {editingCourse ? "Edit Course" : "Add New Course"}
-              </DialogTitle>
+              <DialogTitle>{isEditing ? "Edit Course" : "Add New Course"}</DialogTitle>
             </DialogHeader>
+
+            {/* Form Inputs */}
             <div className="space-y-4">
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Course Title
-                </label>
-                <input
-                  type="text"
-                  value={editingCourse ? editingCourse.title : newCourse.title}
-                  onChange={(e) => {
-                    if (editingCourse) {
-                      setEditingCourse({
-                        ...editingCourse,
-                        title: e.target.value,
-                      });
-                    } else {
-                      setNewCourse({ ...newCourse, title: e.target.value });
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Course Image
-                </label>
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="text"
-                    value={
-                      editingCourse ? editingCourse.image : newCourse.image
-                    }
-                    onChange={(e) => {
-                      if (editingCourse) {
-                        setEditingCourse({
-                          ...editingCourse,
-                          image: e.target.value,
-                        });
-                      } else {
-                        setNewCourse({ ...newCourse, image: e.target.value });
-                      }
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Image URL"
-                  />
-                  <button className="p-2 text-gray-600 border border-gray-300 rounded-md">
-                    <ImageIcon size={20} />
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Course Logo
-                </label>
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="text"
-                    value={editingCourse ? editingCourse.logo : newCourse.logo}
-                    onChange={(e) => {
-                      if (editingCourse) {
-                        setEditingCourse({
-                          ...editingCourse,
-                          logo: e.target.value,
-                        });
-                      } else {
-                        setNewCourse({ ...newCourse, logo: e.target.value });
-                      }
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Logo URL"
-                  />
-                  <button className="p-2 text-gray-600 border border-gray-300 rounded-md">
-                    <ImageIcon size={20} />
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={
-                      editingCourse ? editingCourse.active : newCourse.active
-                    }
-                    onChange={(e) => {
-                      if (editingCourse) {
-                        setEditingCourse({
-                          ...editingCourse,
-                          active: e.target.checked,
-                        });
-                      } else {
-                        setNewCourse({
-                          ...newCourse,
-                          active: e.target.checked,
-                        });
-                      }
-                    }}
-                    className="w-4 h-4 border-gray-300 rounded"
-                  />
-                  <span className="text-sm font-medium text-gray-700">
-                    Active
-                  </span>
-                </label>
-              </div>
+              <Input
+                label="Course Title"
+                name="title"
+                value={newCourse.title}
+                onChange={handleChange}
+                placeholder="Enter Course Title"
+              />
+              <Input
+                label="Short Description"
+                name="shortDescription"
+                value={newCourse.shortDescription}
+                onChange={handleChange}
+                placeholder="Enter Short Description"
+              />
             </div>
+
+            {/* Dialog Footer Buttons */}
             <DialogFooter>
-              <button
-                onClick={() => {
-                  if (editingCourse) {
-                    handleUpdateCourse();
-                  } else {
-                    handleAddCourse();
-                  }
-                }}
-                className="px-4 py-2 text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-700"
-              >
-                {editingCourse ? "Save Changes" : "Add Course"}
-              </button>
+              <Button onClick={handleSaveCourse} className="bg-green-600 hover:bg-green-700 text-white">
+                {isEditing ? "Update Course" : "Save Course"}
+              </Button>
+              <Button onClick={() => setShowModal(false)} className="bg-gray-400 hover:bg-gray-500 text-white">
+                Cancel
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
     </div>
-    </PageWrapper>
   );
 };
 
-export default CoursesAdmin;
+export default AdminCourses;

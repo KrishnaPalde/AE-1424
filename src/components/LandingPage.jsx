@@ -14,6 +14,7 @@ import OurPartners from "./OurPartners";
 import WhatsAppButton from "./WhatsappButton";
 import LoadingSpinner from "./LoadingSpinner";
 import PageWrapper from "./PageWrapper";
+import { Helmet } from "react-helmet-async";
 
 const LandingPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,6 +40,16 @@ const LandingPage = () => {
 
   return (
     <>
+    <Helmet>
+        <title>Transform Your Future with Skill-Based Training | Aarti Educare</title>
+        <meta name="description" content="Empowering individuals through industry-recognized training programs. Enroll now to gain practical skills and enhance career opportunities." />
+        <meta name="keywords" content="skill development, training programs, career growth, job-oriented courses, vocational training, professional skills" />
+        <meta property="og:title" content="Transform Your Future with Skill-Based Training | Aarti Educare"/>
+        <meta property="og:description" content="Empowering individuals through industry-recognized training programs. Join now and upskill yourself." />
+        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.png?alt=media&token=e965adc5-aca7-4b16-a5e8-6270665cfe0c" />
+        <meta property="og:url" content="https://www.aartieducare.com" />
+        <meta name="robots" content="index, follow" />
+    </Helmet> 
       <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
       {/* <Header /> */}
       <Nav />

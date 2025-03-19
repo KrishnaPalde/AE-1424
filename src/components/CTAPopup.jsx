@@ -1,94 +1,93 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const CTAPopup = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; // Return nothing if the popup is not open
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md">
-      <div className="relative bg-white rounded-3xl shadow-lg w-11/12 max-w-lg overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm">
+      {/* Main Popup */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -30, scale: 0.9 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="relative w-11/12 max-w-lg bg-white shadow-xl rounded-2xl  overflow-hidden"
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-gray-800 transition transform hover:scale-110"
+          className="absolute top-4 right-4 text-white hover:text-white transition-all transform hover:scale-110"
           aria-label="Close"
         >
-          ✕
+          <X className="w-6 h-6" />
         </button>
 
-        {/* Header */}
+        {/* Header with Gradient */}
         <div className="bg-gradient-to-r from-[#e67e23] to-[#f3904f] text-white px-8 py-6 text-center">
-          <h2 className="text-2xl font-bold">Contact Us</h2>
-          <p className="text-sm mt-1">We're here to assist you with any questions or inquiries.</p>
+          <h2 className="text-3xl font-bold">Get in Touch</h2>
+          <p className="text-sm mt-1">We’re here to assist you. Reach out today!</p>
         </div>
 
-        {/* Content */}
+        {/* Contact Details */}
         <div className="p-6 space-y-6">
-          {/* Contact Information */}
-          <div className="flex items-center space-x-4">
-            <div className="bg-[#e67e23] text-white p-3 rounded-full">
-              <FaPhoneAlt className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Contact Number</p>
-              <a
-                href="tel:+918237776233"
-                className="text-[#e67e23] hover:underline text-sm"
-              >
-                +91 82377 76233
-              </a>
-            </div>
-          </div>
+          <ContactItem
+            icon={<FaPhoneAlt className="w-6 h-6 text-white" />}
+            title="Phone"
+            content="+91 82377 76233"
+            link="tel:+918237776233"
+          />
 
-          <div className="flex items-center space-x-4">
-            <div className="bg-[#e67e23] text-white p-3 rounded-full">
-              <FaEnvelope className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Email</p>
-              <a
-                href="mailto:office@aartieducare.com"
-                className="text-[#e67e23] hover:underline text-sm"
-              >
-                office@aartieducare.com
-              </a>
-            </div>
-          </div>
+          <ContactItem
+            icon={<FaEnvelope className="w-6 h-6 text-white" />}
+            title="Email"
+            content="office@aartieducare.com"
+            link="mailto:office@aartieducare.com"
+          />
 
-          <div className="flex items-start space-x-4">
-            <div className="bg-[#e67e23] text-white p-3 rounded-full">
-              <FaMapMarkerAlt className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Address</p>
-              <a
-                href="https://maps.app.goo.gl/KJ1mDEJxuEyTfv8g8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#e67e23] hover:underline text-sm"
-              >
-                Utkarsha Training Centre, Plot No. 58, Ambad - Uttam Nagar Rd, behind Shivanjali Petrol
-                Pump, DGP Nagar 2, Murari Nagar, Nashik, Maharashtra 422010
-              </a>
-            </div>
-          </div>
+          <ContactItem
+            icon={<FaMapMarkerAlt className="w-6 h-6 text-white" />}
+            title="Address"
+            content="Utkarsha Training Centre, Ambad - Uttam Nagar Rd, Nashik, Maharashtra 422010"
+            link="https://maps.app.goo.gl/KJ1mDEJxuEyTfv8g8"
+          />
         </div>
 
         {/* WhatsApp Button */}
-        <div className="px-6 py-4">
+        <div className="px-6 pb-6">
           <a
             href="https://wa.me/918237776233"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center bg-[#25D366] text-white text-lg py-2 rounded-full font-medium hover:bg-[#1DA851] transition transform hover:scale-105 shadow-sm space-x-2"
+            className="flex items-center justify-center bg-[#25D366] text-white text-lg py-3 rounded-full font-medium hover:bg-[#1DA851] transition-all transform hover:scale-105 shadow-md space-x-2"
           >
-            <FaWhatsapp className="w-5 h-5" />
+            <FaWhatsapp className="w-6 h-6" />
             <span>Chat on WhatsApp</span>
           </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
+
+/* Reusable Contact Item Component */
+const ContactItem = ({ icon, title, content, link }) => (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition-all"
+  >
+    <div className="flex items-center justify-center w-12 h-12 bg-[#e67e23] rounded-full">
+      {icon}
+    </div>
+    <div>
+      <p className="font-medium text-lg text-gray-800">{title}</p>
+      <p className="text-sm text-[#e67e23] font-semibold">{content}</p>
+    </div>
+  </a>
+);
 
 export default CTAPopup;

@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { servicesData } from "../data/servicesData";
-import CTAPopup from "./CTAPopup"; // Import the popup component
+import CTAPopup from "./CTAPopup";
+
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 const ServiceDetails = () => {
   const { id } = useParams();
-  const service = servicesData.find((s) => s.id === id);
+  const [service, setService] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Popup state
 
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(API_URL+"/services/"+id);
+        if (!response.ok) throw new Error("Failed to fetch services");
+        const data = await response.json();
+        setService(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   if (!service) {
     return (
@@ -43,7 +65,7 @@ const ServiceDetails = () => {
           {/* Image Section */}
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl"></div>
+              <div className="absolute inset-0 bg-white bg-opacity-30 rounded-xl"></div>
               <img
                 src={service.image}
                 alt={service.title}
@@ -81,7 +103,7 @@ const ServiceDetails = () => {
                   {index + 1}
                 </span>
                 <p className="text-gray-700">
-                  <strong>{feature.split(":")[0]}:</strong> {feature.split(":")[1]}
+                  <strong>{feature.split(",")}</strong>
                 </p>
               </div>
             ))}

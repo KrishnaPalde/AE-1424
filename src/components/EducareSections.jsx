@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
-import { servicesData } from "../data/servicesData"; // Importing servicesData
+// import { servicesData } from "../data/servicesData"; // Importing servicesData
 
+import config from "@/config";
+
+const API_URL = config.API_URL;
+ 
 const EducareSections = () => {
   const [activeTab, setActiveTab] = useState("Candidates");
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+      const fetchServices = async () => {
+        try {
+          const response = await fetch(API_URL + "/services");
+          if (!response.ok) throw new Error("Failed to fetch services");
+  
+          const data = await response.json();
+          setServices(data);
+        } catch (err) {
+          setError("Failed to load services.");
+          console.error("Error fetching services:", err);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchServices();
+    }, []);
+  
   // Group services by category dynamically
-  const groupedServices = servicesData.reduce((acc, service) => {
+  const groupedServices = services.reduce((acc, service) => {
     acc[service.category] = acc[service.category] || [];
     acc[service.category].push(service);
     return acc;

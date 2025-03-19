@@ -1,301 +1,52 @@
-// import React, { useState } from "react";
-// import { X } from "lucide-react";
-// import emailjs from "emailjs-com"; // Import EmailJS
-// import indianStates from "./indianState";
-
-// const PopupEnquiryForm = ({ isOpen, onClose }) => {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     message: "",
-//     type: "student",
-//     age: "",
-//     state: "",
-//     city: "",
-//   });
-
-//   const [errors, setErrors] = useState({});
-//   const [success, setSuccess] = useState(false);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value,
-//       ...(name === "type" && value === "student" ? { age: "" } : {}),
-//     }));
-//   };
-
-//   const validateForm = () => {
-//     const newErrors = {};
-//     if (!formData.name.trim()) newErrors.name = "Name is required";
-//     if (!formData.email.trim()) {
-//       newErrors.email = "Email is required";
-//     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-//       newErrors.email = "Invalid email format";
-//     }
-//     if (!formData.phone.trim()) {
-//       newErrors.phone = "Phone is required";
-//     } else if (!/^\d{10}$/.test(formData.phone)) {
-//       newErrors.phone = "Invalid phone number";
-//     }
-//     if (!formData.message.trim()) newErrors.message = "Message is required";
-//     if (formData.type === "student" && !formData.age) {
-//       newErrors.age = "Age is required";
-//     }
-//     if (!formData.state) newErrors.state = "State is required";
-//     if (!formData.city) newErrors.city = "City is required";
-
-//     setErrors(newErrors);
-//     return Object.keys(newErrors).length === 0;
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (validateForm()) {
-//       const emailData = {
-//         name: formData.name || "N/A",
-//         email: formData.email || "N/A",
-//         phone: formData.phone || "N/A",
-//         message: formData.message || "N/A",
-//         type: formData.type || "N/A",
-//         age: formData.type === "student" ? formData.age || "N/A" : "N/A",
-//         state: formData.state || "N/A",
-//         city: formData.city || "N/A",
-//       };
-      
-
-//       emailjs
-//         .send(
-//           "service_q498tfn", // Replace with your EmailJS service ID
-//           "template_soo2f4r", // Replace with your EmailJS template ID
-//           emailData,
-//           "k6St47ADFWmErY3X5" // Replace with your Public Key (User ID)
-//         )
-//         .then(
-//           (response) => {
-//             console.log("Email sent successfully:", response.status, response.text);
-//             setSuccess(true);
-//             setFormData({
-//               name: "",
-//               email: "",
-//               phone: "",
-//               message: "",
-//               type: "student",
-//               age: "",
-//               state: "",
-//               city: "",
-//             });
-//             setTimeout(() => setSuccess(false), 3000);
-//             onClose();
-//           },
-//           (err) => {
-//             console.error("Failed to send email:", err);
-//           }
-//         );
-//     }
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-//       <div className="relative w-full max-w-lg p-8 mx-4 bg-white shadow-2xl rounded-xl lg:max-w-2xl">
-//         <button
-//           onClick={onClose}
-//           className="absolute text-gray-400 transition top-4 right-4 hover:text-gray-600"
-//         >
-//           <X size={24} />
-//         </button>
-
-//         <h2 className="mb-6 text-3xl font-semibold text-center text-gray-800">
-//           Enquiry Form
-//         </h2>
-
-//         <form onSubmit={handleSubmit} className="space-y-6">
-//           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-//             {/* Full Name */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 Full Name *
-//               </label>
-//               <input
-//                 type="text"
-//                 name="name"
-//                 value={formData.name}
-//                 onChange={handleChange}
-//                 placeholder="Enter your full name"
-//                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                   errors.name ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                 }`}
-//               />
-//               {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
-//             </div>
-
-//             {/* Email */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 Email *
-//               </label>
-//               <input
-//                 type="email"
-//                 name="email"
-//                 value={formData.email}
-//                 onChange={handleChange}
-//                 placeholder="Enter your email address"
-//                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                   errors.email ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                 }`}
-//               />
-//               {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-//             </div>
-
-//             {/* Phone */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 Phone *
-//               </label>
-//               <input
-//                 type="tel"
-//                 name="phone"
-//                 value={formData.phone}
-//                 onChange={handleChange}
-//                 placeholder="Enter your phone number"
-//                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                   errors.phone ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                 }`}
-//               />
-//               {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
-//             </div>
-
-//             {/* Enquiry Type */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 Enquiry Type
-//               </label>
-//               <select
-//                 name="type"
-//                 value={formData.type}
-//                 onChange={handleChange}
-//                 className="w-full px-4 py-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-//               >
-//                 <option value="student">Student</option>
-//                 <option value="training_center">Training Center</option>
-//                 <option value="other">Other</option>
-//               </select>
-//             </div>
-
-//             {/* Age */}
-//             {formData.type === "student" && (
-//               <div>
-//                 <label className="block mb-1 text-sm font-medium text-gray-600">
-//                   Age
-//                 </label>
-//                 <input
-//                   type="number"
-//                   name="age"
-//                   value={formData.age}
-//                   onChange={handleChange}
-//                   placeholder="Enter your age"
-//                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                     errors.age ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                   }`}
-//                 />
-//                 {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
-//               </div>
-//             )}
-
-//             {/* State */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 State *
-//               </label>
-//               <select
-//                 name="state"
-//                 value={formData.state}
-//                 onChange={handleChange}
-//                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                   errors.state ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                 }`}
-//               >
-//                 <option value="">Select State</option>
-//                 {Object.keys(indianStates).map((state) => (
-//                   <option key={state} value={state}>
-//                     {state}
-//                   </option>
-//                 ))}
-//               </select>
-//               {errors.state && <p className="mt-1 text-sm text-red-500">{errors.state}</p>}
-//             </div>
-
-//             {/* City */}
-//             <div>
-//               <label className="block mb-1 text-sm font-medium text-gray-600">
-//                 City *
-//               </label>
-//               <select
-//                 name="city"
-//                 value={formData.city}
-//                 onChange={handleChange}
-//                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                   errors.city ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//                 }`}
-//               >
-//                 <option value="">Select City</option>
-//                 {(indianStates[formData.state] || []).map((city) => (
-//                   <option key={city} value={city}>
-//                     {city}
-//                   </option>
-//                 ))}
-//               </select>
-//               {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
-//             </div>
-//           </div>
-
-//           {/* Message */}
-//           <div>
-//             <label className="block mb-1 text-sm font-medium text-gray-600">
-//               Message *
-//             </label>
-//             <textarea
-//               name="message"
-//               value={formData.message}
-//               onChange={handleChange}
-//               placeholder="Write your message here"
-//               rows="4"
-//               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-//                 errors.message ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-//               }`}
-//             />
-//             {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
-//           </div>
-
-//           {/* Submit Button */}
-//           <button
-//             type="submit"
-//             className="w-full py-3 text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800"
-//           >
-//             Submit Enquiry
-//           </button>
-//           {success && (
-//             <p className="mt-4 text-center text-green-500">
-//               Enquiry submitted successfully!
-//             </p>
-//           )}
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PopupEnquiryForm;
-
-
 import React, { useState } from "react";
-import { X } from "lucide-react";
+import { X, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "emailjs-com";
+import { motion, AnimatePresence } from "framer-motion";
 import indianStates from "./indianState";
+
+// 🔹 Reusable InputField Component
+const InputField = ({ label, name, type = "text", value, onChange, error }) => (
+  <div>
+    <label className="block mb-1 text-sm font-medium text-gray-600">
+      {label}
+    </label>
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={`Enter ${label.toLowerCase()}`}
+      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
+        error ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
+      }`}
+    />
+    {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+  </div>
+);
+
+// 🔹 Reusable SelectField Component
+const SelectField = ({ label, name, value, onChange, options, error }) => (
+  <div>
+    <label className="block mb-1 text-sm font-medium text-gray-600">
+      {label}
+    </label>
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
+        error ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
+      }`}
+    >
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+    {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+  </div>
+);
 
 const PopupEnquiryForm = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -361,22 +112,20 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
 
       emailjs
         .send(
-          "service_q498tfn", // Replace with your EmailJS service ID
-          "template_soo2f4r", // Replace with your EmailJS template ID
+          "service_q498tfn",
+          "template_soo2f4r",
           emailData,
-          "k6St47ADFWmErY3X5" // Replace with your Public Key (User ID)
+          "k6St47ADFWmErY3X5"
         )
         .then(
-          (response) => {
-            console.log("Email sent successfully:", response.status, response.text);
+          () => {
             setResponseMessage({
               type: "success",
               text: "Enquiry submitted successfully!",
             });
             resetFormAndClose();
           },
-          (err) => {
-            console.error("Failed to send email:", err);
+          () => {
             setResponseMessage({
               type: "error",
               text: "Failed to submit enquiry. Please try again later.",
@@ -407,204 +156,104 @@ const PopupEnquiryForm = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 top-24 flex items-center justify-center bg-black bg-opacity-60">
-      <div className="relative w-full max-w-lg p-8 mx-4 bg-white shadow-2xl rounded-xl lg:max-w-2xl">
-        <button
-          onClick={onClose}
-          className="absolute text-gray-400 transition top-4 right-4 hover:text-gray-600"
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -50, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="relative w-11/12 max-w-lg p-8 mx-4 bg-white shadow-xl rounded-2xl border border-gray-200"
         >
-          <X size={24} />
-        </button>
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-all transform hover:scale-110"
+          >
+            <X size={24} />
+          </button>
 
-        {!responseMessage ? (
-          <>
-            <h2 className="mb-6 text-3xl font-semibold text-center text-gray-800">
-              Enquiry Form
-            </h2>
+          {!responseMessage ? (
+            <>
+              <h2 className="mb-6 text-3xl font-bold text-center text-gray-900">
+                Enquiry Form
+              </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {/* Full Name */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <InputField
+                    label="Full Name *"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your full name"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                      errors.name ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                    }`}
+                    error={errors.name}
                   />
-                  {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
+                  <InputField
+                    label="Email *"
                     name="email"
+                    type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Enter your email address"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                      errors.email ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                    }`}
+                    error={errors.email}
                   />
-                  {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
+                  <InputField
+                    label="Phone *"
                     name="phone"
+                    type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="Enter your phone number"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                      errors.phone ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                    }`}
+                    error={errors.phone}
                   />
-                  {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
-                </div>
-
-                {/* Enquiry Type */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    Enquiry Type
-                  </label>
-                  <select
+                  <SelectField
+                    label="Enquiry Type"
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                  >
-                    <option value="student">Student</option>
-                    <option value="training_center">Training Center</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                {/* Age */}
-                {formData.type === "student" && (
-                  <div>
-                    <label className="block mb-1 text-sm font-medium text-gray-600">
-                      Age
-                    </label>
-                    <input
-                      type="number"
+                    options={[
+                      { value: "student", label: "Student" },
+                      { value: "training_center", label: "Training Center" },
+                      { value: "other", label: "Other" },
+                    ]}
+                  />
+                  {formData.type === "student" && (
+                    <InputField
+                      label="Age *"
                       name="age"
+                      type="number"
                       value={formData.age}
                       onChange={handleChange}
-                      placeholder="Enter your age"
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                        errors.age ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                      }`}
+                      error={errors.age}
                     />
-                    {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
-                  </div>
-                )}
-
-                {/* State */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    State *
-                  </label>
-                  <select
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                      errors.state ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                    }`}
-                  >
-                    <option value="">Select State</option>
-                    {Object.keys(indianStates).map((state) => (
-                      <option key={state} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.state && <p className="mt-1 text-sm text-red-500">{errors.state}</p>}
+                  )}
                 </div>
 
-                {/* City */}
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-600">
-                    City *
-                  </label>
-                  <select
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                      errors.city ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                    }`}
-                  >
-                    <option value="">Select City</option>
-                    {(indianStates[formData.state] || []).map((city) => (
-                      <option key={city} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
-                </div>
-              {/* </div> */}
-
-              {/* Message */}
-              <div>
-                <label className="block mb-1 text-sm font-medium text-gray-600">
-                  Message *
-                </label>
-                <textarea
+                <InputField
+                  label="Message *"
                   name="message"
+                  type="text"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Write your message here"
-                  rows="4"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all ${
-                    errors.message ? "border-red-500" : "border-gray-300 focus:ring-orange-500"
-                  }`}
+                  error={errors.message}
                 />
-                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
-              </div>
-              </div>
 
-              <button
-                type="submit"
-                className="w-full py-3 text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800"
-              >
-                Submit Enquiry
-              </button>
-            </form>
-          </>
-        ) : (
-          <div
-            className={`text-center p-8 rounded-lg transition-transform duration-500 ${
-              responseMessage.type === "success"
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            <h2 className="text-2xl font-semibold">
-              {responseMessage.type === "success" ? "Success" : "Error"}
-            </h2>
-            <p className="mt-4">{responseMessage.text}</p>
-          </div>
-        )}
-      </div>
-    </div>
+                <button
+                  type="submit"
+                  className="w-full py-3 text-white text-lg font-medium rounded-lg bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800 transition-all"
+                >
+                  Submit Enquiry
+                </button>
+              </form>
+            </>
+          ) : (
+            <SuccessMessage responseMessage={responseMessage} />
+          )}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

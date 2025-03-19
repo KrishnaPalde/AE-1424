@@ -1,16 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import { servicesData } from "../data/servicesData";
 import { schemesData } from "../data/schemeData"; // Import schemesData
 import PageWrapper from "./PageWrapper";
 
+import config from "@/config";
+
+const API_URL = config.API_URL;
+
 const Sitemap = () => {
+  const [services, setServices] = useState([]);
+  const [schemes, setSchemes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(API_URL + "/services");
+        if (!response.ok) throw new Error("Failed to fetch services");
+
+        const data = await response.json();
+        setServices(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    const fetchSchemes = async () => {
+      try {
+        const response = await fetch(API_URL + "/schemes");
+        if (!response.ok) throw new Error("Failed to fetch services");
+
+        const data = await response.json();
+        setSchemes(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSchemes();
+    fetchServices();
+  }, []);
+
   const sections = [
     {
       title: "Main Pages",
       links: [
         { name: "Home", path: "/" },
-        { name: "About Us", path: "/who-we-are/about-us" },
+        { name: "Who We Are", path: "/who-we-are/about-us" },
         // { name: "Gallery", path: "/gallery" },
         { name: "Contact Us", path: "/contact-us" },
         { name: "Privacy Policy", path: "/privacy-policy" },
@@ -27,14 +69,14 @@ const Sitemap = () => {
     },
     {
       title: "What We Do",
-      links: servicesData.map((service) => ({
+      links: services.map((service) => ({
         name: service.title,
         path: `/what-we-do/${service.id}`,
       })),
     },
     {
       title: "Schemes",
-      links: schemesData.map((scheme) => ({
+      links: schemes.map((scheme) => ({
         name: scheme.title,
         path: `/schemes/${scheme.id}`,
       })),

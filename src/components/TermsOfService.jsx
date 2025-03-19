@@ -7,7 +7,7 @@ const TermsOfService = () => {
   return (
     <PageWrapper>
     <Layout title="Terms of Service">
-      <div className="space-y-6 text-gray-800">
+      <div className="space-y-12 text-gray-800">
         <p>
           By accessing and using our website, you agree to comply with the
           following terms and conditions:

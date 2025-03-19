@@ -1,16 +1,11 @@
-import Header from "./components/Header";
-import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import AboutUs from "./components/AboutUs";
-import Gallery from "./components/Gallery";
-import ContactUs from "./components/ContactUs";
 import AdminLogin from "./components/Admin/AdminLogin";
 import GalleryAdmin from "./components/Admin/GalleryAdmin";
-import AdminContact from "./components/Admin/AdminContact";
 import CoursesAdmin from "./components/Admin/CoursesAdmin";
 import AdminTrainingCentre from "./components/Admin/AdminTrainingCentre";
-import NewsBanner from "./components/NewsBanner";
 import LandingPage from "./components/LandingPage";
 import Courses from "./components/Courses";
 import TrainingCenters from "./components/TrainingCenters";
@@ -26,10 +21,21 @@ import TermsOfService from "./components/TermsOfService";
 import Sitemap from "./components/Sitemap";
 import { AnimatePresence } from 'framer-motion';
 import PageWrapper from "./components/PageWrapper";
+import { AdminAuthProvider } from "./components/context/AdminAuthContext";
+import ProtectedRoute from "./components/context/ProtectedRoutes";
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import AdminServices from "./components/Admin/AdminServices";
+import AdminSchemes from "./components/Admin/AdminSchemes";
+import AdminInquiries from "./components/Admin/AdminInquires";
+import AdminBanner from "./components/Admin/AdminBanner";
+import { HelmetProvider } from "react-helmet-async";
+import AdminSettings from "./components/Admin/AdminSettings";
 
 function App() {
   return (
     <>
+    <HelmetProvider>
+    <AdminAuthProvider>
       <BrowserRouter>
       <AnimatePresence mode = "wait">
         <Routes>
@@ -49,26 +55,7 @@ function App() {
           <Route path="privacy-policy" element={<PrivacyPolicy/>}/>
           <Route path="terms-of-service" element={<TermsOfService/>}/>
           <Route path="sitemap" element={<Sitemap/>}/>
-          {/* <Route path="what-we-do/skill-development" element={<><Header/><Nav/><SkillDevelopment/><Footer/></>}/>
-          <Route path="what-we-do/tc-partnerships" element={<><Header/><Nav/><TrainingCenterPartnerships/><Footer/></>}/>
-          <Route path="what-we-do/placement" element={<><Header/><Nav/><PlacementAssistance/><Footer/></>}/>
-          <Route path="what-we-do/work-orders" element={<><Header/><Nav/><WorkOrders/><Footer/></>}/> */}
-
           
-          {/* <Route
-          path="/courses-we-offer"
-          element={
-            <>
-            <Header/>
-            <Nav/>
-            <CoursesWeOffer/>
-            <CoursesCard/>
-            <Affiliations/>
-            <Footer />
-            </>
-          }
-          /> */}
-
           <Route
           path="who-we-are/about-us"
           element={
@@ -87,19 +74,7 @@ function App() {
             <AboutUsPage/>
           }
           />
-          <Route
-          path="/gallery"
-          element={
-            <>
-            {/* <Header/> */}
-            <Nav/>
-            <PageWrapper>
-            <Gallery />
-            <Footer />
-            </PageWrapper>
-            </>
-          }
-          />
+          
           <Route
           path="/contact-us"
           element={
@@ -117,46 +92,82 @@ function App() {
           <Route
           path="/admin-gallery"
           element={
-            <>
+            <ProtectedRoute>
             <GalleryAdmin/>
-            </>
+            </ProtectedRoute>
           }
           />
           <Route
-          path={"/admin-contact-settings"}
+          path="/admin-dashboard"
           element={
-            <>
-            <AdminContact/>
-            </>
+            <ProtectedRoute>
+            <AdminDashboard/>
+            </ProtectedRoute>
           }
           />
+          
           <Route
           path="/admin-courses"
           element={
-            <>
+            <ProtectedRoute>
             <CoursesAdmin/>
-            </>
+            </ProtectedRoute>
           }
           />
           <Route
-          path="/admin-training-centres"
+          path="/admin-services"
           element={
-            <>
-            <AdminTrainingCentre/>
-            </>
+            <ProtectedRoute>
+            <AdminServices/>
+            </ProtectedRoute>
           }
           />
+          <Route
+          path="/admin-settings"
+          element={
+            <ProtectedRoute>
+            <AdminSettings/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-training-centers"
+          element={
+            <ProtectedRoute>
+            <AdminTrainingCentre/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-schemes"
+          element={
+            <ProtectedRoute>
+            <AdminSchemes/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-inquiries"
+          element={
+            <ProtectedRoute>
+            <AdminInquiries/>
+            </ProtectedRoute>
+          }
+          />
+          
           <Route
           path="/admin-banners"
           element={
-            <>
-            <NewsBanner isAdmin={true}/>
-            </>
+            <ProtectedRoute>
+            <AdminBanner/>
+            </ProtectedRoute>
           }
-          />
+          /> 
         </Routes>
         </AnimatePresence>
       </BrowserRouter>
+      </AdminAuthProvider>
+      </HelmetProvider>
     </>
   );
 }

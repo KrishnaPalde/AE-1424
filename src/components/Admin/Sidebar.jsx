@@ -1,102 +1,49 @@
 import React from "react";
-import {
-  Home,
-  Image as ImageIcon,
-  Users,
-  Calendar,
-  Settings,
-  Bell,
-  HelpCircle,
-  LogOut,
-  CirclePercent,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { LayoutGrid, Briefcase, Book, Settings, Phone, LogOut, Image, TvMinimal } from "lucide-react";
+import { useAdminAuth } from "../context/AdminAuthContext";
 
-const menuItems = [
-  {
-    title: "Gallery",
-    icon: ImageIcon,
-    path: "/admin-gallery",
-  },
-  {
-    title: "Courses",
-    icon: Users,
-    path: "/admin-courses",
-  },
-  {
-    title: "Training Centres",
-    icon: Calendar,
-    path: "/admin-training-centres",
-  },
-  {
-    title: "Banner",
-    icon: CirclePercent,
-    path: "/admin-banners",
-  }
-];
+const Sidebar = () => {
+  const { logout } = useAdminAuth();
 
-const bottomMenuItems = [
-  {
-    title: "Contact Settings",
-    icon: Settings,
-    path: "/admin-contact-settings",
-  },
-];
-
-const Sidebar = ({ currentPath }) => {
   return (
-    <div className="flex flex-col w-64 h-screen bg-white shadow-lg">
-      
-      <div className="flex items-center h-16 px-6 border-b">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-violet-600"></div>
-          <span className="text-xl font-bold text-gray-800">Admin Portal</span>
-        </div>
-      </div>
+    <aside className="w-64 min-h-screen bg-[#1F2937] text-white flex flex-col p-6 fixed left-0 top-0">
+      {/* Logo / Title */}
+      <h1 className="text-2xl font-bold mb-8 text-center">Admin Panel</h1>
 
-      
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-        <div className="space-y-1">
-          {menuItems.map((item) => (
-            <a
-              key={item.title}
-              href={item.path}
-              className={cn(
-                "flex items-center px-4 py-3 rounded-lg transition-colors",
-                currentPath === item.path
-                  ? "bg-violet-700 text-white"
-                  : "text-gray-600 hover:bg-gray-50"
-              )}
-            >
-              <item.icon className="w-5 h-5 mr-3" />
-              <span className="font-medium">{item.title}</span>
-             
-            </a>
-          ))}
-        </div>
+      {/* Navigation Links */}
+      <nav className="flex flex-col space-y-4">
+        <NavItem to="/admin-dashboard" icon={<LayoutGrid size={20} />} label="Dashboard" />
+        <NavItem to="/admin-services" icon={<Briefcase size={20} />} label="Services" />
+        <NavItem to="/admin-training-centers" icon={<TvMinimal size={20} />} label="Training Centers" />
+        <NavItem to="/admin-schemes" icon={<Settings size={20} />} label="Schemes" />
+        <NavItem to="/admin-courses" icon={<Book size={20} />} label="Courses" />
+        <NavItem to="/admin-inquiries" icon={<Phone size={20} />} label="Inquiries" />
+        {/* <NavItem to="/admin-gallery" icon={<Image size={20} />} label="Gallery & News" /> */}
+        <NavItem to="/admin-banners" icon={<Image size={20} />} label="Banners" />
+        <NavItem to="/admin-settings" icon={<Settings size={20} />} label="Settings" />
 
-
-        <div className="space-y-1">
-          {bottomMenuItems.map((item) => (
-            <a
-              key={item.title}
-              href={item.path}
-              className="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50"
-            >
-              <item.icon className="w-5 h-5 mr-3" />
-              <span className="font-medium">{item.title}</span>
-            </a>
-          ))}
-
-          <Link to='/' className="flex items-center w-full px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50">
-            <LogOut className="w-5 h-5 mr-3" />
-            <span className="font-medium">Logout</span>
-          </Link>
-        </div>
+        {/* Logout Button */}
+        <button
+          onClick={logout}
+          className="flex items-center space-x-3 p-3 bg-red-600 rounded-lg transition hover:bg-red-700 mt-auto"
+        >
+          <LogOut size={20} /> <span>Logout</span>
+        </button>
       </nav>
+    </aside>
+  );
+};
 
-    </div>
+/* Nav Item Component */
+const NavItem = ({ to, icon, label }) => {
+  return (
+    <Link
+      to={to}
+      className="flex items-center space-x-3 p-3 hover:bg-gray-700 rounded-lg transition"
+    >
+      {icon} <span>{label}</span>
+    </Link>
   );
 };
 

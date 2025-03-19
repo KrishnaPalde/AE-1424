@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import  Footer  from "./Footer"
-import  Header  from "./Header"
 import  Nav  from "./Nav"
 import AffiliatedBy from "./AffiliatedBy"
 import GovernmentDepartments from "./GovernmentDepartments"

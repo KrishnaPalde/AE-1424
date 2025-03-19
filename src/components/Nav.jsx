@@ -271,70 +271,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, PhoneIcon, EnvelopeIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo.png';
 import horizontal_logo from '../assets/logo_horizontal.jpg';
-import { servicesData } from "../data/servicesData";
-import PageWrapper from './PageWrapper';
+
+import config from "@/config";
+
+const API_URL = config.API_URL;
 
 // Filter services for Candidates and Organizations
-const candidateServices = servicesData.filter(
-  (service) => service.category === "Candidates"
-);
 
-const organizationServices = servicesData.filter(
-  (service) => service.category === "Organizations"
-);
-
-const navigation = [
-  { name: "Home", href: "/", current: false },
-  {
-    name: "Who We Are",
-    href: "/who-we-are",
-    current: false,
-    sublinks: [
-      { name: "About Us", href: "/who-we-are/about-us" },
-      { name: "Vision & Mission", href: "/who-we-are/about-us/vision-mission" },
-      { name: "Board of Directors", href: "/who-we-are/about-us/board-directors" },
-    ],
-  },
-  {
-    name: "What We Do",
-    href: "/what-we-do",
-    current: false,
-    sublinks: [
-      { name: "Overview", href: "/what-we-do/services-overview" },
-      {
-        name: "For Candidates",
-        href: "/what-we-do/services-overview",
-        sublinks: candidateServices.map((service) => ({
-          name: service.title,
-          href: `/what-we-do/${service.id}`,
-        })),
-      },
-      {
-        name: "For Organizations",
-        href: "/what-we-do/services-overview",
-        sublinks: organizationServices.map((service) => ({
-          name: service.title,
-          href: `/what-we-do/${service.id}`,
-        })),
-      },
-    ],
-  },
-  { name: "Schemes", href: "/schemes", current: false },
-  {
-    name: "Training Centers",
-    href: "/training-centers",
-    current: false,
-    sublinks: [
-      { name: "Training Centers", href: "/training-centers" },
-      { name: "Courses & Programs", href: "/training-centers/courses-offered" },
-      { name: "Find a Center", href: "/training-centers/find-a-center" },
-    ],
-  },
-  { name: "Contact Us", href: "/contact-us", current: false },
-];
 
 export default function Nav() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
@@ -378,19 +323,118 @@ export default function Nav() {
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [contact, setContact] = useState({mobileNumber: "+91 82377 76233", email: "admin@aartieducare.com"});
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(API_URL+"/services");
+        if (!response.ok) throw new Error("Failed to fetch services");
+
+        const data = await response.json();
+        setServices(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    const fetchContactDetails = async () => {
+      try {
+        const response = await fetch(API_URL+"/contact");
+        if (!response.ok) throw new Error("Failed to fetch services");
+        const data = await response.json();
+        setContact(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContactDetails();
+    fetchServices();
+  }, []);
+    
+
+  const candidateServices = services.filter(
+    (service) => service.category === "Candidates"
+  );
+  
+  const organizationServices = services.filter(
+    (service) => service.category === "Organizations"
+  );
+  
+  const navigation = [
+    { name: "Home", href: "/", current: false },
+    {
+      name: "Who We Are",
+      href: "/who-we-are",
+      current: false,
+      sublinks: [
+        { name: "About Us", href: "/who-we-are/about-us" },
+        { name: "Vision & Mission", href: "/who-we-are/about-us/vision-mission" },
+        { name: "Board of Directors", href: "/who-we-are/about-us/board-directors" },
+      ],
+    },
+    {
+      name: "What We Do",
+      href: "/what-we-do",
+      current: false,
+      sublinks: [
+        { name: "Overview", href: "/what-we-do/services-overview" },
+        {
+          name: "For Candidates",
+          href: "/what-we-do/services-overview",
+          sublinks: candidateServices.map((service) => ({
+            name: service.title,
+            href: `/what-we-do/${service.id}`,
+          })),
+        },
+        {
+          name: "For Organizations",
+          href: "/what-we-do/services-overview",
+          sublinks: organizationServices.map((service) => ({
+            name: service.title,
+            href: `/what-we-do/${service.id}`,
+          })),
+        },
+      ],
+    },
+    { name: "Schemes", href: "/schemes", current: false },
+    {
+      name: "Training Centers",
+      href: "/training-centers",
+      current: false,
+      sublinks: [
+        { name: "Training Centers", href: "/training-centers" },
+        { name: "Courses & Programs", href: "/training-centers/courses-offered" },
+        { name: "Find a Center", href: "/training-centers/find-a-center" },
+      ],
+    },
+    { name: "Contact Us", href: "/contact-us", current: false },
+  ];
+
+
   const ContactInfo = () => (
     <div className={`flex flex-col items-center justify-center xl:items-end sm:flex-row ${scrollState.scrolled ? 'hidden' : 'block'}`}>
-      <div className="flex items-center ml-2 sm:px-3 justify-stretch">
-        <PhoneIcon className="w-4 h-4 text-gray-500" />
-        <span className="ml-2 text-xs lg:mr-8 lg:text-lg">
-          +91 82377 76233
-        </span>
-      </div>
-      <a href="mailto:admin@aartieducare.com">
+      <a href={`tel:${contact.mobileNumber}`}>
+        <div className="flex items-center ml-2 sm:px-3 justify-stretch">
+          <PhoneIcon className="w-4 h-4 text-gray-500" />
+          <span className="ml-2 text-xs lg:mr-8 lg:text-lg">
+            {contact.mobileNumber}
+          </span>
+        </div>
+      </a>
+      <a href={`mailto:${contact.email}`}>
         <div className="flex items-center justify-around px-3">
           <EnvelopeIcon className="w-4 h-4 mr-2 text-gray-500" />
           <span className="text-xs sm:mr-6 lg:text-lg">
-            admin@aartieducare.com
+            {contact.email}
           </span>
         </div>
       </a>
@@ -410,7 +454,7 @@ export default function Nav() {
             {item.sublinks ? (
               <div className="inline-flex items-center text-[#e67e23] px-3 py-2  font-medium hover:text-[#c75f12] cursor-pointer transition-colors duration-200">
                 {item.name}
-                <ChevronDownIcon className="ml-1 h-4 w-4 text-[#e67e23] transform group-hover:rotate-180 transition-transform duration-200" />
+                <ChevronDownIcon className="ml-1 h-4 w-4 text-[#e67e23] tra`nsform `group-hover:rotate-180 transition-transform duration-200" />
               </div>
             ) : (
               <Link
@@ -448,6 +492,7 @@ export default function Nav() {
                         {sublink.sublinks.map((nestedSublink, nestedIndex) => (
                           <React.Fragment key={nestedSublink.name}>
                             <Link
+                              reloadDocument
                               to={nestedSublink.href}
                               className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#e67e23] hover:text-white"
                             >

@@ -1,13 +1,39 @@
 // PrivacyPolicy.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import PageWrapper from "./PageWrapper";
 
+import config from "@/config";
+
+const API_URL = config.API_URL;
+
 const PrivacyPolicy = () => {
+  const [contact, setContact] = useState({email: 'admin@aartieducare.com',});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchContactDetails = async () => {
+      try {
+        const response = await fetch(API_URL + "/contact");
+        if (!response.ok) throw new Error("Failed to fetch services");
+        const data = await response.json();
+        setContact(data);
+      } catch (err) {
+        setError("Failed to load services.");
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContactDetails();
+  }, []);
+
+
   return (
     <PageWrapper>
     <Layout title="Privacy Policy">
-      <div className="space-y-6 text-gray-800">
+      <div className="space-y-12 text-gray-800">
         <p>
           We value your privacy and are committed to protecting your personal
           information. This Privacy Policy outlines how we collect, use, and
@@ -30,8 +56,8 @@ const PrivacyPolicy = () => {
         <p>
           You can request access, correction, or deletion of your data by
           contacting us at{" "}
-          <a href="mailto:office@aartieducare.com" className="text-[#e67e23] underline">
-            office@aartieducare.com
+          <a href={`mailto:${contact.email}`} className="text-[#e67e23] underline">
+            {contact.email}
           </a>
           .
         </p>

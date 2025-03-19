@@ -4,7 +4,7 @@ const URL = process.env.URL;
 
 let dbConn;
 
-const connectDb = async () => {
+const connectDB = async () => {
   try {
     await mongoose.connect(URL);
     dbConn = mongoose.connection;
@@ -15,4 +15,4 @@ const connectDb = async () => {
   }
 };
 
-module.exports = { connectDb };
+module.exports = connectDB;
