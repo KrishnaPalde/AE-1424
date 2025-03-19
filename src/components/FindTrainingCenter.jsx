@@ -41,7 +41,6 @@ export default function FindTrainingCenter() {
 
       const data = await response.json();
       setTrainingCenters(data);
-      console.log(data);
     } catch (err) {
       setError("Failed to load services.");
       console.error("Error fetching services:", err);

@@ -102,7 +102,6 @@ const AdminServices = () => {
   const handleSaveService = async () => {
     if (!newService.title || !newService.category || !newService.description) {
       alert("Title, Category, and Description are required!");
-      console.log(newService);  
       return;
     }
     

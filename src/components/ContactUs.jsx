@@ -103,7 +103,6 @@ const ContactUs = () => {
       } catch (err) {
         console.error("Error saving service:", err);
       }
-      console.log("Form submitted:", formData);
     }
   };
 

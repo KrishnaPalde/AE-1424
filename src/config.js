@@ -1,5 +1,5 @@
 const config = {
-  API_URL: "http://localhost:9000/api",
+  API_URL: "https://ae-1424.onrender.com/api",
   firebaseConfig: {
     apiKey: "AIzaSyDvMxxgmvFY2MJv6AYiD4jZFhrr9-NETfo",
     authDomain: "aartieducare-ms.firebaseapp.com",

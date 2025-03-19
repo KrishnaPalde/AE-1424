@@ -30,7 +30,6 @@ const AdminDashboard = () => {
         }
   
         const data = await response.json(); // Convert response to JSON
-        console.log("Fetched stats:", data); // Debugging output
         setStats(data);
       } catch (err) {
         setError("Failed to load dashboard statistics");

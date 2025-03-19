@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /login
+Disallow: /admin-gallery
+Disallow: /admin-dashboard
+Disallow: /admin-courses
+Disallow: /admin-services
+Disallow: /admin-settings
+Disallow: /admin-training-centers
+Disallow: /admin-schemes
+Disallow: /admin-inquiries
+Disallow: /admin-banners
+Allow: /
+
+Sitemap: https://aartieducare.com/sitemap.xml

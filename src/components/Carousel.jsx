@@ -36,7 +36,6 @@ export default function Carousel() {
           setBanners(data);
         } catch (err) {
           setError("Failed to load banners.");
-          console.error("Error fetching banners:", err);
         } finally {
           setIsLoading(false);
         }
