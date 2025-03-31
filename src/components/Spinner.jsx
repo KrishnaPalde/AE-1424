@@ -1,12 +1,13 @@
 import React from "react";
-import logo from "../assets/logo.png"; // Replace with the actual path to your logo
+import logo from "../assets/logo.webp"; // Replace with the actual path to your logo
+import LazyLoad from "react-lazyload";
 
 const Spinner = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300">
     <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
     <div className="flex flex-col items-center space-y-4">
-  <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+  <LazyLoad height={200} offset={150} once><img src="/logo.webp" alt="Logo" className="h-12 w-auto" /></LazyLoad>
   <p className="text-white text-lg">Loading...</p>
 </div>
   </div>

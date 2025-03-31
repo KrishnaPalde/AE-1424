@@ -46,7 +46,7 @@ const LandingPage = () => {
         <meta name="keywords" content="skill development, training programs, career growth, job-oriented courses, vocational training, professional skills" />
         <meta property="og:title" content="Transform Your Future with Skill-Based Training | Aarti Educare"/>
         <meta property="og:description" content="Empowering individuals through industry-recognized training programs. Join now and upskill yourself." />
-        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.png?alt=media&token=e965adc5-aca7-4b16-a5e8-6270665cfe0c" />
+        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.webp?alt=media&token=d85ffcb5-122c-4fb7-b0cb-036857228217" />
         <meta property="og:url" content="https://www.aartieducare.com" />
         <meta name="robots" content="index, follow" />
     </Helmet> 

@@ -10,15 +10,16 @@ import {
 } from "lucide-react";
 
 import config from "@/config";
+import LazyLoad from "react-lazyload";
 
 const API_URL = config.API_URL;
  
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [contact, setContact] = useState({address: 'Utkarsha Training Centre, Nashik, Maharashtra',
-    mobileNumber: '+91 82377 76233',
-    email: 'admin@aartieducare.com',});
-  const [courses, setCourses] = useState([]);
+    mobileNumber: '+91 80878 10364',
+    email: 'aartieducare@gmail.com',});
+  const [services, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -38,7 +39,7 @@ const Footer = () => {
       };
       const fetchCourses = async () => {
         try {
-          const response = await fetch(API_URL + "/courses");
+          const response = await fetch(API_URL + "/services");
           if (!response.ok) throw new Error("Failed to fetch services");
           const data = await response.json();
           setCourses(data);
@@ -59,11 +60,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* About Section */}
           <div className="space-y-4">
+          <LazyLoad height={200} offset={150} once>
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo_horizontal.jpg?alt=media&token=c53ac0f2-bffc-468e-a1ea-877806a4be90"
+            src="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo_horizontal.webp?alt=media&token=5eaef1a3-bc99-40ff-a414-d4cbb6bc3d00"
             alt="Aarti Educare"
             className="w-[200px] h-[100px] object-cover rounded-xl shadow-lg"
           />
+          </LazyLoad>
             <h3 className="mb-4 text-xl font-semibold text-white">
               Aarti Educare
             </h3>
@@ -123,26 +126,41 @@ const Footer = () => {
                   Contact Us
                 </a>
               </li>
+              <li>
+                <a href="/login" className="transition-colors hover:text-white">
+                  Admin Login
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Programs Section */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Our Programs</h3>
-            <ul className="space-y-2">
-              {courses.length > 0 ? (
-                courses.map((course) => (
-                  <li key={course._id.$oid}>
-                    <a href="/training-centers/courses-offered" className="transition-colors hover:text-white">
-                      {course.title}
-                    </a>
-                  </li>
-                ))
-              ) : (
-                <li className="text-gray-400">No programs available</li>
-              )}
-            </ul>
-          </div>
+  <h3 className="mb-4 text-lg font-semibold text-white">Our Services</h3>
+  <ul className="space-y-2">
+    {services.length > 0 ? (
+      <>
+        {services.slice(0, Math.min(services.length, 6)).map((service) => (
+          <li key={service._id.$oid}>
+            <a href="/what-we-do/services-overview" className="transition-colors hover:text-white">
+              {service.title}
+            </a>
+          </li>
+        ))}
+        {services.length > 6 && (
+          <li>
+            <a href="/what-we-do/services-overview" className="text-[#e67e23] hover:underline font-medium">
+              Read More
+            </a>
+          </li>
+        )}
+      </>
+    ) : (
+      <li className="text-gray-400">No programs available</li>
+    )}
+  </ul>
+</div>
+
           {/* <div>
             <h3 className="mb-4 text-lg font-semibold text-white">
               Our Programs
@@ -174,7 +192,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/training-centers/courses-offered"
+                  href="/training-centers/services-offered"
                   className="transition-colors hover:text-white"
                 >
                   Courses Offered

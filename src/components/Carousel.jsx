@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import config from '@/config';
+import LazyLoad from 'react-lazyload';
 
 const API_URL = config.API_URL;
 
@@ -62,11 +63,13 @@ export default function Carousel() {
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={index}>
+            <LazyLoad key={index} height={200} offset={150} once>
             <img
               src={banner.imageUrl}
               alt={`Slide ${index + 1}`}
               className="w-full h-[650px] object-cover "
             />
+            </LazyLoad>
           </SwiperSlide>
         ))}
       </Swiper>

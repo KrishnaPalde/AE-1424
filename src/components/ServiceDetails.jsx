@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import CTAPopup from "./CTAPopup";
 
 import config from "@/config";
+import LazyLoad from "react-lazyload";
 
 const API_URL = config.API_URL;
 
@@ -66,11 +67,13 @@ const ServiceDetails = () => {
           <div className="lg:col-span-5">
             <div className="relative">
               <div className="absolute inset-0 bg-white bg-opacity-30 rounded-xl"></div>
+              <LazyLoad height={200} offset={150} once>
               <img
                 src={service.image}
                 alt={service.title}
                 className="w-full h-full object-cover rounded-xl shadow-lg"
               />
+              </LazyLoad>
             </div>
           </div>
 

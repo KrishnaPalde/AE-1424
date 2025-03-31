@@ -271,10 +271,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, PhoneIcon, EnvelopeIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import logo from '../assets/logo.png';
-import horizontal_logo from '../assets/logo_horizontal.jpg';
+import logo from '../assets/logo.webp';
+import horizontal_logo from '../assets/logo_horizontal.webp';
 
 import config from "@/config";
+import LazyLoad from 'react-lazyload';
 
 const API_URL = config.API_URL;
 
@@ -326,7 +327,7 @@ export default function Nav() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [contact, setContact] = useState({mobileNumber: "+91 82377 76233", email: "admin@aartieducare.com"});
+  const [contact, setContact] = useState({mobileNumber: "‪+91 80878 10364‬", email: "aartieducare@gmail.com"});
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -639,6 +640,7 @@ export default function Nav() {
          
         <div className="flex justify-center lg:justify-start">
             <Link to="/">
+            <LazyLoad height={200} offset={150} once>
               <img
                 src={scrollState.scrolled ? horizontal_logo : logo}
                 alt="Aarti Educare Logo"
@@ -650,6 +652,7 @@ export default function Nav() {
                   willChange: 'height, transform'
                 }}
               />
+              </LazyLoad>
             </Link>
           </div>
 

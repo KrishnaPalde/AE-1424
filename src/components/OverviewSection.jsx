@@ -21,11 +21,15 @@ const OverviewSection = () => {
 
   useEffect(() => {
         const fetchServices = async () => {
+          console.log(1)
           try {
+            console.log(2)
             const response = await fetch(API_URL + "/services");
+            console.log(3)
             if (!response.ok) throw new Error("Failed to fetch services");
-    
+            
             const data = await response.json();
+            console.log(data)
             setServices(data);
           } catch (err) {
             setError("Failed to load services.");

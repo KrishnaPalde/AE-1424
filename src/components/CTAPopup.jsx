@@ -36,15 +36,15 @@ const CTAPopup = ({ isOpen, onClose }) => {
           <ContactItem
             icon={<FaPhoneAlt className="w-6 h-6 text-white" />}
             title="Phone"
-            content="+91 82377 76233"
-            link="tel:+918237776233"
+            content="+91 80878 10364"
+            link="tel:+918087810364"
           />
 
           <ContactItem
             icon={<FaEnvelope className="w-6 h-6 text-white" />}
             title="Email"
-            content="office@aartieducare.com"
-            link="mailto:office@aartieducare.com"
+            content="aartieducare@gmail.com"
+            link="mailto:aartieducare@gmail.com"
           />
 
           <ContactItem
@@ -58,7 +58,7 @@ const CTAPopup = ({ isOpen, onClose }) => {
         {/* WhatsApp Button */}
         <div className="px-6 pb-6">
           <a
-            href="https://wa.me/918237776233"
+            href="https://wa.me/918087810364"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center bg-[#25D366] text-white text-lg py-3 rounded-full font-medium hover:bg-[#1DA851] transition-all transform hover:scale-105 shadow-md space-x-2"

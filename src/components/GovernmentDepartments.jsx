@@ -3,24 +3,25 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import gov_logo1 from "../assets/goverment_departments/DAY-NULM.jpg";
-import gov_logo2 from "../assets/goverment_departments/Digital-india-csc-logo-png-image-1024x539.png";
-import gov_logo3 from "../assets/goverment_departments/Electronics System Design and Manufacturing (ESDM).png";
-import gov_logo4 from "../assets/goverment_departments/Kaushalya Balam.jpg";
-import gov_logo5 from "../assets/goverment_departments/MSDE.png";
-import gov_logo6 from "../assets/goverment_departments/MSJE.png";
-import gov_logo7 from "../assets/goverment_departments/MSSDS.jpg";
-import gov_logo8 from "../assets/goverment_departments/Maharashtra Shashan.jpg";
-import gov_logo9 from "../assets/goverment_departments/NBCFDC.png";
-import gov_logo10 from "../assets/goverment_departments/NSFDC.png";
-import gov_logo11 from "../assets/goverment_departments/NSKFDC.png";
-import gov_logo12 from "../assets/goverment_departments/OBC Corporation.png";
-import gov_logo13 from "../assets/goverment_departments/PM Daksh.jpg";
-import gov_logo14 from "../assets/goverment_departments/PMKVY Logo.png";
-import gov_logo15 from "../assets/goverment_departments/SARATHI.jpg";
-import gov_logo16 from "../assets/goverment_departments/Shabari Corporation.jpg";
-import gov_logo17 from "../assets/goverment_departments/Skill-India.png";
-import gov_logo18 from "../assets/goverment_departments/TRTI.png";
+import gov_logo1 from "../assets/goverment_departments/DAY-NULM.webp";
+import gov_logo2 from "../assets/goverment_departments/Digital-india-csc.webp";
+import gov_logo3 from "../assets/goverment_departments/Electronics System Design and Manufacturing (ESDM).webp";
+import gov_logo4 from "../assets/goverment_departments/Kaushalya Balam.webp";
+import gov_logo5 from "../assets/goverment_departments/MSDE.webp";
+import gov_logo6 from "../assets/goverment_departments/MSJE.webp";
+import gov_logo7 from "../assets/goverment_departments/MSSDS.webp";
+import gov_logo8 from "../assets/goverment_departments/Maharashtra Shashan.webp";
+import gov_logo9 from "../assets/goverment_departments/NBCFDC.webp";
+import gov_logo10 from "../assets/goverment_departments/NSFDC.webp";
+import gov_logo11 from "../assets/goverment_departments/NSKFDC.webp";
+import gov_logo12 from "../assets/goverment_departments/OBC Corporation.webp";
+import gov_logo13 from "../assets/goverment_departments/PM Daksh.webp";
+import gov_logo14 from "../assets/goverment_departments/PMKVY Logo.webp";
+import gov_logo15 from "../assets/goverment_departments/SARATHI.webp";
+import gov_logo16 from "../assets/goverment_departments/Shabari Corporation.webp";
+import gov_logo17 from "../assets/goverment_departments/Skill-India.webp";
+import gov_logo18 from "../assets/goverment_departments/TRTI.webp";
+import LazyLoad from "react-lazyload";
 
 export default function GovernmentDepartments() {
   const sliderSettings = {
@@ -69,11 +70,13 @@ export default function GovernmentDepartments() {
               key={index}
               className="flex items-center justify-center p-4 hover:scale-105 transition-transform duration-300"
             >
+              <LazyLoad key={index} height={200} offset={150} once>
               <img
                 src={logo}
                 alt={`Government Department ${index + 1}`}
                 className="h-32 mx-auto object-contain"
               />
+              </LazyLoad>
             </div>
           ))}
         </Slider>

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { CheckCircle, Award, Target } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import aboutUsImage from "../assets/tc3.png";
-import sagar_thoke from "../assets/Sagar_Thoke.jpg";
-import sagar_ghule from "../assets/Sagar_Ghule.jpg";
-import sagar_khumbhar from "../assets/Sagar_Kumbhar.jpg";
+import aboutUsImage from "../assets/tc3.webp";
+import sagar_thoke from "../assets/Sagar_Thoke.webp";
+import sagar_ghule from "../assets/Sagar_Ghule.webp";
+import sagar_khumbhar from "../assets/Sagar_Kumbhar.webp";
 import GovernmentDepartments from "./GovernmentDepartments";
+import LazyLoad from "react-lazyload";
 
 const AboutUs = () => {
   const boardOfDirectors = [
@@ -146,11 +147,13 @@ const AboutUs = () => {
           {/* Image and Stats Section */}
           <div className="relative">
             <div className="rounded-lg shadow-lg overflow-hidden">
+              <LazyLoad height={200} offset={150} once>
               <img
                 src={aboutUsImage}
                 alt="Our Story"
                 className="transition-transform duration-300 hover:scale-105"
               />
+              </LazyLoad>
             </div>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
               {stats2.map((stat, index) => (
@@ -226,11 +229,13 @@ const AboutUs = () => {
                 key={index}
                 className="p-8 text-center transition-transform bg-gray-50 rounded-xl shadow-md hover:scale-105"
               >
+                <LazyLoad key={index} height={200} offset={150} once>
                 <img
                   src={director.image}
                   alt={director.name}
                   className="w-32 h-32 mx-auto mb-4 rounded-full object-cover"
                 />
+                </LazyLoad>
                 <h3 className="text-xl font-semibold text-[#e67e23]">{director.name}</h3>
                 <p className="text-[#333333] font-medium">{director.position}</p>
                 <p className="text-sm text-gray-600 mt-2">{director.description}</p>

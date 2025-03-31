@@ -1,5 +1,5 @@
 import React from 'react'
-import ss1 from "../assets/ss1.jpg";
+import ss1 from "../assets/ss1.webp";
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Stepper from "../components/Stepper";
 

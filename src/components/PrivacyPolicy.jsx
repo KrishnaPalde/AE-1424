@@ -8,7 +8,7 @@ import config from "@/config";
 const API_URL = config.API_URL;
 
 const PrivacyPolicy = () => {
-  const [contact, setContact] = useState({email: 'admin@aartieducare.com',});
+  const [contact, setContact] = useState({email: 'aartieducare@gmail.com',});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

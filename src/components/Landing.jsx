@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../assets/logo.png";
-import landing from "../assets/landing.jpg";
-import affiliation1 from "../assets/affiliation1.png";
-import affiliation2 from "../assets/affiliation2.png";
-import affiliation3 from "../assets/affiliation3.png";
-import affiliation4 from "../assets/affiliation4.png";
-import affiliation5 from "../assets/affiliation5.png";
-import ss1 from "../assets/ss1.jpg";
+import logo from "../assets/logo.webp";
+import landing from "../assets/landing.webp";
+import affiliation1 from "../assets/affiliation1.webp";
+import affiliation2 from "../assets/affiliation2.webp";
+import affiliation3 from "../assets/affiliation3.webp";
+import affiliation4 from "../assets/affiliation4.webp";
+import affiliation5 from "../assets/affiliation5.webp";
+import ss1 from "../assets/ss1.webp";
 
 import { PhoneIcon } from "@heroicons/react/24/outline";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
@@ -14,6 +14,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Nav from "./Nav";
 import Carousel from "./Carousel";
 import Legacy from "./Stepper";
+import LazyLoad from "react-lazyload";
 
 export default function Landing() {
   return (
@@ -21,11 +22,13 @@ export default function Landing() {
       {/* Image starts */}
       <div>
         <div className="hidden h-[38rem] bg-gradient-to-tr from-[#211F1F] from-30% via-[#7B3A1B] via-100% to-[#FC6015] to-5% md:block relative">
+          <LazyLoad height={200} offset={150} once>
           <img
             src={landing}
             alt="Introduction"
             className="absolute object-cover w-full h-full mix-blend-overlay"
           />
+          </LazyLoad>
           <div className="absolute inset-0 flex items-center justify-start p-10">
             <div className="">
               <h1 className="text-6xl font-medium text-white">
@@ -146,19 +149,29 @@ export default function Landing() {
 
           <div className="grid grid-cols-2 gap-4 p-10 px-10 md:flex-row md:flex md:space-x-4 md:px-6 md:gap-0">
             <div className="flex flex-col items-center justify-center">
-              <img src={affiliation1} alt="aff1" className="md:h-24" />
+              <LazyLoad height={200} offset={150} once>
+                <img src={affiliation1} alt="aff1" className="md:h-24" />
+              </LazyLoad>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <img src={affiliation2} alt="aff2" className="md:h-24" />
+              <LazyLoad height={200} offset={150} once>
+                <img src={affiliation2} alt="aff2" className="md:h-24" />
+              </LazyLoad>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <img src={affiliation3} alt="aff3" className="md:h-24" />
+              <LazyLoad height={200} offset={150} once>
+                <img src={affiliation3} alt="aff3" className="md:h-24" />
+              </LazyLoad>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <img src={affiliation4} alt="aff4" className="md:h-24" />
+              <LazyLoad height={200} offset={150} once>
+                <img src={affiliation4} alt="aff4" className="md:h-24" />
+              </LazyLoad>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <img src={affiliation5} alt="aff5" className="md:h-16" />
+              <LazyLoad height={200} offset={150} once>
+                <img src={affiliation5} alt="aff5" className="md:h-16" />
+              </LazyLoad>
             </div>
           </div>
         </div>
