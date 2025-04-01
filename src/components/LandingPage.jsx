@@ -15,24 +15,36 @@ import WhatsAppButton from "./WhatsappButton";
 import LoadingSpinner from "./LoadingSpinner";
 import PageWrapper from "./PageWrapper";
 import { Helmet } from "react-helmet-async";
+import landingImage from "../assets/landing.webp";
 
 const LandingPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
 
   const closePopup = () => setIsPopupOpen(false);
 
   useEffect(() => {
     // Show popup after initial load
-    setTimeout(() => setIsPopupOpen(true), 2000);
+   if (!isMobile) {
+      setTimeout(() => setIsPopupOpen(true), 2000);
+    } 
 
+    
     // Simulate loading for 2.5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
 
-    return () => clearTimeout(timer); // Cleanup timer on unmount
-  }, []);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobile]);
 
   if (isLoading) {
     return <LoadingSpinner />; // Show the spinner during the loading phase
@@ -50,11 +62,30 @@ const LandingPage = () => {
         <meta property="og:url" content="https://www.aartieducare.com" />
         <meta name="robots" content="index, follow" />
     </Helmet> 
-      <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
+      <div className="hidden md:block">
+        <PopupEnquiryForm isOpen={isPopupOpen} onClose={closePopup} />
+      </div>
       {/* <Header /> */}
       <Nav />
       <PageWrapper>
-      <Carousel />
+      {isMobile ? (
+           <div
+           className="h-[400px] w-full bg-cover bg-center relative transition-all duration-1000 ease-in-out"
+           style={{ backgroundImage: `url(${landingImage})` }}
+         >
+           {/* Overlay with theme color and opacity with animation */}
+           <div
+             className={`absolute inset-0 bg-[#e67e23] bg-opacity-60 transition-all duration-1000 ease-in-out ${
+               'opacity-100'
+             }`}
+           ></div>
+    
+         </div>
+        
+        ) : (
+          <Carousel />
+        )}
+      {/* <Carousel /> */}
       <Intro />
       <AffiliatedBy />
       <Records />

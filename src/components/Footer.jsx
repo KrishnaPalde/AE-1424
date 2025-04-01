@@ -11,6 +11,7 @@ import {
 
 import config from "@/config";
 import LazyLoad from "react-lazyload";
+import logoHorizontal from "../assets/logo_horizontal.webp";
 
 const API_URL = config.API_URL;
  
@@ -62,7 +63,8 @@ const Footer = () => {
           <div className="space-y-4">
           <LazyLoad height={200} offset={150} once>
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo_horizontal.webp?alt=media&token=5eaef1a3-bc99-40ff-a414-d4cbb6bc3d00"
+            // src="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo_horizontal.webp?alt=media&token=5eaef1a3-bc99-40ff-a414-d4cbb6bc3d00"
+            src={logoHorizontal}
             alt="Aarti Educare"
             className="w-[200px] h-[100px] object-cover rounded-xl shadow-lg"
           />
@@ -75,16 +77,10 @@ const Footer = () => {
               education programs for a brighter future.
             </p>
             <div className="flex pt-4 space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/share/1Ydd1Gp3Xe/" target="_blank" rel="noopener noreferrer">
                 <Facebook className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <Twitter className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/aartieducare?igsh=NDBnYjdkMnh6eDRn" target="_blank" rel="noopener noreferrer">
                 <Instagram className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
               </a>
             </div>
