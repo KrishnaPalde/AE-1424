@@ -4,7 +4,7 @@ const gallerySchema = new mongoose.Schema({
   id: { type: Number, required: true, unique: true },
   category: { type: String, required: true },
   title: { type: String, required: true },
-  date: { type: String, required: true }, // e.g. "March 2024"
+  date: { type: String, required: true }, // e.g., "March 2024"
   image: { type: String, required: true }, // Image URL or file path
   description: { type: String, required: true },
 });

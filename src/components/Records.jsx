@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 
@@ -15,9 +15,18 @@ export default function Records() {
   ];
 
   const [ref, inView] = useInView({
-    triggerOnce: false, // Continuously monitor visibility
-    threshold: 0.5, // Trigger when 50% of the section is visible
+    triggerOnce: false,
+    threshold: 0.5,
   });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => { 
+    if (inView && !hasAnimated) {
+      setHasAnimated(true);
+    }
+  }, [inView, hasAnimated]);
+
+  
 
   return (
     <div className="bg-white py-16">
@@ -50,13 +59,14 @@ export default function Records() {
                   className="flex flex-col items-center justify-center border border-[#e67e23] rounded-lg p-6 text-center transition-transform transform hover:scale-105 shadow-md"
                 >
                   <h1 className="text-4xl lg:text-5xl font-bold text-[#e67e23]">
-                    {inView ? (
+                    {hasAnimated ? (
                       <CountUp start={0} end={metric.count} duration={3} />
                     ) : (
                       "0"
                     )}
                     <span className="text-2xl">+</span>
                   </h1>
+
                   <p className="mt-2 text-lg font-medium text-gray-700 capitalize">
                     {metric.title}
                   </p>

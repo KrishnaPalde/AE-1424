@@ -44,7 +44,7 @@ const InquirySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    cit: {
+    city: {
       type: String,
       required: true,
       trim: true,

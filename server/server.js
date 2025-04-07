@@ -8,11 +8,13 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const trainingRoutes = require("./routes/trainingRoutes");
 const schemeRoutes = require("./routes/schemeRoutes");
-// const galleryRoutes = require("./routes/galleryRoutes");
+const galleryRoutes = require("./routes/galleryRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const inquiryRoutes = require("./routes/inquiryRoutes");
 const coursesRoutes = require("./routes/courseRoutes");
 const bannerRoutes = require("./routes/bannerRoutes");
+const logoRoutes = require("./routes/logoRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 
 const app = express();
 connectDb();
@@ -33,6 +35,9 @@ app.use("/api/courses", coursesRoutes);
 app.use("/api/inquiries", inquiryRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/logos", logoRoutes);
+app.use("/api/gallery", galleryRoutes);
+app.use("/api/categories", categoryRoutes);
 app.get("/", (req, res) => {
   res.send("API is running...");
 });

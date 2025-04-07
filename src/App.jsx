@@ -30,6 +30,8 @@ import AdminInquiries from "./components/Admin/AdminInquires";
 import AdminBanner from "./components/Admin/AdminBanner";
 import { HelmetProvider } from "react-helmet-async";
 import AdminSettings from "./components/Admin/AdminSettings";
+import AdminLogos from "./components/Admin/AdminLogos";
+import GalleryScreen from "./components/Gallery";
 
 function App() {
   return (
@@ -40,6 +42,7 @@ function App() {
       <AnimatePresence mode = "wait">
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
+          <Route path="/gallery" element={<GalleryScreen/>}/>
           <Route path="/training-centers"element={<TrainingCenters/>}/>
           <Route path="training-centers/courses-offered" element={<Courses/>}/>
           <Route path="training-centers/find-a-center" element={<TrainingCenters/>}/>
@@ -127,6 +130,14 @@ function App() {
           element={
             <ProtectedRoute>
             <AdminSettings/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-logos"
+          element={
+            <ProtectedRoute>
+            <AdminLogos/>
             </ProtectedRoute>
           }
           />

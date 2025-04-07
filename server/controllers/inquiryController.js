@@ -42,6 +42,7 @@ exports.createInquiry = async (req, res) => {
       .status(201)
       .json({ message: "Inquiry submitted successfully", inquiry });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Error submitting inquiry", error });
   }
 };

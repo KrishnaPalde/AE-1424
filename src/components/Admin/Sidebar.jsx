@@ -19,8 +19,9 @@ const Sidebar = () => {
         <NavItem to="/admin-schemes" icon={<Settings size={20} />} label="Schemes" />
         <NavItem to="/admin-courses" icon={<Book size={20} />} label="Courses" />
         <NavItem to="/admin-inquiries" icon={<Phone size={20} />} label="Inquiries" />
-        {/* <NavItem to="/admin-gallery" icon={<Image size={20} />} label="Gallery & News" /> */}
+        <NavItem to="/admin-gallery" icon={<Image size={20} />} label="Gallery" />
         <NavItem to="/admin-banners" icon={<Image size={20} />} label="Banners" />
+        <NavItem to="/admin-logos" icon={<Image size={20} />} label="Partner Logos" />
         <NavItem to="/admin-settings" icon={<Settings size={20} />} label="Settings" />
 
         {/* Logout Button */}

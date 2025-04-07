@@ -24,9 +24,100 @@ exports.getTrainingCenterById = async (req, res) => {
 };
 
 // ✅ Create a new training center
+// exports.createTrainingCenter = async (req, res) => {
+//   try {
+//     const { title, description, courses, students, address, city, coords } =
+//       req.body;
+
+//     if (!title || !description || !address || !city) {
+//       return res.status(400).json({
+//         message: "Title, description, address, and city are required",
+//       });
+//     }
+
+//     // ✅ Generate a unique ID using title + random 4-digit number
+//     const slugify = (text) =>
+//       text
+//         .toLowerCase()
+//         .replace(/\s+/g, "-") // Replace spaces with "-"
+//         .replace(/[^\w-]+/g, ""); // Remove non-word characters
+
+//     const uniqueId = `${slugify(title)}-${Math.floor(
+//       1000 + Math.random() * 9000
+//     )}`;
+
+//     let latitude = parseFloat(coords?.latitude) || 0;
+//     let longitude = parseFloat(coords?.longitude) || 0;
+
+//     // ✅ If lat/lng are missing, try fetching coordinates from OpenStreetMap
+//     if (!latitude || !longitude) {
+//       try {
+//         const formattedAddress = encodeURIComponent(address.trim());
+//         console.log(`Fetching coordinates for address: ${formattedAddress}`);
+
+//         let geoResponse = await axios.get(
+//           `https://nominatim.openstreetmap.org/search?q=${formattedAddress}&format=json&limit=1`
+//         );
+
+//         if (geoResponse.data.length > 0) {
+//           latitude = parseFloat(geoResponse.data[0].lat);
+//           longitude = parseFloat(geoResponse.data[0].lon);
+//           console.log(
+//             `✅ Address-based coordinates found: Lat=${latitude}, Lng=${longitude}`
+//           );
+//         } else {
+//           console.warn(
+//             "⚠️ Address lookup failed, trying city-based coordinates..."
+//           );
+
+//           // ✅ If address lookup fails, fetch city coordinates
+//           const formattedCity = encodeURIComponent(city.trim());
+//           geoResponse = await axios.get(
+//             `https://nominatim.openstreetmap.org/search?q=${formattedCity}&format=json&limit=1`
+//           );
+
+//           if (geoResponse.data.length > 0) {
+//             latitude = parseFloat(geoResponse.data[0].lat);
+//             longitude = parseFloat(geoResponse.data[0].lon);
+//             console.log(
+//               `✅ City-based coordinates found: Lat=${latitude}, Lng=${longitude}`
+//             );
+//           } else {
+//             console.warn("⚠️ City lookup also failed. Using default (0,0).");
+//           }
+//         }
+//       } catch (geoError) {
+//         console.error("❌ Error fetching coordinates:", geoError.message);
+//       }
+//     }
+
+//     // ✅ Create a new Training Center
+//     const newCenter = new TrainingCenter({
+//       id: uniqueId,
+//       title,
+//       description,
+//       courses,
+//       students,
+//       address,
+//       city,
+//       coords: { latitude, longitude },
+//     });
+
+//     await newCenter.save();
+
+//     res.status(201).json({
+//       message: "✅ Training center created successfully",
+//       center: newCenter,
+//     });
+//   } catch (error) {
+//     console.error("❌ Error creating training center:", error);
+//     res.status(500).json({ message: "Error creating training center", error });
+//   }
+// };
+
 exports.createTrainingCenter = async (req, res) => {
   try {
-    const { title, description, courses, students, address, city, coords } =
+    let { title, description, courses, students, address, city, coords } =
       req.body;
 
     if (!title || !description || !address || !city) {
@@ -34,6 +125,14 @@ exports.createTrainingCenter = async (req, res) => {
         message: "Title, description, address, and city are required",
       });
     }
+
+    // ✅ Ensure courses is an array (fallback to empty array if invalid)
+    if (!Array.isArray(courses)) {
+      courses = [];
+    }
+
+    // ✅ Handle students field (convert to number or default to 0)
+    // students = parseInt(students, 10) || 0;
 
     // ✅ Generate a unique ID using title + random 4-digit number
     const slugify = (text) =>
@@ -53,38 +152,37 @@ exports.createTrainingCenter = async (req, res) => {
     if (!latitude || !longitude) {
       try {
         const formattedAddress = encodeURIComponent(address.trim());
-        console.log(`Fetching coordinates for address: ${formattedAddress}`);
+        const formattedCity = encodeURIComponent(city.trim());
 
-        let geoResponse = await axios.get(
-          `https://nominatim.openstreetmap.org/search?q=${formattedAddress}&format=json&limit=1`
+        console.log(
+          `📍 Fetching coordinates for: ${formattedAddress} or ${formattedCity}`
         );
 
-        if (geoResponse.data.length > 0) {
-          latitude = parseFloat(geoResponse.data[0].lat);
-          longitude = parseFloat(geoResponse.data[0].lon);
+        // ✅ Fetch both address and city coordinates concurrently
+        const [geoResponseAddr, geoResponseCity] = await Promise.all([
+          axios.get(
+            `https://nominatim.openstreetmap.org/search?q=${formattedAddress}&format=json&limit=1`
+          ),
+          axios.get(
+            `https://nominatim.openstreetmap.org/search?q=${formattedCity}&format=json&limit=1`
+          ),
+        ]);
+
+        // ✅ Use address coordinates if available, otherwise use city coordinates
+        if (geoResponseAddr.data.length > 0) {
+          latitude = parseFloat(geoResponseAddr.data[0].lat);
+          longitude = parseFloat(geoResponseAddr.data[0].lon);
           console.log(
-            `✅ Address-based coordinates found: Lat=${latitude}, Lng=${longitude}`
+            `✅ Address-based coordinates: Lat=${latitude}, Lng=${longitude}`
+          );
+        } else if (geoResponseCity.data.length > 0) {
+          latitude = parseFloat(geoResponseCity.data[0].lat);
+          longitude = parseFloat(geoResponseCity.data[0].lon);
+          console.log(
+            `✅ City-based coordinates: Lat=${latitude}, Lng=${longitude}`
           );
         } else {
-          console.warn(
-            "⚠️ Address lookup failed, trying city-based coordinates..."
-          );
-
-          // ✅ If address lookup fails, fetch city coordinates
-          const formattedCity = encodeURIComponent(city.trim());
-          geoResponse = await axios.get(
-            `https://nominatim.openstreetmap.org/search?q=${formattedCity}&format=json&limit=1`
-          );
-
-          if (geoResponse.data.length > 0) {
-            latitude = parseFloat(geoResponse.data[0].lat);
-            longitude = parseFloat(geoResponse.data[0].lon);
-            console.log(
-              `✅ City-based coordinates found: Lat=${latitude}, Lng=${longitude}`
-            );
-          } else {
-            console.warn("⚠️ City lookup also failed. Using default (0,0).");
-          }
+          console.warn("⚠️ Location lookup failed. Using default (0,0).");
         }
       } catch (geoError) {
         console.error("❌ Error fetching coordinates:", geoError.message);
@@ -96,7 +194,7 @@ exports.createTrainingCenter = async (req, res) => {
       id: uniqueId,
       title,
       description,
-      courses,
+      courses, // ✅ Now stored as an array
       students,
       address,
       city,
