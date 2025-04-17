@@ -127,6 +127,11 @@ const Footer = () => {
                   Admin Login
                 </a>
               </li>
+              <li>
+                <a href="/online-examination/login" className="transition-colors hover:text-white">
+                  Online Examination
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Affiliations from "./Affiliations";
 import Carousel from "./Carousel";
 import Footer from "./Footer";
 import Header from "./Header";

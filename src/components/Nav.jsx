@@ -417,8 +417,10 @@ export default function Nav() {
         { name: "Find a Center", href: "/training-centers/find-a-center" },
       ],
     },
+    { name: "Online Examinations", href: "/online-examination/login", current: false },
     { name: "Gallery", href: "/gallery", current: false },
     { name: "Contact Us", href: "/contact-us", current: false },
+    
   ];
 
 

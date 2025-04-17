@@ -32,12 +32,21 @@ import { HelmetProvider } from "react-helmet-async";
 import AdminSettings from "./components/Admin/AdminSettings";
 import AdminLogos from "./components/Admin/AdminLogos";
 import GalleryScreen from "./components/Gallery";
+import AdminExamManagement from "./components/Admin/AdminExamManagement";
+import AdminExamDetails from "./components/Admin/AdminExamDetails";
+import ExamLogin from "./components/Exam_Portal/ExamLogin";
+import ExamProtectedRoute from "./components/context/ExamProtectedRoute";
+import { ExamAuthProvider } from "./components/context/ExamAuthContext";
+import StudentDashboard from "./components/Exam_Portal/StudentDashboard";
+import ExamScreen from "./components/Exam_Portal/ExamScreen";
+import FeedbackScreen from "./components/Exam_Portal/ExamFeedback";
 
 function App() {
   return (
     <>
     <HelmetProvider>
     <AdminAuthProvider>
+      <ExamAuthProvider>
       <BrowserRouter>
       <AnimatePresence mode = "wait">
         <Routes>
@@ -90,6 +99,54 @@ function App() {
             <>
             <AdminLogin/>
             </>
+          }
+          />
+          <Route
+          path="/online-examination/login"
+          element={
+            <>
+            <ExamLogin/>
+            </>
+          }
+          />
+          <Route
+          path="/online-examination/Dashboard/:studId"
+          element={
+            <ExamProtectedRoute>
+            <StudentDashboard/>
+            </ExamProtectedRoute>
+          }
+          />
+          <Route
+          path="/online-examination/:examId/exam"
+          element={
+            <ExamProtectedRoute>
+            <ExamScreen/>
+            </ExamProtectedRoute>
+          }
+          />
+          <Route
+          path="/online-examination/:examId/feedback"
+          element={
+            <ExamProtectedRoute>
+            <FeedbackScreen/>
+            </ExamProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-exam-management"
+          element={
+            <ProtectedRoute>
+            <AdminExamManagement/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-exam-management/:examId"
+          element={
+            <ProtectedRoute>
+            <AdminExamDetails/>
+            </ProtectedRoute>
           }
           />
           <Route
@@ -177,6 +234,7 @@ function App() {
         </Routes>
         </AnimatePresence>
       </BrowserRouter>
+      </ExamAuthProvider>
       </AdminAuthProvider>
       </HelmetProvider>
     </>

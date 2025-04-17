@@ -15,6 +15,7 @@ const coursesRoutes = require("./routes/courseRoutes");
 const bannerRoutes = require("./routes/bannerRoutes");
 const logoRoutes = require("./routes/logoRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const examRoutes = require("./routes/exam_routes/examRoutes");
 
 const app = express();
 connectDb();
@@ -38,6 +39,8 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/logos", logoRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/exams", examRoutes);
+
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
