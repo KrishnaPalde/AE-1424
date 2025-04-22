@@ -937,8 +937,12 @@ const AdminExamDetails = () => {
                   const status = studentResult ? studentResult.status : "-";
 
                   return (
-                    <tr key={index} className="border-t">
-                      <td className="px-4 py-2">{student.firstName + " " + student.lastName}</td>
+                    <tr 
+                     key={index} 
+                     className="border-t "
+                    >
+                      <td className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                     onClick={() => navigate(`/admin-exam-management/${examId}/${student._id}/details`)}>{student.firstName + " " + student.lastName}</td>
                       <td className="px-4 py-2">+91 {student.contactNumber}</td>
                       <td className="px-4 py-2">{student.email}</td>
                       <td className="px-4 py-2">

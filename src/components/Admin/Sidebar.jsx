@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LayoutGrid, Briefcase, Book, Settings, Phone, LogOut, Image, TvMinimal } from "lucide-react";
 import { useAdminAuth } from "../context/AdminAuthContext";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const Sidebar = () => {
   const { logout } = useAdminAuth();
@@ -15,6 +16,7 @@ const Sidebar = () => {
       <nav className="flex flex-col space-y-4">
         <NavItem to="/admin-dashboard" icon={<LayoutGrid size={20} />} label="Dashboard" />
         <NavItem to="/admin-exam-management" icon={<Settings size={20} />} label="Exam Management" />
+        <NavItem to="/admin-student-management" icon={<FaPeopleGroup size={20} />} label="Students" />
         <NavItem to="/admin-services" icon={<Briefcase size={20} />} label="Services" />
         <NavItem to="/admin-training-centers" icon={<TvMinimal size={20} />} label="Training Centers" />
         <NavItem to="/admin-schemes" icon={<Settings size={20} />} label="Schemes" />

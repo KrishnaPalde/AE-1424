@@ -192,7 +192,7 @@ const AdminExamManagement = () => {
             {loading ? (
               <p className="text-center text-gray-500">Loading...</p>
             ) : (
-              <Table>
+              <Table key={exams.length}>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Title</TableHead>

@@ -7,11 +7,12 @@ router.post("/", examController.createExam);
 router.get("/", examController.getAllExams);
 router.get("/:id", examController.getExamById);
 router.delete("/:id", examController.deleteExamById);
-router.post("/:examId/:studentId/start-exam", examController.startExam);
+router.get("/:examId/:studentId/start-exam", examController.startExam);
 router.post("/:examId/:studentId/submit-exam", examController.submitExam);
 router.post("/students/login", examController.loginStudent);
 
 // Assign students
+router.get("/students/all", examController.getAllStudents);
 router.get("/students/:studentId", examController.getStudent);
 router.post("/:examId/add-students-bulk", examController.addStudentsBulkToExam);
 router.post("/:examId/add-student", examController.addStudentToExam);
@@ -52,6 +53,22 @@ router.get("/:examId/feedbacks", async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 });
+router.get("/:examId/:studentId/feedback", async (req, res) => {
+  try {
+    const { examId, studentId } = req.params;
+
+    const feedback = await Feedback.find({
+      examId: examId,
+      studentId: studentId,
+    });
+
+    res.status(200).json(feedback);
+  } catch (error) {
+    console.error("Error Fetching feedback:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+
 router.post("/feedback", async (req, res) => {
   try {
     const {

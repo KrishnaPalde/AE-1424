@@ -353,16 +353,21 @@ export default function ExamScreen() {
     const handleSubmit = () => {
       document.activeElement?.blur();
     
-      // Exit fullscreen first
-      if (document.fullscreenElement) {
-        document.exitFullscreen().then(() => {
+      if(Object.entries(answers).length == questions?.length){
+        // Exit fullscreen first
+        if (document.fullscreenElement) {
+          document.exitFullscreen().then(() => {
+            showConfirmDialog();
+          }).catch(() => {
+            showConfirmDialog(); // fallback in case exiting fullscreen fails
+          });
+        } else {
           showConfirmDialog();
-        }).catch(() => {
-          showConfirmDialog(); // fallback in case exiting fullscreen fails
-        });
+        }
       } else {
-        showConfirmDialog();
+        showCompleteExamDialog();
       }
+      
     };
     
     const showConfirmDialog = () => {
@@ -384,6 +389,15 @@ export default function ExamScreen() {
             submitExam(false);
           }
         });
+    };
+    const showCompleteExamDialog = () => {
+      Swal.fire({
+        title: "Complete Exam !!!",
+        text: "You have to attempt every question in order to submit the exam.",
+        icon: "warning",
+        showCancelButton: true,
+        showConfirmButton: false,
+      })
     };
     
       

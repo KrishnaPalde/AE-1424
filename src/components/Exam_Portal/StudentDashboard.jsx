@@ -284,7 +284,6 @@ const API_URL = config.API_URL;
 
 const StudentDashboard = () => {
   const [selectedExam, setSelectedExam] = useState(null);
-  const [popupStep, setPopupStep] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const location = useLocation();
   const { logout } = useExamAuth();
@@ -292,14 +291,6 @@ const StudentDashboard = () => {
   const { studentId } = location.state || {};
   const {studId} = useParams();
   const [student, setStudent] = useState({});
-  const [studentData, setStudentData] = useState({
-    firstName: '',
-    lastName: '',
-    age: '',
-    aadhaar: '',
-    contact: '',
-    email: '',
-  });
   const [exams, setExams] = useState([]);
   const [loadingExams, setLoadingExams] = useState(true);
 
@@ -313,28 +304,31 @@ const StudentDashboard = () => {
   `;
 
   useEffect(() => {
-    const fetchExams = async () => {
-      try {
-        const response = await fetch(`${API_URL}/exams`); // Adjust endpoint as needed
-        const data = await response.json();
-        setExams(data);
-      } catch (error) {
-        console.error('Error fetching exams:', error);
-      } finally {
-        setLoadingExams(false);
-      }
-    };
+    // const fetchExams = async () => {
+    //   try {
+    //     const response = await fetch(`${API_URL}/exams`); // Adjust endpoint as needed
+    //     const data = await response.json();
+    //     setExams(data);
+    //   } catch (error) {
+    //     console.error('Error fetching exams:', error);
+    //   } finally {
+    //     setLoadingExams(false);
+    //   }
+    // };
     const fetchStudent = async () => {
         try {
           const response = await fetch(`${API_URL}/exams/students/${studentId?.trim() ? studentId : studId}`); // Adjust endpoint as needed
           const data = await response.json();
+
+          const combinedExams = [
+            ...data?.assignedExams || [],  // Default to empty array if undefined
+            ...data?.completedExams || []  // Default to empty array if undefined
+          ];
+      
+          // Use setExams to store the combined exams
+          setExams(combinedExams);
+
           setStudent(data);
-            studentData.firstName = student.firstName || "";
-            studentData.lastName = student.lastName || "";
-            studentData.age = student.age || "";
-            studentData.aadhaar = student.aadharNumber || "";
-            studentData.contact = student.contactNumber || "";
-            studentData.email = student.email || "";
         } catch (error) {
           console.error('Error fetching exams:', error);
         } finally {
@@ -343,21 +337,17 @@ const StudentDashboard = () => {
       };
 
     fetchStudent();
-    fetchExams();
+    // fetchExams();
   }, []);
 
-  const handleInputChange = (e) => {
-    setStudentData({ ...studentData, [e.target.name]: e.target.value });
-  };
 
   const handleStartExam = async (examId, studentId) => {
     try {
       const response = await fetch(`${API_URL}/exams/${examId}/${studentId}/start-exam`, {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(studentData),
       });
 
       const data = await response.json();
@@ -372,15 +362,6 @@ const StudentDashboard = () => {
       console.error('Network error:', error);
     }
     setShowPopup(false);
-    setStudentData({
-      firstName: '',
-      lastName: '',
-      age: '',
-      aadhaar: '',
-      contact: '',
-      email: '',
-    });
-    setPopupStep(1);
   };
 
   const handleLogout = () => {
@@ -389,11 +370,12 @@ const StudentDashboard = () => {
   };
 
   const isExamActive = (exam) => {
-    const currentTime = new Date();
-    return (
-      currentTime >= new Date(exam.startTime) &&
-      currentTime <= new Date(exam.endTime)
-    );
+    // const currentTime = new Date();
+    // return (
+    //   currentTime >= new Date(exam.startTime) &&
+    //   currentTime <= new Date(exam.endTime)
+    // );
+    return true;
   };
 
   return (
@@ -422,7 +404,7 @@ const StudentDashboard = () => {
             {exams
   .filter(isExamActive)
   .map((exam) => {
-    const isSubmitted = student?.completedExams?.includes(exam._id);
+    const isSubmitted = student?.completedExams?.some(examItem => examItem._id === exam._id);
     const isDisabled = isSubmitted || !exam.isActive;
     return (
       <div
@@ -488,21 +470,17 @@ const StudentDashboard = () => {
               {selectedExam.title}
             </h2>
 
-            {popupStep === 1 && (
-              <>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Exam Instructions</h3>
                 <p className="text-gray-600 leading-relaxed whitespace-pre-line">{MCQ_INSTRUCTIONS}</p>
 
                 <button
-                  onClick={() => setPopupStep(2)}
+                  onClick={() => handleStartExam(selectedExam._id, studentId)}
                   className="mt-6 w-full bg-[#1E3A8A] hover:bg-[#1E40AF] text-white font-medium py-2.5 rounded-md transition duration-300"
                 >
                   Continue
                 </button>
-              </>
-            )}
 
-            {popupStep === 2 && (
+            {/* {popupStep === 2 && (
               <>
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Enter Your Details</h3>
                 <div className="grid grid-cols-1 gap-4">
@@ -570,7 +548,7 @@ const StudentDashboard = () => {
                   Close
                 </button>
               </>
-            )}
+            )} */}
           </div>
         </div>
       )}

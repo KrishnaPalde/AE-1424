@@ -40,6 +40,9 @@ import { ExamAuthProvider } from "./components/context/ExamAuthContext";
 import StudentDashboard from "./components/Exam_Portal/StudentDashboard";
 import ExamScreen from "./components/Exam_Portal/ExamScreen";
 import FeedbackScreen from "./components/Exam_Portal/ExamFeedback";
+import StudentExamDetails from "./components/Admin/AdminStudentExamDetailsScreen";
+import AdminStudentManagement from "./components/Admin/AdminStudentManagement";
+import AdminStudentDetails from "./components/Admin/AdminStudentDetails";
 
 function App() {
   return (
@@ -142,10 +145,34 @@ function App() {
           }
           />
           <Route
+          path="/admin-student-management"
+          element={
+            <ProtectedRoute>
+            <AdminStudentManagement/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
           path="/admin-exam-management/:examId"
           element={
             <ProtectedRoute>
             <AdminExamDetails/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-exam-management/:examId/:studentId/details"
+          element={
+            <ProtectedRoute>
+            <StudentExamDetails/>
+            </ProtectedRoute>
+          }
+          />
+          <Route
+          path="/admin-student-management/students/:studentId"
+          element={
+            <ProtectedRoute>
+            <AdminStudentDetails/>
             </ProtectedRoute>
           }
           />

@@ -16,8 +16,8 @@ exports.createExam = async (req, res) => {
       duration,
       isActive,
     });
-    await exam.save();
-    res.status(201).json({ message: "Exam created", exam });
+    const savedExam = await exam.save();
+    res.status(201).json(savedExam);
   } catch (error) {
     res.status(400).json({ message: "Failed to create exam", error });
   }
@@ -152,23 +152,22 @@ exports.deleteStudentFromExam = async (req, res) => {
     }
 
     // Step 2: Remove the examId from the assignedExams array
-    const examIndex = student.assignedExams.indexOf(examId);
-    if (examIndex === -1) {
+    const assignedExamIndex = student.assignedExams.indexOf(examId);
+    const completedExamIndex = student.completedExams.indexOf(examId);
+    if (assignedExamIndex === -1 && completedExamIndex === -1) {
       return res
         .status(400)
         .json({ message: "Exam not assigned to this student" });
     }
 
-    student.assignedExams.splice(examIndex, 1); // Remove the examId from the array
+    if (assignedExamIndex != -1) {
+      student.assignedExams.splice(assignedExamIndex, 1); // Remove the examId from the array
+    } else if (completedExamIndex != -1) {
+      student.completedExams.splice(completedExamIndex, 1); // Remove the examId from the array
+    }
 
     // Step 3: Save the updated student record
     await student.save();
-
-    // Step 4: If no exams are left in the assignedExams array, delete the student
-    if (student.assignedExams.length === 0) {
-      await Student.findByIdAndDelete(studentId);
-      return res.status(200).json({ message: "Student deleted successfully" });
-    }
 
     return res.status(200).json({
       message:
@@ -311,11 +310,26 @@ exports.getStudent = async (req, res) => {
   try {
     const studentId = req.params.studentId;
 
-    const student = await Student.findById(studentId);
+    const student = await Student.findById(studentId)
+      .populate("assignedExams completedExams")
+      .lean();
 
     return res.status(200).json(student);
   } catch (error) {
     console.error("Error fetching students for exam:", error);
+    return res.status(500).json({
+      message: "Failed to fetch students.",
+      error: error.message,
+    });
+  }
+};
+
+exports.getAllStudents = async (req, res) => {
+  try {
+    const student = await Student.find();
+    return res.status(200).json(student);
+  } catch (error) {
+    console.error("Error fetching students:", error);
     return res.status(500).json({
       message: "Failed to fetch students.",
       error: error.message,
@@ -405,8 +419,7 @@ exports.deleteExamById = async (req, res) => {
 
 // Controller function to start an exam for a student and update student details
 exports.startExam = async (req, res) => {
-  const { examId, studentId } = req.params; // Extract examId and studentId from URL params
-  const studentData = req.body; // Student data sent from frontend
+  const { examId, studentId } = req.params;
 
   try {
     // Find the exam by examId
@@ -438,18 +451,7 @@ exports.startExam = async (req, res) => {
     // Update student model with exam start details
     student.examStatus = true; // Mark exam as started
 
-    // Update student details (firstName, lastName, age, aadhaar, contact, email)
-    student.firstName = studentData.firstName || student.firstName;
-    student.lastName = studentData.lastName || student.lastName;
-    student.age = studentData.age || student.age;
-    student.aadharNumber = studentData.aadhaar || student.aadharNumber;
-    student.contactNumber = studentData.contact || student.contactNumber;
-    student.email = studentData.email || student.email;
-
-    // Save the updated student document
     await student.save();
-
-    await exam.save();
 
     // Send a success response
     res.status(200).json({
