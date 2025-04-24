@@ -29,30 +29,32 @@ exports.addStudentToExam = async (req, res) => {
     req.body;
 
   try {
-    // Validate required fields
     if (!firstName || !lastName || !contactNumber) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Check if the exam exists
     const exam = await Exam.findById(examId);
     if (!exam) {
       return res.status(404).json({ message: "Exam not found" });
     }
 
-    // Check if email or contact already exists
-    const existingStudent = await Student.findOne({ contactNumber });
-    if (existingStudent) {
-      return res
-        .status(409)
-        .json({ message: "Email or Contact already in use" });
+    let student = await Student.findOne({ contactNumber });
+
+    if (student) {
+      // If student exists, add exam if not already assigned
+      if (!student.assignedExams.includes(examId)) {
+        student.assignedExams.push(examId);
+        await student.save();
+      }
+      return res.status(200).json({
+        message: "Existing student updated with new exam assignment",
+        student,
+      });
     }
 
-    // Hash password
     const passwordHash = await bcrypt.hash("Password@123", 10);
 
-    // Create new student
-    const student = new Student({
+    student = new Student({
       email: email || null,
       passwordHash,
       firstName,
@@ -67,7 +69,7 @@ exports.addStudentToExam = async (req, res) => {
 
     res.status(201).json({
       message: "Student added and assigned to exam",
-      student: student,
+      student,
     });
   } catch (err) {
     console.error("Error adding student:", err);
@@ -90,50 +92,50 @@ exports.addStudentsBulkToExam = async (req, res) => {
     }
 
     const contactNumbers = students.map((s) => s.contactNumber);
-
-    // Find duplicates from DB
-    const existing = await Student.find({
+    const existingStudents = await Student.find({
       contactNumber: { $in: contactNumbers },
-    }).select("contactNumber");
+    });
 
-    const existingContacts = new Set(existing.map((s) => s.contactNumber));
-
-    // Filter valid and non-duplicate students
-    const newStudents = await Promise.all(
-      students
-        .filter(
-          (s) =>
-            s.firstName &&
-            s.lastName &&
-            s.contactNumber &&
-            !existingContacts.has(s.contactNumber)
-        )
-        .map(async (s) => {
-          const passwordHash = await bcrypt.hash("Password@123", 10);
-          return {
-            email: s.email || null,
-            passwordHash,
-            firstName: s.firstName,
-            lastName: s.lastName,
-            age: s.age || null,
-            contactNumber: s.contactNumber,
-            aadharNumber: s.aadharNumber || null,
-            assignedExams: [examId],
-          };
-        })
+    const existingMap = new Map(
+      existingStudents.map((s) => [s.contactNumber, s])
     );
 
-    if (newStudents.length === 0) {
-      return res
-        .status(409)
-        .json({ message: "No valid or unique students to add" });
+    const newStudents = [];
+    const updatedStudents = [];
+
+    for (const s of students) {
+      if (!s.firstName || !s.lastName || !s.contactNumber) continue;
+
+      const existing = existingMap.get(s.contactNumber);
+
+      if (existing) {
+        // Assign exam if not already assigned
+        if (!existing.assignedExams.includes(examId)) {
+          existing.assignedExams.push(examId);
+          await existing.save();
+          updatedStudents.push(existing);
+        }
+      } else {
+        const passwordHash = await bcrypt.hash("Password@123", 10);
+        newStudents.push({
+          email: s.email || null,
+          passwordHash,
+          firstName: s.firstName,
+          lastName: s.lastName,
+          age: s.age || null,
+          contactNumber: s.contactNumber,
+          aadharNumber: s.aadharNumber || null,
+          assignedExams: [examId],
+        });
+      }
     }
 
     const insertedStudents = await Student.insertMany(newStudents);
 
     res.status(201).json({
-      message: `${insertedStudents.length} students added successfully`,
+      message: `${insertedStudents.length} new students added, ${updatedStudents.length} existing students updated`,
       addedStudents: insertedStudents,
+      updatedStudents,
     });
   } catch (err) {
     console.error("Error adding students in bulk:", err);
