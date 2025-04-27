@@ -6,6 +6,7 @@ const Feedback = require("../../models/exam_model/Feedback");
 router.post("/", examController.createExam);
 router.get("/", examController.getAllExams);
 router.get("/:id", examController.getExamById);
+router.put("/:id", examController.updateExamById);
 router.delete("/:id", examController.deleteExamById);
 router.get("/:examId/:studentId/start-exam", examController.startExam);
 router.post("/:examId/:studentId/submit-exam", examController.submitExam);

@@ -23,6 +23,28 @@ exports.createExam = async (req, res) => {
   }
 };
 
+exports.updateExamById = async (req, res) => {
+  try {
+    const { title, description, startTime, endTime, duration, isActive } =
+      req.body;
+    const { id } = req.params;
+
+    const savedExam = await Exam.findByIdAndUpdate(
+      id,
+      { title, description, startTime, endTime, duration, isActive },
+      { new: true, runValidators: true }
+    );
+
+    if (!savedExam) {
+      return res.status(404).json({ message: "Exam not found" });
+    }
+
+    res.status(200).json(savedExam);
+  } catch (error) {
+    res.status(400).json({ message: "Failed to update exam", error });
+  }
+};
+
 exports.addStudentToExam = async (req, res) => {
   const { examId } = req.params;
   const { email, firstName, lastName, age, contactNumber, aadharNumber } =
