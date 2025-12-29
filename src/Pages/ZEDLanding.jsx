@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import SEO from '../components/common/SEO';
+import SEO from '../components/common/seo';
 import Hero from '../components/zed/Hero';
 import Nav from '@/components/Nav';
 // Lazy load non-critical sections for performance
