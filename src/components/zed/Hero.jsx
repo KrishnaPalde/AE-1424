@@ -41,9 +41,9 @@ const Hero = () => {
           </a>
           
           {/* Secondary Action */}
-          <button className="w-full md:w-auto flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 px-8 py-3.5 rounded-lg font-semibold transition-all shadow-sm">
+          {/* <button className="w-full md:w-auto flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 px-8 py-3.5 rounded-lg font-semibold transition-all shadow-sm">
             Download Brochure <Download size={18} />
-          </button>
+          </button> */}
 
           {/* Navigation to Main Site - Orange Hover */}
           <Link 
