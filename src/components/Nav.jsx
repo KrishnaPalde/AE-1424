@@ -369,9 +369,9 @@ export default function Nav() {
   const organizationServices = services.filter(
     (service) => service.category === "Organizations"
   );
-  
+  const isCampaignLive = true;
   const navigation = [
-    { name: "Home", href: "/", current: false },
+    { name: "Home", href: isCampaignLive ? "/home" : "/", current: false },
     {
       name: "Who We Are",
       href: "/who-we-are",

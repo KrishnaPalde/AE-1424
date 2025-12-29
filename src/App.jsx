@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import AdminLogin from "./components/Admin/AdminLogin";
@@ -43,8 +43,11 @@ import FeedbackScreen from "./components/Exam_Portal/ExamFeedback";
 import StudentExamDetails from "./components/Admin/AdminStudentExamDetailsScreen";
 import AdminStudentManagement from "./components/Admin/AdminStudentManagement";
 import AdminStudentDetails from "./components/Admin/AdminStudentDetails";
+import ZedLanding from "./Pages/ZEDLanding";
 
 function App() {
+  const isCampaignLive = true;
+  console.log("ZED CAMPAIGN MODE:", isCampaignLive ? "ON" : "OFF");
   return (
     <>
     <HelmetProvider>
@@ -53,7 +56,32 @@ function App() {
       <BrowserRouter>
       <AnimatePresence mode = "wait">
         <Routes>
-          <Route path="/" element={<LandingPage/>}/>
+          {/* CAMPAIGN MODE: ON */}
+          {isCampaignLive ? (
+            <>
+              {/* Root loads ZED Campaign */}
+              <Route path="/" element={<ZedLanding />} />
+              
+              {/* /home loads the Original Website */}
+              <Route path="/home" element={<LandingPage />} />
+              
+              {/* Catch-all: Redirect to ZED Page */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </>
+          ) : (
+            /* CAMPAIGN MODE: OFF (Future State) */
+            <>
+              {/* Root loads Original Website */}
+              <Route path="/" element={<LandingPage />} />
+              
+              {/* Optional: Archive ZED page */}
+              <Route path="/zed-certification" element={<ZedLanding />} />
+              
+              {/* Catch-all: Redirect to Main Website */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </>
+          )}
+          {/* <Route path="/" element={<LandingPage/>}/> */}
           <Route path="/gallery" element={<GalleryScreen/>}/>
           <Route path="/training-centers"element={<TrainingCenters/>}/>
           <Route path="training-centers/courses-offered" element={<Courses/>}/>
