@@ -372,6 +372,7 @@ export default function Nav() {
   const isCampaignLive = true;
   const navigation = [
     { name: "Home", href: isCampaignLive ? "/home" : "/", current: false },
+    { name: "ZED Certification", href: isCampaignLive ? "/" : "/zed-certification", current: false },
     {
       name: "Who We Are",
       href: "/who-we-are",
