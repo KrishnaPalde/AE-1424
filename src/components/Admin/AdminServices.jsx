@@ -100,6 +100,7 @@ const AdminServices = () => {
 
   // ✅ Add or Edit Service
   const handleSaveService = async () => {
+    console.log(newService);
     if (!newService.title || !newService.category || !newService.description) {
       alert("Title, Category, and Description are required!");
       return;
@@ -231,7 +232,7 @@ const AdminServices = () => {
                 onClick={() => {
                   setShowServiceDialog(true);
                   setIsEditing(false);
-                  setNewService({ title: "", category: "", description: "", longDescription: "", features: "", imageUrl: "", imageFile: null });
+                  setNewService({ title: "", category: "Candidates", description: "", longDescription: "", features: "", imageUrl: "", imageFile: null });
                 }}
                 className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2"
               >

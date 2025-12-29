@@ -73,11 +73,11 @@ const LandingPage = () => {
            style={{ backgroundImage: `url(${landingImage})` }}
          >
            {/* Overlay with theme color and opacity with animation */}
-           <div
+           {/* <div
              className={`absolute inset-0 bg-[#e67e23] bg-opacity-60 transition-all duration-1000 ease-in-out ${
                'opacity-100'
              }`}
-           ></div>
+           ></div> */}
     
          </div>
         

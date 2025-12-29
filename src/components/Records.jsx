@@ -7,7 +7,7 @@ export default function Records() {
     { title: "Training Centres", count: 60 },
     { title: "Trainers", count: 150 },
     { title: "Master Trainers", count: 40 },
-    { title: "Trained Candidates", count: 15000 },
+    { title: "Trained Candidates", count: 50000 },
     { title: "Placed Candidates", count: 9000 },
     { title: "Projects Completed", count: 45 },
     { title: "Government Collaborations", count: 20 },
