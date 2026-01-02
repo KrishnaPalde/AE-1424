@@ -77,6 +77,7 @@ function App() {
               
               {/* Optional: Archive ZED page */}
               <Route path="/zed-certification" element={<ZedLanding />} />
+
               
               {/* Catch-all: Redirect to Main Website */}
               <Route path="*" element={<Navigate to="/" replace />} />
