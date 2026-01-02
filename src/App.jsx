@@ -44,6 +44,7 @@ import StudentExamDetails from "./components/Admin/AdminStudentExamDetailsScreen
 import AdminStudentManagement from "./components/Admin/AdminStudentManagement";
 import AdminStudentDetails from "./components/Admin/AdminStudentDetails";
 import ZedLanding from "./Pages/ZEDLanding";
+import Careers from "./Pages/CareersPage";
 
 function App() {
   const isCampaignLive = true;
@@ -83,6 +84,7 @@ function App() {
           )}
           {/* <Route path="/" element={<LandingPage/>}/> */}
           <Route path="/gallery" element={<GalleryScreen/>}/>
+          <Route path="/careers" element={<Careers/>}/>
           <Route path="/training-centers"element={<TrainingCenters/>}/>
           <Route path="training-centers/courses-offered" element={<Courses/>}/>
           <Route path="training-centers/find-a-center" element={<TrainingCenters/>}/>

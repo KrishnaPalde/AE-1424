@@ -372,7 +372,7 @@ export default function Nav() {
   const isCampaignLive = true;
   const navigation = [
     { name: "Home", href: isCampaignLive ? "/home" : "/", current: false },
-    { name: "ZED Certification", href: isCampaignLive ? "/" : "/zed-certification", current: false },
+    // { name: "ZED Certification", href: isCampaignLive ? "/" : "/zed-certification", current: false },
     {
       name: "Who We Are",
       href: "/who-we-are",
@@ -405,6 +405,10 @@ export default function Nav() {
             href: `/what-we-do/${service.id}`,
           })),
         },
+        {
+          name: "ZED Certification",
+          href: isCampaignLive ? "/" : "/zed-certification",
+        }
       ],
     },
     { name: "Schemes", href: "/schemes", current: false },
@@ -420,6 +424,7 @@ export default function Nav() {
     },
     { name: "Online Examinations", href: "/online-examination/login", current: false },
     { name: "Gallery", href: "/gallery", current: false },
+    { name: "Careers", href: "/careers", current: false },
     { name: "Contact Us", href: "/contact-us", current: false },
     
   ];
