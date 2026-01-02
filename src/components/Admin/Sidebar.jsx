@@ -24,7 +24,7 @@ const Sidebar = () => {
     });
 
     const { token } = await res.json();
-
+    alert(res.status);
     // 3. Redirect opened tab
     newWindow.location.href = `https://leads.aartieducare.com/sso?token=${token}`;
   } catch (err) {
