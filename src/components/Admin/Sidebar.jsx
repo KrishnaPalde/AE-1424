@@ -9,18 +9,29 @@ const Sidebar = () => {
   const { logout } = useAdminAuth();
 
   const redirectToLeadManagement = async () => {
+  // 1. Open tab synchronously (allowed)
+  const newWindow = window.open("", "_blank", "noopener,noreferrer");
+
+  if (!newWindow) {
+    alert("Please allow popups for this site");
+    return;
+  }
+
+  try {
+    // 2. Fetch token
     const res = await fetch(config.API_URL + "/sso/create-token", {
       method: "POST",
     });
 
     const { token } = await res.json();
 
-    const ssoUrl = `https://leads.aartieducare.com/sso?token=${token}`;
-    
-    // Open in new tab
-    window.open(ssoUrl, "_blank", "noopener,noreferrer");
-  };
-
+    // 3. Redirect opened tab
+    newWindow.location.href = `https://leads.aartieducare.com/sso?token=${token}`;
+  } catch (err) {
+    newWindow.close();
+    console.error("SSO redirect failed", err);
+  }
+};
 
   return (
     <aside className="w-64 min-h-screen bg-[#1F2937] text-white flex flex-col p-6 fixed left-0 top-0">
