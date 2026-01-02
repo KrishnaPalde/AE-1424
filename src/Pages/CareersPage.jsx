@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import Footer from "@/components/Footer"
-import WhatsAppButton from "@/components/WhatsAppButton"
 import PageWrapper from "@/components/PageWrapper"
 import { Helmet } from "react-helmet-async"
 import Nav from "@/components/Nav"
 import Careers from "@/components/CareersComponent"
+import WhatsAppButton from "@/components/WhatsappButton"
 
 const CareersPage = () => {
     useEffect(() => {
