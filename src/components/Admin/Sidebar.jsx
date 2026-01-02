@@ -10,12 +10,12 @@ const Sidebar = () => {
 
   const redirectToLeadManagement = async () => {
   // 1. Open tab synchronously (allowed)
-  const newWindow = window.open("", "_blank", "noopener,noreferrer");
+  //const newWindow = window.open("", "_blank", "noopener,noreferrer");
 
-  if (!newWindow) {
-    alert("Please allow popups for this site");
-    return;
-  }
+  //if (!newWindow) {
+   // alert("Please allow popups for this site");
+   // return;
+//  }
 
   try {
     // 2. Fetch token
@@ -25,6 +25,7 @@ const Sidebar = () => {
 
     const { token } = await res.json();
     alert(res.status);
+    alert(res.json());
     // 3. Redirect opened tab
     newWindow.location.href = `https://leads.aartieducare.com/sso?token=${token}`;
   } catch (err) {
