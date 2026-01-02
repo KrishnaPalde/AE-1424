@@ -19,13 +19,12 @@ const Sidebar = () => {
 
   try {
     // 2. Fetch token
+    alert(1);
     const res = await fetch(config.API_URL + "/sso/create-token", {
       method: "POST",
     });
-
-    const { token } = await res.json();
     alert(res.status);
-    alert(res.json());
+    const { token } = await res.json();
     // 3. Redirect opened tab
     newWindow.location.href = `https://leads.aartieducare.com/sso?token=${token}`;
   } catch (err) {
