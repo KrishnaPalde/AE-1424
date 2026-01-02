@@ -15,7 +15,7 @@ const Sidebar = () => {
 
     const { token } = await res.json();
 
-    const ssoUrl = `http://localhost:3001/sso?token=${token}`;
+    const ssoUrl = `https://leads.aartieducare.com/sso?token=${token}`;
     
     // Open in new tab
     window.open(ssoUrl, "_blank", "noopener,noreferrer");
