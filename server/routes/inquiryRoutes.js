@@ -3,6 +3,7 @@ const {
   getInquiries,
   createInquiry,
   deleteInquiry,
+  markInquiryAsRead,
 } = require("../controllers/inquiryController");
 
 const router = express.Router();
@@ -15,5 +16,7 @@ router.post("/", createInquiry);
 
 // ✅ Delete an inquiry by ID
 router.delete("/:id", deleteInquiry);
+
+router.patch("/:id/read", markInquiryAsRead);
 
 module.exports = router;

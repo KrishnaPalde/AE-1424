@@ -56,3 +56,25 @@ exports.deleteInquiry = async (req, res) => {
     res.status(500).json({ message: "Error deleting inquiry", error });
   }
 };
+
+// PATCH /inquiries/:id/read
+exports.markInquiryAsRead = async (req, res) => {
+  try {
+    const { remark } = req.body;
+
+    const inquiry = await Inquiry.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "read",
+        remark,
+        readAt: new Date(),
+      },
+      { new: true }
+    );
+
+    res.json(inquiry);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update inquiry", error });
+  }
+};
+

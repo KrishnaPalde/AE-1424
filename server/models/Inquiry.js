@@ -54,6 +54,23 @@ const InquirySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+
+    // 🆕 CRM fields
+    status: {
+      type: String,
+      enum: ["unread", "read"],
+      default: "unread",
+    },
+
+    remark: {
+      type: String,
+      default: "",
+    },
+
+    readAt: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );
