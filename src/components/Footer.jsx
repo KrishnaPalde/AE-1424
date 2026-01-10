@@ -4,9 +4,9 @@ import {
   Phone,
   MapPin,
   Facebook,
-  Twitter,
-  Linkedin,
   Instagram,
+  ArrowRight,
+  ChevronRight
 } from "lucide-react";
 
 import config from "@/config";
@@ -17,221 +17,137 @@ const API_URL = config.API_URL;
  
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const [contact, setContact] = useState({address: 'Utkarsha Training Centre, Nashik, Maharashtra',
+  const [contact, setContact] = useState({
+    address: 'Utkarsha Training Centre, Nashik, Maharashtra',
     mobileNumber: '+91 80878 10364',
-    email: 'aartieducare@gmail.com',});
-  const [services, setCourses] = useState([]);
+    email: 'aartieducare@gmail.com',
+  });
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
       const fetchContactDetails = async () => {
         try {
           const response = await fetch(API_URL + "/contact");
-          if (!response.ok) throw new Error("Failed to fetch services");
-          const data = await response.json();
-          setContact(data);
+          if (response.ok) {
+            const data = await response.json();
+            setContact(data);
+          }
         } catch (err) {
-          setError("Failed to load services.");
-          console.error("Error fetching services:", err);
-        } finally {
-          setLoading(false);
+          console.error("Error fetching contact:", err);
         }
       };
-      const fetchCourses = async () => {
+      const fetchServices = async () => {
         try {
           const response = await fetch(API_URL + "/services");
-          if (!response.ok) throw new Error("Failed to fetch services");
-          const data = await response.json();
-          setCourses(data);
+          if (response.ok) {
+            const data = await response.json();
+            setServices(data);
+          }
         } catch (err) {
-          setError("Failed to load services.");
           console.error("Error fetching services:", err);
-        } finally {
-          setLoading(false);
         }
       };
-      fetchCourses();
+      fetchServices();
       fetchContactDetails();
     }, []);
 
   return (
-    <footer className="text-gray-300 bg-gray-900">
-      <div className="px-4 py-4 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* About Section */}
-          <div className="space-y-4">
-          <LazyLoad height={200} offset={150} once>
-          <img
-            // src="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo_horizontal.webp?alt=media&token=5eaef1a3-bc99-40ff-a414-d4cbb6bc3d00"
-            src={logoHorizontal}
-            alt="Aarti Educare"
-            className="w-[200px] h-[100px] object-cover rounded-xl shadow-lg"
-          />
-          </LazyLoad>
-            <h3 className="mb-4 text-xl font-semibold text-white">
-              Aarti Educare
-            </h3>
-            <p className="text-sm">
+    <footer className="text-gray-400 bg-gray-950 font-sans">
+      <div className="px-6 py-12 mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          
+          {/* 1. Brand Section */}
+          <div className="space-y-6">
+            <LazyLoad height={80} offset={100} once>
+              <img
+                src={logoHorizontal}
+                alt="Aarti Educare"
+                className="w-48 h-auto object-contain bg-white/5 rounded-lg p-2"
+              />
+            </LazyLoad>
+            <p className="text-sm leading-relaxed text-gray-400">
               Empowering individuals through government-sponsored training and
               education programs for a brighter future.
             </p>
-            <div className="flex pt-4 space-x-4">
-              <a href="https://www.facebook.com/share/1Ydd1Gp3Xe/" target="_blank" rel="noopener noreferrer">
-                <Facebook className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
-              </a>
-              <a href="https://www.instagram.com/aartieducare?igsh=NDBnYjdkMnh6eDRn" target="_blank" rel="noopener noreferrer">
-                <Instagram className="w-5 h-5 transition-colors cursor-pointer hover:text-blue-400" />
-              </a>
+            <div className="flex space-x-4">
+              <SocialIcon href="https://www.facebook.com/share/1Ydd1Gp3Xe/" icon={<Facebook size={18} />} />
+              <SocialIcon href="https://www.instagram.com/aartieducare?igsh=NDBnYjdkMnh6eDRn" icon={<Instagram size={18} />} />
             </div>
           </div>
 
-          {/* Quick Links Section */}
+          {/* 2. Quick Links Section */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">
+            <h3 className="mb-6 text-sm font-bold text-white uppercase tracking-wider">
               Quick Links
             </h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/" className="transition-colors hover:text-white">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/who-we-are/about-us" className="transition-colors hover:text-white">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="/what-we-do/services-overview" className="transition-colors hover:text-white">
-                  Our Services
-                </a>
-              </li>
-              <li>
-                <a href="/schemes" className="transition-colors hover:text-white">
-                  Government Schemes
-                </a>
-              </li>
-              <li>
-                <a href="/training-centers" className="transition-colors hover:text-white">
-                  Training Centers
-                </a>
-              </li>
-              <li>
-                <a href="/contact-us" className="transition-colors hover:text-white">
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <a href="/login" className="transition-colors hover:text-white">
-                  Admin Login
-                </a>
-              </li>
-              <li>
-                <a href="/online-examination/login" className="transition-colors hover:text-white">
-                  Online Examination
-                </a>
-              </li>
+            <ul className="space-y-3 text-sm">
+              <FooterLink href="/" label="Home" />
+              <FooterLink href="/who-we-are/about-us" label="About Us" />
+              <FooterLink href="/online-examination/login" label="Online Examination" />
+              <FooterLink href="/training-centers" label="Training Centers" />
+              <FooterLink href="/careers" label="Careers" />
+              <FooterLink href="/login" label="Admin Login" />
             </ul>
           </div>
 
-          {/* Programs Section */}
+          {/* 3. Our Services Section - UPGRADED */}
           <div>
-  <h3 className="mb-4 text-lg font-semibold text-white">Our Services</h3>
-  <ul className="space-y-2">
-    {services.length > 0 ? (
-      <>
-        {services.slice(0, Math.min(services.length, 6)).map((service) => (
-          <li key={service._id.$oid}>
-            <a href="/what-we-do/services-overview" className="transition-colors hover:text-white">
-              {service.title}
-            </a>
-          </li>
-        ))}
-        {services.length > 6 && (
-          <li>
-            <a href="/what-we-do/services-overview" className="text-[#e67e23] hover:underline font-medium">
-              Read More
-            </a>
-          </li>
-        )}
-      </>
-    ) : (
-      <li className="text-gray-400">No programs available</li>
-    )}
-  </ul>
-</div>
-
-          {/* <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">
-              Our Programs
+            <h3 className="mb-6 text-sm font-bold text-white uppercase tracking-wider">
+              Key Services
             </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/what-we-do/services-overview"
-                  className="transition-colors hover:text-white"
-                >
-                  Services Overview
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/training-centers"
-                  className="transition-colors hover:text-white"
-                >
-                  Training Centers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/training-centers/find-a-center"
-                  className="transition-colors hover:text-white"
-                >
-                  Find a Center
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/training-centers/services-offered"
-                  className="transition-colors hover:text-white"
-                >
-                  Courses Offered
-                </a>
-              </li>
+            <ul className="space-y-3 text-sm">
+              {services.length > 0 ? (
+                <>
+                  {services.slice(0, 5).map((service, index) => (
+                    <li key={index} className="group">
+                      <a 
+                        href={`/what-we-do/services-overview`} 
+                        className="flex items-start transition-colors group-hover:text-[#e67e23]"
+                      >
+                        <ChevronRight className="w-4 h-4 mt-0.5 mr-2 text-gray-600 group-hover:text-[#e67e23] transition-colors" />
+                        <span className="line-clamp-1">{service.title}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li className="pt-2">
+                    <a 
+                      href="/what-we-do/services-overview" 
+                      className="inline-flex items-center text-xs font-semibold text-[#e67e23] uppercase tracking-wide hover:text-white transition-colors"
+                    >
+                      View All Services <ArrowRight className="w-3 h-3 ml-1" />
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <li className="text-gray-500 italic">Loading services...</li>
+              )}
             </ul>
-          </div> */}
+          </div>
 
-          {/* Contact Section */}
+          {/* 4. Contact Section */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">
+            <h3 className="mb-6 text-sm font-bold text-white uppercase tracking-wider">
               Contact Us
             </h3>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <MapPin className="flex-shrink-0 w-5 h-5 mt-1" />
-                <p className="text-sm">
+            <div className="space-y-4 text-sm">
+              <div className="flex items-start space-x-3 group">
+                <MapPin className="flex-shrink-0 w-5 h-5 text-[#e67e23] mt-0.5" />
+                <span className="group-hover:text-gray-200 transition-colors">
                   {contact.address}
-                </p>
+                </span>
               </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="flex-shrink-0 w-5 h-5" />
-                <p className="text-sm">
-                  <a href={`tel:${contact.mobileNumber.replace(/\s+/g, '')}`} className="hover:underline">
-                    {contact.mobileNumber}
-                  </a>
-                </p>
+              <div className="flex items-center space-x-3 group">
+                <Phone className="flex-shrink-0 w-5 h-5 text-[#e67e23]" />
+                <a href={`tel:${contact.mobileNumber.replace(/\s+/g, '')}`} className="group-hover:text-white transition-colors">
+                  {contact.mobileNumber}
+                </a>
               </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="flex-shrink-0 w-5 h-5" />
-                <p className="text-sm">
-                  <a
-                    href={`mailto:${contact.email}`}
-                    className="hover:underline"
-                  >
-                    {contact.email}
-                  </a>
-                </p>
+              <div className="flex items-center space-x-3 group">
+                <Mail className="flex-shrink-0 w-5 h-5 text-[#e67e23]" />
+                <a href={`mailto:${contact.email}`} className="group-hover:text-white transition-colors">
+                  {contact.email}
+                </a>
               </div>
             </div>
           </div>
@@ -239,29 +155,15 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-gray-800">
-        <div className="px-4 py-6 mx-auto max-w-7xl">
-          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <p className="text-sm">
-              © {currentYear} Aarti Educare. All rights reserved.
-            </p>
-            <div className="flex space-x-6 text-sm">
-              <a
-                href="/privacy-policy"
-                className="transition-colors hover:text-white"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/terms-of-service"
-                className="transition-colors hover:text-white"
-              >
-                Terms of Service
-              </a>
-              <a href="/sitemap" className="transition-colors hover:text-white">
-                Sitemap
-              </a>
-            </div>
+      <div className="border-t border-gray-800 bg-gray-950">
+        <div className="px-6 py-6 mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+          <p>
+            © {currentYear} Aarti Educare Pvt. Ltd. All rights reserved.
+          </p>
+          <div className="flex space-x-6">
+            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms-of-service" className="hover:text-white transition-colors">Terms</a>
+            <a href="/sitemap" className="hover:text-white transition-colors">Sitemap</a>
           </div>
         </div>
       </div>
@@ -286,5 +188,25 @@ const Footer = () => {
     </footer>
   );
 };
+
+// Helper Components for Cleaner Code
+const FooterLink = ({ href, label }) => (
+  <li>
+    <a href={href} className="block hover:text-[#e67e23] hover:translate-x-1 transition-all duration-200">
+      {label}
+    </a>
+  </li>
+);
+
+const SocialIcon = ({ href, icon }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-[#e67e23] hover:text-white transition-all duration-300"
+  >
+    {icon}
+  </a>
+);
 
 export default Footer;

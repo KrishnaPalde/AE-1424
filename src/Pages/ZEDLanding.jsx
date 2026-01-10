@@ -2,32 +2,42 @@ import React, { Suspense, lazy } from 'react';
 import SEO from '../components/common/seo';
 import Hero from '../components/zed/Hero';
 import Nav from '@/components/Nav';
-// Lazy load non-critical sections for performance
+
+// Lazy load non-critical sections
 const AboutZed = lazy(() => import('../components/zed/AboutZed'));
+const CertificationLevels = lazy(() => import('../components/zed/CertificationLevels')); // NEW
 const Benefits = lazy(() => import('../components/zed/Benefits'));
-const Eligibility = lazy(() => import('../components/zed/Eligibility'));
 const Process = lazy(() => import('../components/zed/Process'));
-const Role = lazy(() => import('../components/zed/Role'));
+const PartnerWithUs = lazy(() => import('../components/zed/PartnerWithUs')); // NEW
+const EnquiryForm = lazy(() => import('../components/zed/EnquiryForm')); // NEW
 const FooterCTA = lazy(() => import('../components/zed/FooterCTA'));
 
 const ZedLanding = () => {
   return (
-    <main className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <main className="min-h-screen bg-slate-50 font-sans text-slate-800 scroll-smooth">
       <SEO 
-        title="ZED Certification for MSMEs - Government Recognized" 
-        description="Get ZED Certified with Aarti Educare. Unlock government benefits, subsidies, and global recognition for your manufacturing unit."
+        title="Get ZED Certified | Subsidies for MSMEs & Partner Program" 
+        description="Aarti Educare helps MSMEs achieve Bronze, Silver, & Gold ZED Certification. Unlock government subsidies. Facilitators join our partner network."
       />
       
       <Nav/>
       
       <Hero />
       
-      <Suspense fallback={<div className="h-20" />}>
+      <Suspense fallback={<div className="h-20 bg-slate-50" />}>
+        {/* Core Education */}
         <AboutZed />
+        <CertificationLevels /> {/* Explains Bronze/Silver/Gold */}
         <Benefits />
-        <Eligibility />
         <Process />
-        <Role />
+        
+        {/* Dual Call to Action Area */}
+        <div id="enquiry-section" className="scroll-mt-24">
+           <EnquiryForm />
+        </div>
+
+        <PartnerWithUs /> {/* For Facilitators */}
+        
         <FooterCTA />
       </Suspense>
     </main>

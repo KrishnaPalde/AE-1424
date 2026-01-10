@@ -269,7 +269,7 @@
 
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, PhoneIcon, EnvelopeIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.webp';
 import horizontal_logo from '../assets/logo_horizontal.webp';
@@ -291,6 +291,9 @@ export default function Nav() {
     hideContact: false
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+
 
   const handleScroll = useCallback(() => {
     const scrollY = window.scrollY;
@@ -328,6 +331,7 @@ export default function Nav() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [contact, setContact] = useState({mobileNumber: "‪+91 80878 10364‬", email: "aartieducare@gmail.com"});
+  const isCampaignLive = true;
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -369,10 +373,13 @@ export default function Nav() {
   const organizationServices = services.filter(
     (service) => service.category === "Organizations"
   );
-  const isCampaignLive = true;
+  
   const navigation = [
     { name: "Home", href: isCampaignLive ? "/home" : "/", current: false },
-    // { name: "ZED Certification", href: isCampaignLive ? "/" : "/zed-certification", current: false },
+    {
+          name: "ZED Certification",
+          href: isCampaignLive ? "/" : "/zed-certification",
+    },
     {
       name: "Who We Are",
       href: "/who-we-are",
@@ -405,13 +412,9 @@ export default function Nav() {
             href: `/what-we-do/${service.id}`,
           })),
         },
-        {
-          name: "ZED Certification",
-          href: isCampaignLive ? "/" : "/zed-certification",
-        }
+        { name: "Schemes", href: "/schemes", current: false },
       ],
     },
-    { name: "Schemes", href: "/schemes", current: false },
     {
       name: "Training Centers",
       href: "/training-centers",
@@ -428,6 +431,40 @@ export default function Nav() {
     { name: "Contact Us", href: "/contact-us", current: false },
     
   ];
+
+  const filteredNavigation = navigation.filter((item) => {
+    // CAMPAIGN LIVE MODE
+    if (isCampaignLive) {
+      // "/" = ZED Certification
+      if (item.name === "ZED Certification" && currentPath === "/") {
+        return false;
+      }
+
+      // "/home" = Home
+      if (item.name === "Home" && currentPath === "/home") {
+        return false;
+      }
+    }
+
+    // NORMAL MODE
+    if (!isCampaignLive) {
+      // "/" = Home
+      if (item.name === "Home" && currentPath === "/") {
+        return false;
+      }
+
+      // "/zed-certification" = ZED Certification
+      if (
+        item.name === "ZED Certification" &&
+        currentPath === "/zed-certification"
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
 
 
   const ContactInfo = () => (
@@ -454,7 +491,7 @@ export default function Nav() {
   const DesktopNavigation = () => (
     <nav className="hidden lg:block">
       <div className="relative flex items-center justify-end w-full space-x-4">
-        {navigation.map((item) => (
+        {filteredNavigation.map((item) => (
           <div
             key={item.name}
             className="relative group"
@@ -567,7 +604,7 @@ export default function Nav() {
                 </button>
   
                 <nav className="mt-12 space-y-2">
-                  {navigation.map((item) => (
+                  {filteredNavigation.map((item) => (
                     <div key={item.name} className="border-b border-gray-100 last:border-b-0">
                       {item.sublinks ? (
                         <details className="group">

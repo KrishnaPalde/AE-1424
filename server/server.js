@@ -41,6 +41,7 @@ app.use("/api/gallery", galleryRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/sso", ssoRoutes);
+app.use("/api/zed", require("./routes/zedRoutes"));
 
 app.get("/", (req, res) => {
   res.send("API is running...");

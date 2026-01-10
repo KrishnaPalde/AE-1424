@@ -45,6 +45,7 @@ import AdminStudentManagement from "./components/Admin/AdminStudentManagement";
 import AdminStudentDetails from "./components/Admin/AdminStudentDetails";
 import ZedLanding from "./Pages/ZEDLanding";
 import Careers from "./Pages/CareersPage";
+import AdminZedEnquiry from "./components/Admin/AdminZedEnquiry";
 
 function App() {
   const isCampaignLive = true;
@@ -277,6 +278,15 @@ function App() {
           element={
             <ProtectedRoute>
             <AdminInquiries/>
+            </ProtectedRoute>
+          }
+          />
+          
+          <Route
+          path="/admin-zed-enquiries"
+          element={
+            <ProtectedRoute>
+            <AdminZedEnquiry/>
             </ProtectedRoute>
           }
           />

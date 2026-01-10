@@ -151,7 +151,7 @@ const AdminInquiries = () => {
                     <TableHead>Name</TableHead>
                     <TableHead>Type</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Read On</TableHead>
+                    <TableHead>Date Time</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -185,7 +185,7 @@ const AdminInquiries = () => {
                         </span>
                       </TableCell>
 
-                      <TableCell>{formatDateTime(inq.readAt)}</TableCell>
+                      <TableCell>{formatDateTime(inq.createdAt)}</TableCell>
 
                       <TableCell className="text-right space-x-2">
                         <Button
