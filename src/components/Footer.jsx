@@ -19,7 +19,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [contact, setContact] = useState({
     address: 'Utkarsha Training Centre, Nashik, Maharashtra',
-    mobileNumber: '+91 80878 10364',
+    mobileNumber: '+91 98812 14707',
     email: 'aartieducare@gmail.com',
   });
   const [services, setServices] = useState([]);

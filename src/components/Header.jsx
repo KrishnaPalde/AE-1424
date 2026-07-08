@@ -26,7 +26,7 @@ export default function Header() {
           <div className="flex items-center ml-2 sm:px-3 justify-stretch ">
             <PhoneIcon className="w-4 h-4 text-gray-500" />
             <span className="ml-2 text-xs lg:mr-8 lg:text-lg">
-            +91 80878 10364
+            +91 98812 14707
             </span>
           </div>
           </a>

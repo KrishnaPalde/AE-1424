@@ -16,7 +16,7 @@ const FooterCTA = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex items-center gap-3 bg-slate-800 px-6 py-3 rounded-lg border border-slate-700 hover:border-[#e67e23] transition-colors group">
               <Phone size={20} className="text-[#e67e23]" />
-              <span className="font-semibold group-hover:text-[#e67e23] transition-colors">+91 80878 10364</span>
+              <span className="font-semibold group-hover:text-[#e67e23] transition-colors">+91 98812 14707</span>
             </div>
             <div className="flex items-center gap-3 bg-slate-800 px-6 py-3 rounded-lg border border-slate-700 hover:border-[#e67e23] transition-colors group">
               <Mail size={20} className="text-[#e67e23]" />

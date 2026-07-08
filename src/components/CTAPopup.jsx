@@ -36,8 +36,8 @@ const CTAPopup = ({ isOpen, onClose }) => {
           <ContactItem
             icon={<FaPhoneAlt className="w-6 h-6 text-white" />}
             title="Phone"
-            content="+91 80878 10364"
-            link="tel:+918087810364"
+            content="+91 98812 14707"
+            link="tel:+919881214707"
           />
 
           <ContactItem

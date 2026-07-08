@@ -408,11 +408,11 @@ const ContactUs = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                   <Phone className="text-[#e67e23]" />
-                  <p className="text-gray-700">+91 80878 10364</p>
+                  <p className="text-gray-700">+91 98812 14707</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <Mail className="text-[#e67e23]" />
-                  <p className="text-gray-700">contact@aartieducare.com</p>
+                  <p className="text-gray-700">aartieducare@gmail.com</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <Clock className="text-[#e67e23]" />
