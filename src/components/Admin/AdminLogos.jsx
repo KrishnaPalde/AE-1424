@@ -8,12 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import config from "@/config";
+import { uploadImage, deleteImageByUrl } from "@/lib/uploadImage";
 
-const firebaseApp = initializeApp(config.firebaseConfig);
-const storage = getStorage(firebaseApp);
 const API_URL = config.API_URL;
 
 const categories = ["government", "affiliated", "partners"];
@@ -67,7 +64,7 @@ const AdminLogos = () => {
       const uploadedLogos = [];
   
       for (const file of bulkFiles) {
-        const imageUrl = await uploadToFirebase(file);
+        const { url: imageUrl } = await uploadImage(file, `logos/${selectedCategory}`);
   
         // Save to MongoDB
         const res = await fetch(`${API_URL}/logos/${selectedCategory}`, {
@@ -104,28 +101,11 @@ const AdminLogos = () => {
   
   
 
-  const uploadToFirebase = async (file) => {
-    return new Promise((resolve, reject) => {
-      const storageRef = ref(storage, `logos/${selectedCategory}/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => setUploadProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100),
-        (err) => reject(err),
-        async () => {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          resolve(url);
-        }
-      );
-    });
-  };
-
   const handleAddLogo = async () => {
     if (!newLogo.file) return alert("Upload an image");
     setLoading(true);
     try {
-      const imageUrl = await uploadToFirebase(newLogo.file);
+      const { url: imageUrl } = await uploadImage(newLogo.file, `logos/${selectedCategory}`, setUploadProgress);
       const res = await fetch(`${API_URL}/logos/${selectedCategory}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -143,28 +123,12 @@ const AdminLogos = () => {
     setLoading(false);
   };
 
-  const extractFileName = (url) => {
-    try {
-      const match = url.match(/\/o\/(.*?)\?/);
-      return match ? decodeURIComponent(match[1].split("/").pop()) : null;
-    } catch {
-      return null;
-    }
-  };
-
   const handleDelete = async (logoId, imageUrl) => {
     if (!window.confirm("Delete this logo?")) return;
-  
+
     try {
-      // Extract and decode the full path from the Firebase Storage URL
-      const baseUrl = "https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/";
-      const encodedPath = imageUrl.replace(baseUrl, "").split("?")[0]; // Get only path part before `?`
-      const fullPath = decodeURIComponent(encodedPath); // Now we have 'logos/government/avatar.png' or similar
-  
-      // Use full path instead of manually constructing it from category and file name
-      const fileRef = ref(storage, fullPath);
-      await deleteObject(fileRef);
-  
+      await deleteImageByUrl(imageUrl);
+
       // Call backend to delete metadata
       await fetch(`${API_URL}/logos/${selectedCategory}/${logoId}`, { method: "DELETE" });
   

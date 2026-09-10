@@ -8,19 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
-import { initializeApp } from "firebase/app";
-
 import config from "@/config";
+import { uploadImage, deleteImageByUrl } from "@/lib/uploadImage";
 
 const API_URL = config.API_URL;
-
-// ✅ Firebase Configuration
-const firebaseConfig = config.firebaseConfig;
-
-// ✅ Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
 
 const AdminBanner = () => {
   const [banners, setBanners] = useState([]);
@@ -110,29 +101,6 @@ const AdminBanner = () => {
     setShowModal(true);
   };
 
-  // ✅ Upload Image to Firebase and Get URL
-  const uploadImageToFirebase = async (file) => {
-    return new Promise((resolve, reject) => {
-      const storageRef = ref(storage, `banners/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
-        },
-        (error) => {
-          reject(error);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          resolve(downloadURL);
-        }
-      );
-    });
-  };
-
   // ✅ Save Banner (Add or Edit)
   const handleSaveBanner = async () => {
     if (!newBanner.imageUrl && !newBanner.imageFile) {
@@ -150,12 +118,12 @@ const AdminBanner = () => {
     if (uploadOption === "file" && newBanner.imageFile) {
       setIsLoading(true);
       try {
-        
-        imageUrl = await uploadImageToFirebase(newBanner.imageFile);
-        
+
+        ({ url: imageUrl } = await uploadImage(newBanner.imageFile, "banners", setUploadProgress));
+
       } catch (error) {
-        console.error("❌ Firebase Upload Error:", error);
-        alert("Error uploading image to Firebase.");
+        console.error("❌ Image upload error:", error);
+        alert("Error uploading image.");
         return;
       }
       setIsLoading(false);
@@ -186,49 +154,12 @@ const AdminBanner = () => {
     }
   };
 
-  const getFileNameFromUrl = (url) => {
-    try {
-      // Extract the part between "/o/" and "?"
-      const match = url.match(/\/o\/(.*?)\?/);
-      if (!match || match.length < 2) return null;
-  
-      // Decode the filename (replacing %2F with "/" and decoding URL encoding)
-      const filePath = decodeURIComponent(match[1]);
-  
-      // Extract the actual file name after the last "/"
-      return filePath.substring(filePath.lastIndexOf("/") + 1);
-    } catch (error) {
-      console.error("Error extracting file name:", error);
-      return null;
-    }
-  };
-
   // ✅ Delete Banner
   const handleDeleteBanner = async (id, imageUrl) => {
     if (!window.confirm("Are you sure you want to delete this banner?")) return;
 
     try {
-      if(imageUrl.includes("firebasestorage.googleapis.com")){
-        const imageName = getFileNameFromUrl(imageUrl);
-        if(imageName == null){
-          return;
-        }
-        new Promise((resolve, reject) => {
-          // Create a reference to the file in Firebase Storage
-          const imageRef = ref(storage, `banners/${imageName}`);
-      
-          // Delete the image
-          deleteObject(imageRef)
-            .then(() => {
-              resolve('Image deleted successfully');
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        });
-      }
-      
-
+      await deleteImageByUrl(imageUrl);
       await fetch(`${API_URL}/banners/${id}`, { method: "DELETE" });
       setBanners(banners.filter((b) => b._id !== id));
     } catch (err) {

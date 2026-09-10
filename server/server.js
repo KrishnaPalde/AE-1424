@@ -17,6 +17,7 @@ const logoRoutes = require("./routes/logoRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const examRoutes = require("./routes/exam_routes/examRoutes");
 const ssoRoutes = require("./routes/ssoRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
 const app = express();
 connectDb();
 
@@ -42,6 +43,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/sso", ssoRoutes);
 app.use("/api/zed", require("./routes/zedRoutes"));
+app.use("/api/upload", uploadRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

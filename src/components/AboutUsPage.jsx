@@ -19,7 +19,7 @@ const AboutUsPage = () => {
             <meta name="keywords" content="about us, our mission, skill development vision, professional training, workforce development" />
             <meta property="og:title" content="About Us - Our Mission & Vision | Aarti Educare" />
             <meta property="og:description" content="Discover our mission to empower individuals with skill-based education and career growth opportunities." />
-            <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.webp?alt=media&token=d85ffcb5-122c-4fb7-b0cb-036857228217" />
+            <meta property="og:image" content="https://res.cloudinary.com/dtfyzz6gj/image/upload/v1789032016/aartieducare/misc/site-logo.webp" />
             <meta property="og:url" content="https://www.aartieducare.com/who-we-are/about-us" />
             <meta name="robots" content="index, follow" />
         </Helmet>

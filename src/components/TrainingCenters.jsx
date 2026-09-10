@@ -26,7 +26,7 @@ const TrainingCenters = () => {
             <meta name="keywords" content="training centers, skill development, learning centers, professional training" />
             <meta property="og:title" content="Training Centers - Aarti Educare" />
             <meta property="og:description" content="Find certified training centers near you that provide high-quality skill development courses." />
-            <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/Logo%2Flogo.webp?alt=media&token=d85ffcb5-122c-4fb7-b0cb-036857228217" />
+            <meta property="og:image" content="https://res.cloudinary.com/dtfyzz6gj/image/upload/v1789032016/aartieducare/misc/site-logo.webp" />
             <meta property="og:url" content="https://www.aartieducare.com/training-centers" />
             <meta name="robots" content="index, follow" />
         </Helmet>

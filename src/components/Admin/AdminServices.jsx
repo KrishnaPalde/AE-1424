@@ -6,17 +6,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
-import { initializeApp } from "firebase/app";
-
 import config from "@/config";
+import { uploadImage, deleteImageByUrl } from "@/lib/uploadImage";
 
 const API_URL = config.API_URL;
-
-const firebaseConfig = config.firebaseConfig;
-
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
 
 const AdminServices = () => {
   const [services, setServices] = useState([]);
@@ -76,28 +69,6 @@ const AdminServices = () => {
     setNewService((prev) => ({ ...prev, [name]: value }));
   };
 
-  const uploadImageToFirebase = async (file) => {
-      return new Promise((resolve, reject) => {
-        const storageRef = ref(storage, `services/${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-  
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            // setUploadProgress(progress);
-          },
-          (error) => {
-            reject(error);
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            resolve(downloadURL);
-          }
-        );
-      });
-    };
-
   // ✅ Add or Edit Service
   const handleSaveService = async () => {
     console.log(newService);
@@ -112,12 +83,12 @@ const AdminServices = () => {
     if (uploadOption === "file" && newService.imageFile) {
       setIsLoading(true);
       try {
-        
-        imageUrl = await uploadImageToFirebase(newService.imageFile);
-        
+
+        ({ url: imageUrl } = await uploadImage(newService.imageFile, "services"));
+
       } catch (error) {
-        console.error("❌ Firebase Upload Error:", error);
-        alert("Error uploading image to Firebase.");
+        console.error("❌ Image upload error:", error);
+        alert("Error uploading image.");
         return;
       }
       setIsLoading(false);
@@ -167,47 +138,12 @@ const AdminServices = () => {
     setShowServiceDialog(true);
   };
 
-  const getFileNameFromUrl = (url) => {
-    try {
-      // Extract the part between "/o/" and "?"
-      const match = url.match(/\/o\/(.*?)\?/);
-      if (!match || match.length < 2) return null;
-  
-      // Decode the filename (replacing %2F with "/" and decoding URL encoding)
-      const filePath = decodeURIComponent(match[1]);
-  
-      // Extract the actual file name after the last "/"
-      return filePath.substring(filePath.lastIndexOf("/") + 1);
-    } catch (error) {
-      console.error("Error extracting file name:", error);
-      return null;
-    }
-  };
-
   // ✅ Delete Service
   const handleDeleteService = async (id, imageUrl) => {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
 
     try {
-      if(imageUrl.includes("firebasestorage.googleapis.com")){
-              const imageName = getFileNameFromUrl(imageUrl);
-              if(imageName == null){
-                return;
-              }
-              new Promise((resolve, reject) => {
-                // Create a reference to the file in Firebase Storage
-                const imageRef = ref(storage, `services/${imageName}`);
-            
-                // Delete the image
-                deleteObject(imageRef)
-                  .then(() => {
-                    resolve('Image deleted successfully');
-                  })
-                  .catch((error) => {
-                    reject(error);
-                  });
-              });
-            }
+      await deleteImageByUrl(imageUrl);
       const response = await fetch(`${API_URL}/services/${id}`, { method: "DELETE" });
       if (!response.ok) throw new Error("Error deleting service.");
 

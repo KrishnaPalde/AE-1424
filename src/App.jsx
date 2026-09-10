@@ -48,7 +48,7 @@ import Careers from "./Pages/CareersPage";
 import AdminZedEnquiry from "./components/Admin/AdminZedEnquiry";
 
 function App() {
-  const isCampaignLive = true;
+  const isCampaignLive = false;
   console.log("ZED CAMPAIGN MODE:", isCampaignLive ? "ON" : "OFF");
   return (
     <>

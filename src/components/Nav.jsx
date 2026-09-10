@@ -331,7 +331,7 @@ export default function Nav() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [contact, setContact] = useState({mobileNumber: "‪+91 80878 10364‬", email: "aartieducare@gmail.com"});
-  const isCampaignLive = true;
+  const isCampaignLive = false;
 
   useEffect(() => {
     const fetchServices = async () => {

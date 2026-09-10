@@ -159,15 +159,9 @@ import {
 import PageWrapper from "../PageWrapper";
 import AdminSidebar from "./Sidebar";
 import config from "@/config";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
-import { initializeApp } from "firebase/app";
+import { uploadImage, deleteImageByUrl } from "@/lib/uploadImage";
 
 const API_URL = config.API_URL;
-const firebaseConfig = config.firebaseConfig;
-
-// ✅ Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
 
 
 const GalleryAdmin = () => {
@@ -181,30 +175,6 @@ const GalleryAdmin = () => {
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-
-// ✅ Upload Image to Firebase and Get URL
-  const uploadImageToFirebase = async (file) => {
-    return new Promise((resolve, reject) => {
-      const storageRef = ref(storage, `gallery/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
-        },
-        (error) => {
-          reject(error);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setUploadProgress(0);
-          resolve(downloadURL);
-        }
-      );
-    });
-  };
 
   const defaultForm = {
     title: "",
@@ -262,10 +232,11 @@ const GalleryAdmin = () => {
   const handleSubmit = async () => {
     try {
       let imageUrl = formData.image;
-  
-      // Upload to Firebase if it's a File
+
+      // Upload to Cloudinary if it's a File
       if (formData.image instanceof File) {
-        imageUrl = await uploadImageToFirebase(formData.image);
+        ({ url: imageUrl } = await uploadImage(formData.image, "gallery", setUploadProgress));
+        setUploadProgress(0);
       }
   
       const payload = {
@@ -294,13 +265,7 @@ const GalleryAdmin = () => {
   const handleDelete = async (id, imageUrl) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
-      const baseUrl = "https://firebasestorage.googleapis.com/v0/b/aartieducare-ms.appspot.com/o/";
-      const encodedPath = imageUrl.replace(baseUrl, "").split("?")[0]; // Get only path part before `?`
-      const fullPath = decodeURIComponent(encodedPath); // Now we have 'logos/government/avatar.png' or similar
-  
-      // Use full path instead of manually constructing it from category and file name
-      const fileRef = ref(storage, fullPath);
-      await deleteObject(fileRef);
+      await deleteImageByUrl(imageUrl);
       await axios.delete(`${API_URL}/gallery/${id}`);
       fetchGallery();
     } catch (error) {
