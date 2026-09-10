@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/common/seo';
 import horizontal_logo from '../assets/logo_horizontal.webp';
 
@@ -207,7 +208,34 @@ const ZedLanding = () => {
         .fab { position:fixed; right:16px; bottom:20px; z-index:101; width:58px; height:58px; border-radius:50%; background:var(--wa); display:grid; place-items:center; box-shadow:0 8px 24px rgba(37,211,102,.5); text-decoration:none; animation:fabpulse 2.2s ease-in-out infinite; }
         .fab svg { width:31px; height:31px; }
         @keyframes fabpulse { 0%,100%{transform:scale(1);box-shadow:0 8px 24px rgba(37,211,102,.5);} 50%{transform:scale(1.08);box-shadow:0 12px 32px rgba(37,211,102,.7);} }
-        
+
+        .home-fab {
+          position:fixed; left:16px; top:16px; z-index:101;
+          display:flex; align-items:center; gap:7px;
+          background:rgba(255,255,255,.97); color:var(--navy);
+          font-weight:800; font-size:13px; letter-spacing:.02em;
+          padding:10px 16px 10px 12px; border-radius:999px;
+          box-shadow:0 8px 24px rgba(0,0,0,.28);
+          text-decoration:none; backdrop-filter:blur(6px);
+          border:1px solid rgba(255,255,255,.6);
+          transition:transform .15s, box-shadow .15s;
+        }
+        .home-fab:hover { box-shadow:0 10px 30px rgba(0,0,0,.35); }
+        .home-fab:active { transform:scale(.95); }
+        .home-fab svg { width:17px; height:17px; flex-shrink:0; }
+        .home-fab .htxt { display:none; }
+        @media (min-width:521px){
+          .home-fab { left:calc(50% - 244px); }
+          .home-fab .htxt { display:inline; }
+        }
+        @media (min-width:900px){
+          /* Desktop logo sits top-left of screen 1, so move Home to the top-right instead */
+          .home-fab { left:auto; right:max(28px,calc((100vw - 1220px)/2 + 28px)); top:24px; padding:11px 20px 11px 14px; font-size:14px; }
+        }
+        @media (min-width:1600px){
+          .home-fab { right:calc((100vw - 1360px)/2); }
+        }
+
         /* ===== RESPONSIVE UPGRADE: MOBILE + TABLET + DESKTOP ===== */
         @media (min-width:521px){ .fab{ right:calc(50% - 244px); } }
         
@@ -455,7 +483,16 @@ const ZedLanding = () => {
         </div>
       </div>
 
-      {/* floating whatsapp (only bottom element) */}
+      {/* floating "Go to Home" button */}
+      <Link to="/" className="home-fab" aria-label="Go to Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 11.5 12 4l9 7.5" />
+          <path d="M5.5 10v9a1 1 0 0 0 1 1H9.5a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-9" />
+        </svg>
+        <span className="htxt">Home</span>
+      </Link>
+
+      {/* floating whatsapp */}
       <a className="fab" href="https://wa.me/919881214707?text=Hi%2C%20I%27m%20interested%20in%20ZED%20Certification." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
         <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.4 2 7.8L.4 31.6l8.1-2.1c2.3 1.3 4.9 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.3-2.1-2-4.5-2-7 0-7.2 5.9-13.1 13.1-13.1S29.1 8.7 29.1 16 23.2 28.7 16 28.7zm7.2-9.8c-.4-.2-2.3-1.1-2.7-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.4 7 6.2 1 .4 1.7.7 2.3.9 1 .3 1.8.3 2.5.2.8-.1 2.3-.9 2.6-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5z"/></svg>
       </a>
